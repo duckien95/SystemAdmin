@@ -37,4 +37,3 @@ export class FileUploadModel {
     size: number;
     imagePath: string;
 }
-

@@ -10,17 +10,29 @@ import { BaseComponent } from '../base/base.component';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent extends BaseComponent implements OnInit {
-  actionIds: string[] = ["Home/About", "Home/Index"];
-  constructor(
-    private roleService: RoleService
-  ) { 
-    super();    
-  }
+   actionIds: string[] = ["Home/About", "Home/Index"];
+   appId: string;
+   constructor(
+      private roleService: RoleService
+   ) {
+      super();
+   }
 
-  ngOnInit() {
-    super.onInit(this.actionIds);
-    
-  }
- 
+   ngOnInit() {
+      super.onInit(this.actionIds);
+      this.appId = '';
+      if(localStorage.getItem('cms_app_id')){
+         this.appId = localStorage.getItem("cms_app_id");
+      }
+
+   }
+
+   logout() {
+      console.log('logout');
+      localStorage.removeItem('cms_token');
+      localStorage.removeItem('cms_app_id');
+      localStorage.removeItem('AppId');
+   }
+
 
 }

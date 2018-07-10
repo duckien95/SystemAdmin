@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Banner } from '../../../../models/marketing-management/banner/banner/banner';
 
 declare var App: any;
-declare var jquery: any;
+declare var jQuery: any;
 declare var $: any;
 
 @Component({
@@ -24,7 +24,8 @@ export class BannerAddOrChangeComponent implements OnInit {
   @Input() bannerId: number;
   @Output() reloadBannerEvent = new EventEmitter();
   banner: Banner;
-  statuses: KeyValueModel[];
+  // statuses: KeyValueModel[];
+  statuses: any;
   pageTypes: KeyValueModel[];
   onGetDetailStatus: boolean;
   onAddOrChangeStatus: boolean;
@@ -38,60 +39,120 @@ export class BannerAddOrChangeComponent implements OnInit {
   ngOnInit() {
     this.banner = new Banner();
     this.formValid = true;
-  }
-
-  async onGetDetail(): Promise<void> {
-    if (this.onGetDetailStatus) {
-      ConfigSetting.ShowWaiting();
-      return;
-    }
-    App.blockUI();
-    this.onGetDetailStatus = true;
-    try {
-      const response = await this.bannerService.getBannerById(this.banner.id);
-      if (response.status) {
-        this.banner = response.banner;
-        this.statuses = response.statuses;
-        this.pageTypes = response.pageTypes;
-      }
-      else {
-        ConfigSetting.ShowErrores(response.messages);
-      }
-
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    finally {
-      this.onGetDetailStatus = false;
-      App.unblockUI();
+    this.statuses = [
+      { 'value': 1, 'text': '1', 'checked': false },
+      { 'value': 2, 'text': '2', 'checked': false },
+      { 'value': 3, 'text': '3', 'checked': false }
+   ];
+    if (jQuery().datepicker) {
+      $('.date-picker').datepicker({
+        rtl: App.isRTL(),
+        orientation: 'left',
+        autoclose: true
+      });
+      // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
     }
   }
 
-  async onAddOrChange(form): Promise<void> {
-    if (this.onAddOrChangeStatus) {
-      ConfigSetting.ShowWaiting();
-      return;
-    }
-    App.blockUI();
-    try {
+   resetBanner(){
+      this.banner = new Banner();
+   }
+   onGetDetail(){
+      if(this.banner._id == undefined) {
+         ConfigSetting.ShowWaiting();
+         return;
+      }
+      this.bannerService.getListBanner({'bannerId': this.banner._id}).subscribe( res => {
+         this.banner = res.error ? [] : res.data[0];
+      })
+   }
+
+   onAddOrChange(form){
       this.formValid = form.valid;
-      if (this.formValid) {
-        const requestModel = this.banner;
-        const response = await this.bannerService.saveBanner(requestModel);
-        if (response.status) {
-          ConfigSetting.ShowSuccess('Save sucess.');
-          $('#banner-add-or-change').modal('hide');
-          this.reloadBannerEvent.emit();
-        } else {
-          ConfigSetting.ShowErrores(response.messages);
-        }
+      if(this.formValid){
+         const requestModel = this.banner;
+         if(this.banner._id != undefined) {
+            this.bannerService.updateBanner(requestModel).subscribe( res => {
+               console.log(res);
+               if(!res.error){
+                  ConfigSetting.ShowSuccess('Save banner sucess');
+                  $('#banner-add-or-change').modal('hide');
+                  this.reloadBannerEvent.emit();
+               }
+               else {
+                  ConfigSetting.ShowErrores(res.message);
+               }
+            })
+         }
+         else {
+            this.bannerService.createBanner(requestModel).subscribe( res => {
+               console.log(res);
+               if(!res.error){
+                  ConfigSetting.ShowSuccess('Create banner sucess');
+                  $('#banner-add-or-change').modal('hide');
+                  this.reloadBannerEvent.emit();
+               }
+               else {
+                  ConfigSetting.ShowErrores(res.message);
+               }
+            })
+         }
+
       }
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    finally {
-      this.onAddOrChangeStatus = false;
-      App.unblockUI();
-    }
-  }
+   }
+
+  // async onGetDetail(): Promise<void> {
+  //   if (this.onGetDetailStatus) {
+  //     ConfigSetting.ShowWaiting();
+  //     return;
+  //   }
+  //   App.blockUI();
+  //   this.onGetDetailStatus = true;
+  //   try {
+  //     const response = await this.bannerService.getBannerById(this.banner.id);
+  //     if (response.status) {
+  //       this.banner = response.banner;
+  //       this.statuses = response.statuses;
+  //       this.pageTypes = response.pageTypes;
+  //     }
+  //     else {
+  //       ConfigSetting.ShowErrores(response.messages);
+  //     }
+  //
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   finally {
+  //     this.onGetDetailStatus = false;
+  //     App.unblockUI();
+  //   }
+  // }
+
+  // async onAddOrChange(form): Promise<void> {
+  //   if (this.onAddOrChangeStatus) {
+  //     ConfigSetting.ShowWaiting();
+  //     return;
+  //   }
+  //   App.blockUI();
+  //   try {
+  //     this.formValid = form.valid;
+  //     if (this.formValid) {
+  //       const requestModel = this.banner;
+  //       const response = await this.bannerService.saveBanner(requestModel);
+  //       if (response.status) {
+  //         ConfigSetting.ShowSuccess('Save sucess.');
+  //         $('#banner-add-or-change').modal('hide');
+  //         this.reloadBannerEvent.emit();
+  //       } else {
+  //         ConfigSetting.ShowErrores(response.messages);
+  //       }
+  //     }
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   finally {
+  //     this.onAddOrChangeStatus = false;
+  //     App.unblockUI();
+  //   }
+  // }
 }

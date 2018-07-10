@@ -9,8 +9,7 @@
               <div class="portlet-title ">
                 <div class="caption">
                   <i class="icon-settings font-red"></i>
-                  <span [hidden]="bannerItem.id == 'undefined' || bannerItem.id == ''" class="caption-subject font-red sbold uppercase">Add new banner item</span>
-                  <span [hidden]="bannerItem.id != 'undefined' && bannerItem.id != ''" class="caption-subject font-red sbold uppercase">Change banner item</span>
+                  <span  class="caption-subject font-red sbold uppercase">{{ bannerItemId == undefined ? 'Add new banner item' : 'Change banner item' }}</span>
                 </div>
               </div>
               <div class="portlet-body">
@@ -21,14 +20,14 @@
                       <label class="control-label col-md-3">Id
                       </label>
                       <div class="col-md-7">
-                        <input type="text" class="form-control" name="id" [(ngModel)]="bannerItem.id" readonly #id="ngModel" />
+                        <input type="text" class="form-control" name="id" [(ngModel)]="bannerItem._id" readonly #id="ngModel" />
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3">BannerId
                       </label>
                       <div class="col-md-7">
-                        <input type="text" class="form-control" placeholder="bannerId" name="bannerId" [(ngModel)]="banner.id" readonly #bannerId="ngModel"
+                        <input type="text" class="form-control" placeholder="bannerId" name="bannerId" [(ngModel)]="banner._id" readonly #bannerId="ngModel"
                         />
                       </div>
                     </div>
@@ -44,10 +43,10 @@
                       <label class="control-label col-md-3">Banner Item Name
                         <span class="required"> * </span>
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
-                        'has-error': (bannerItemName.errors && (bannerItemName.dirty || bannerItemName.touched)) 
+                      <div class="col-md-7" [ngClass]="{
+                        'has-error': (bannerItemName.errors && (bannerItemName.dirty || bannerItemName.touched))
                         || (!formValid && bannerItemName.errors),
-                        'has-success': !bannerItemName.errors 
+                        'has-success': !bannerItemName.errors
                      }">
                         <input type="text" class="form-control" placeholder="BannerItemName" name="bannerItemName" [(ngModel)]="bannerItem.bannerItemName"
                           required minlength="1" maxlength="1024" #bannerItemName="ngModel" />
@@ -63,10 +62,10 @@
                       <label class="control-label col-md-3">Target Url
                         <span class="required"> * </span>
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
-                        'has-error': (targetUrl.errors && (targetUrl.dirty || targetUrl.touched)) 
+                      <div class="col-md-7" [ngClass]="{
+                        'has-error': (targetUrl.errors && (targetUrl.dirty || targetUrl.touched))
                         || (!formValid && targetUrl.errors),
-                        'has-success': !targetUrl.errors 
+                        'has-success': !targetUrl.errors
                          }">
                         <input type="text" class="form-control" placeholder="Target URL" name="targetUrl" [(ngModel)]="bannerItem.targetUrl" required
                           minlength="1" maxlength="2048" #targetUrl="ngModel" />
@@ -74,7 +73,7 @@
                         || (!formValid && targetUrl.errors)
                         ">
                           <p class="required" *ngIf="targetUrl.errors?.required">TargetUrl is required</p>
-                          <p class="required" *ngIf="targetUrl.errors.maxlength || targetUrl.errors.minlength">targetUrl must be between 1 and 2048 characters</p>
+                          <p class="required" *ngIf="targetUrl.errors.maxlength || targetUrl.errors.minlength">TargetUrl must be between 1 and 2048 characters</p>
                         </span>
                       </div>
                     </div>
@@ -83,8 +82,9 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-7">
-                        <img [src]="bannerItem.imageUrl" width="100px" height="100px" style="border: 1px" />
-                        <a (click)="onChangeImage()">Change image </a>
+                        <img [src]="getURLImage(bannerItem.imageUrl)" width="100px" height="100px" style="border: 1px" />
+                        <input type="file" #bannerItemImage (change)="onFileChange($event)" style="display: none">
+                        <a (click)="bannerItemImage.click()">Change image </a>
                         <span class="help-block" *ngIf="(bannerItem.imageUrl == '' || bannerItem.imageUrl == null) && !formValid">
                           <p class="required">Image is required</p>
                         </span>
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                     <div [style.display]="bannerItem.isDefault ? 'none' : 'block'">
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3">StartDate
                         </label>
                         <div class="col-md-4">
@@ -127,8 +127,44 @@
                           </div>
                           <span class="help-block">MM/dd/yyy (tháng/ngày/năm)</span>
                         </div>
+                      </div> -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3">Start Date
+                           <span class="required"> * </span>
+                        </label>
+
+                        <div class="col-md-7" [ngClass]="{
+                        'has-error': (startDate.errors && (startDate.dirty || startDate.touched))
+                        || (!formValid && startDate.errors), 'has-success': !startDate.errors }">
+                           <!-- <input type="text" class="form-control" name="oldPublishDate" [value]="postModel.startDate | date: 'MM/dd/yyyy'" [disabled]="true"> -->
+                           <input type="date" class="form-control" placeholder="End Date" name="startDate" [ngModel]="bannerItem.startDate | date:'yyyy-MM-dd'"
+                           (ngModelChange)="bannerItem.startDate = $event" [required]="!bannerItem.isDefault" #startDate="ngModel"/>
+                           <span class="help-block" *ngIf="(startDate.invalid && (startDate.dirty  || startDate.touched))
+                           || (!formValid && startDate.errors)
+                           ">
+                              <p class="required" *ngIf="startDate.errors?.required">Start date is required</p>
+                           </span>
+                        </div>
                       </div>
                       <div class="form-group">
+                        <label class="control-label col-md-3">End Date
+                           <span class="required"> * </span>
+                        </label>
+
+                        <div class="col-md-7" [ngClass]="{
+                        'has-error': (endDate.errors && (endDate.dirty || endDate.touched))
+                        || (!formValid && endDate.errors), 'has-success': !endDate.errors }">
+                           <!-- <input type="text" class="form-control" name="oldPublishDate" [value]="bannerItem.endDate | date: 'MM/dd/yyyy'" [disabled]="true"> -->
+                           <input type="date" class="form-control" placeholder="End Date" name="endDate" [ngModel]="bannerItem.endDate | date:'yyyy-MM-dd'"
+                           (ngModelChange)="bannerItem.endDate = $event" [required]="!bannerItem.isDefault" #endDate="ngModel"/>
+                           <span class="help-block" *ngIf="(endDate.invalid && (endDate.dirty  || endDate.touched))
+                           || (!formValid && endDate.errors)
+                           ">
+                              <p class="required" *ngIf="endDate.errors?.required">End date is required</p>
+                           </span>
+                        </div>
+                      </div>
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3">EndDate
                         </label>
                         <div class="col-md-4">
@@ -143,15 +179,15 @@
                           </div>
                           <span class="help-block">MM/dd/yyy (tháng/ngày/năm)</span>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3">Status
                         <span class="required"> * </span>
                       </label>
-                      <div class="col-md-7" [ngClass]="{'has-error': (status.errors && (status.dirty || status.touched)) 
+                      <div class="col-md-7" [ngClass]="{'has-error': (status.errors && (status.dirty || status.touched))
                       || (!formValid && status.errors),
-                      'has-success': !status.errors 
+                      'has-success': !status.errors
                        }">
                         <select class="form-control form-filter input-sm" [(ngModel)]="bannerItem.status" name="status" #status="ngModel" required>
                           <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
@@ -165,21 +201,40 @@
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3">Priority
+                       <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{
+                       'has-error': (priority.errors && (priority.dirty || priority.touched))
+                       || (!formValid && priority.errors),
+                       'has-success': !priority.errors
+                    }">
+                       <input type="text" class="form-control" placeholder="Priority" name="priority" [(ngModel)]="bannerItem.priority"
+                          required #priority="ngModel" />
+                       <span class="help-block" *ngIf="(priority.invalid && (priority.dirty  || priority.touched))
+                       || (!formValid && priority.errors)
+                       ">
+                          <p class="required" *ngIf="priority.errors?.required">Priority is required</p>
+
+                       </span>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group">
+                      <label class="control-label col-md-3">Priority
                         <span class="required"> * </span>
                       </label>
-                      <div class="col-md-7" [ngClass]="{'has-error': (status.errors && (status.dirty || status.touched)) 
-                      || (!formValid && status.errors),
-                      'has-success': !status.errors 
+                      <div class="col-md-7" [ngClass]="{'has-error': (priority.errors && (priority.dirty || priority.touched))
+                      || (!formValid && priority.errors),
+                      'has-success': !status.errors
                        }">
                        <input type="text" class="form-control" name="priority" placeholder="Priority" [(ngModel)]="bannerItem.priority" maxlength="50"
                        #priority="ngModel" />
                         <span class="help-block" *ngIf="(priority.invalid && (priority.dirty  || priority.touched))
-                        || (!formValid && status.errors)
+                        || (!formValid && priority.errors)
                         ">
-                          <p class="required" *ngIf="status.errors.required">Priority is required</p>
+                          <p class="required" *ngIf="priority.errors.required">Priority is required</p>
                         </span>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="form-actions">
                     <div class="row">

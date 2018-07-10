@@ -41,6 +41,38 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // async onLogin(loginForm): Promise<void> {
+  //   App.blockUI();
+  //   try {
+  //     if (loginForm.valid) {
+  //       const response = await this.accountService.login(this.model.email, this.model.password, this.model.remember);
+  //       this.model.message = response.messages.join();
+  //       if (response.status) {
+  //         if (this.returnUrl === '' || this.returnUrl === undefined) {
+  //           this.router.navigateByUrl(ConfigSetting.HomePage);
+  //         } else {
+  //           this.router.navigateByUrl(this.returnUrl);
+  //         }
+  //
+  //       }
+  //       const response = await this.accountService.login(this.model.email, this.model.password, this.model.remember);
+  //       this.model.message = response.messages.join();
+  //
+  //       if (response.status) {
+  //         if (this.returnUrl === '' || this.returnUrl === undefined) {
+  //           this.router.navigateByUrl(ConfigSetting.HomePage);
+  //         } else {
+  //           this.router.navigateByUrl(this.returnUrl);
+  //         }
+  //
+  //       }
+  //     }
+  //
+  //   } catch (error) {
+  //     ConfigSetting.ShowErrorException(error);
+  //   }
+  //   App.unblockUI();
+  // }
   async onLogin(loginForm): Promise<void> {
     App.blockUI();
     try {
@@ -55,6 +87,7 @@ export class LoginComponent implements OnInit {
           }
 
         }
+
       }
 
     } catch (error) {
@@ -62,5 +95,26 @@ export class LoginComponent implements OnInit {
     }
     App.unblockUI();
   }
+
+  // login by AppId
+   onLoginForm(loginForm){
+      try {
+         if (loginForm.valid) {
+               this.accountService.loginSystem(this.model.email, this.model.password).subscribe( res => {
+                  console.log(res);
+                  if(res.auth){
+                     localStorage.setItem('cms_token', res.token);
+                     localStorage.setItem('cms_app_id', res.appId);
+                     this.router.navigate(['/g/services']);
+                  }
+                  else {
+                     this.router.navigate(['/login']);
+                  }
+               })
+         }
+      } catch (error) {
+         ConfigSetting.ShowErrorException(error);
+      }
+   }
 
 }

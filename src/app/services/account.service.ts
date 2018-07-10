@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { ConfigSetting } from '../common/configSetting'
 import { HttpClientService } from '../common/http-client.service';
 
@@ -9,7 +9,19 @@ import { Dictionary } from '../models/dictionary';
 @Injectable()
 export class AccountService {
 
-  constructor(private httpClient: HttpClientService) { }
+  constructor(private httpClient: HttpClientService, private http: Http) { }
+
+
+    setHeader(){
+        let header = new Headers();
+        header.append('Access-Control-Allow-Origin', '*');
+        header.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, PATCH, DELETE');
+        header.append('Access-Control-Allow-Headers', 'Content-type');
+        header.append('Content-Type', 'application/json');
+        let requestOptions = new RequestOptions();
+        requestOptions.headers = header;
+        return requestOptions;
+    }
 
   async login(email: string, password: string, remember: boolean): Promise<any> {
     let request = {
@@ -36,6 +48,12 @@ export class AccountService {
     }
     return result;
   }
+
+   loginSystem(username, password){
+      // let obj = { "username": username, "password": password };
+      let obj = { "appId": username, "secretKey": password };
+      return this.httpClient.postJsonObservable('auth/gettoken', obj);
+   }
   async register(fullName: string, email: string, password: string, confirmPassword: string): Promise<any> {
     const request = {
       fullName,

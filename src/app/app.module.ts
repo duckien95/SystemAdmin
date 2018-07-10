@@ -46,11 +46,20 @@ import { AdminMenuService } from './services/admin-menu.service';
 import { BinLocationTypeService } from './services/binlocation-type.service';
 
 import { DistanceService } from './services/distance.service';
+import { VtpServiceComponent } from './components/marketing-management/vtp-service/vtp-service.component';
+import { VtpServiceAddOrChangeComponent } from './components/marketing-management/vtp-service-add-or-change/vtp-service-add-or-change.component';
+import { VtpService } from './services/marketing-management/vtp.service';
+
+import { PostComponent } from './components/marketing-management/post/post.component';
+import { PostAddOrChangeComponent } from './components/marketing-management/post-add-or-change/post-add-or-change.component';
+import { PostService } from './services/marketing-management/post.service';
+import { VtpChildServiceComponent } from './components/marketing-management/vtp-child-service/vtp-child-service.component';
 // import { WarehouseVendorService } from './services/warehouse-vendor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    VtpChildServiceComponent
   ],
   imports: [
     AppRoutingModule
@@ -91,7 +100,9 @@ import { DistanceService } from './services/distance.service';
     RegionsTypeService,
     AdminMenuService,
     BinLocationTypeService,
-    DistanceService
+    DistanceService,
+    VtpService,
+    PostService
   ],
   bootstrap: [AppComponent]
 })

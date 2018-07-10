@@ -24,113 +24,196 @@ export class BannerItemAddOrChangeComponent implements OnInit {
   bannerItemId: string;
   bannerItem: BannerItem;
   banner: Banner;
-  statuses: KeyValueModel[];
+  // statuses: KeyValueModel[];
+  statuses: any;
   submited: boolean;
   onGetDetailStatus: boolean;
+  formValid: boolean;
   constructor(private bannerService: BannerService,
     private router: Router) { }
 
-  ngOnInit() {
-    this.bannerItem = new BannerItem();
-    this.banner = new Banner();
-    this.submited = false;
-    if (jQuery().datetimepicker) {
-      $('.datetimepicker1').datetimepicker();
-    }
-  }
-
-  async onGetDetail(): Promise<boolean> {
-    if (this.onGetDetailStatus) {
-      ConfigSetting.ShowWaiting();
-      return;
-    }
-    this.onGetDetailStatus = true;
-    App.blockUI();
-    try {
-      let response = await this.bannerService.getBannerItemById(this.bannerItemId, this.bannerId);
-      if (response.status) {
-        this.bannerItem = response.bannerItem;
-        this.banner = response.banner;
-        this.statuses = response.statuses;
-        return true;
-      } else {
-        ConfigSetting.ShowErrores(response.messages);
-      }
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    finally {
-      this.onGetDetailStatus = false;
-      App.unblockUI();
-    }
-    return false;
-  }
-
-  async onAddOrChange(form): Promise<void> {
-    if (this.submited) {
-      ConfigSetting.ShowWaiting();
-      return;
-    }
-    App.blockUI();
-    this.submited = true;
-    try {
-      if (form.valid) {
-        let requestModel = this.bannerItem;
-        if (requestModel.isDefault) {
-          requestModel.startDate = "";
-          requestModel.endDate = "";
-        }
-        else {
-          requestModel.startDate = $("input[name='startDate']").val();
-          requestModel.endDate = $("input[name='endDate']").val();
-        }
-
-        let response = await this.bannerService.saveBannerItem(requestModel);
-        if (response.status) {
-          $('#banner-item-add-or-change').modal('hide');
-          ConfigSetting.ShowSuccess('Save sucess.');
-          this.reloadBannerItemEvent.emit();
-        } else {
-          ConfigSetting.ShowErrores(response.messages);
-        }
-      }
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    finally {
-      App.unblockUI();
+   ngOnInit() {
+      this.bannerItem = new BannerItem();
+      this.banner = new Banner();
+      this.formValid = true;
       this.submited = false;
-    }
+      this.statuses = [
+        { 'value': 1, 'text': '1', 'checked': false },
+        { 'value': 2, 'text': '2', 'checked': false },
+        { 'value': 3, 'text': '3', 'checked': false }
+      ];
+      if (jQuery().datetimepicker) {
+         $('.datetimepicker1').datetimepicker();
+      }
+   }
 
-  }
+   initBannerItem(){
+      this.bannerItem = new BannerItem();
+      this.bannerService.getListBanner({ 'bannerId': this.bannerId }).subscribe( res => {
+         this.banner = res.error ? [] : res.data[0];
+      })
+   }
 
-  async onChangeImage(): Promise<void> {
-    App.blockUI();
-    try {
-      $('#file-uploader-popup').modal('show');
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    App.unblockUI();
-  }
+   onGetDetail(){
+      this.bannerService.getBannerItemById({ 'bannerItemId': this.bannerItemId, 'bannerId': this.bannerId }).subscribe( res => {
+         console.log(res);
+         if(!res.error){
+            this.banner = res.banner;
+            this.bannerItem =  res.bannerItem;
+         }
 
-  async getUploadedFile($event): Promise<void> {
-    try {
-      this.bannerItem.imageUrl = ConfigSetting.CDN_URL + $event;
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-    App.unblockUI();
-  }
+      })
+   }
 
-  async onSelectedCheckbox(): Promise<void> {
-    try {
+  // async onGetDetail(): Promise<boolean> {
+  //   if (this.onGetDetailStatus) {
+  //     ConfigSetting.ShowWaiting();
+  //     return;
+  //   }
+  //   this.onGetDetailStatus = true;
+  //   App.blockUI();
+  //   try {
+  //     let response = await this.bannerService.getBannerItemById(this.bannerItemId, this.bannerId);
+  //     if (response.status) {
+  //       this.bannerItem = response.bannerItem;
+  //       this.banner = response.banner;
+  //       this.statuses = response.statuses;
+  //       return true;
+  //     } else {
+  //       ConfigSetting.ShowErrores(response.messages);
+  //     }
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   finally {
+  //     this.onGetDetailStatus = false;
+  //     App.unblockUI();
+  //   }
+  //   return false;
+  // }
+
+   onAddOrChange(form) {
+      this.formValid = form.valid;
+      if(form.valid && this.bannerItem.imageUrl != undefined) {
+         let requestModel = this.bannerItem;
+         if (requestModel.isDefault) {
+            requestModel.startDate = "";
+            requestModel.endDate = "";
+         }
+         if(this.bannerItemId){
+            this.bannerService.updateBannerItem(requestModel).subscribe( res => {
+               // console.log(res);
+               if(!res.error) {
+                  $('#banner-item-add-or-change').modal('hide');
+                  ConfigSetting.ShowSuccess('Update banner item sucess.');
+                  this.reloadBannerItemEvent.emit();
+               } else {
+                  ConfigSetting.ShowError(res.message);
+               }
+            })
+         } else {
+            requestModel.bannerId = this.bannerId;
+            this.bannerService.createBannerItem(requestModel).subscribe( res => {
+               if(!res.error) {
+                  $('#banner-item-add-or-change').modal('hide');
+                  ConfigSetting.ShowSuccess('Create banner item sucess.');
+                  this.reloadBannerItemEvent.emit();
+               } else {
+                  ConfigSetting.ShowError(res.message);
+               }
+            })
+         }
+
+      } else {
+         ConfigSetting.ShowError("Can not update or create banner item");
+      }
+   }
+  // async onAddOrChange(form): Promise<void> {
+  //   if (this.submited) {
+  //     ConfigSetting.ShowWaiting();
+  //     return;
+  //   }
+  //   App.blockUI();
+  //   this.submited = true;
+  //   try {
+  //     if (form.valid) {
+  //       let requestModel = this.bannerItem;
+  //       if (requestModel.isDefault) {
+  //         requestModel.startDate = "";
+  //         requestModel.endDate = "";
+  //       }
+  //       else {
+  //         requestModel.startDate = $("input[name='startDate']").val();
+  //         requestModel.endDate = $("input[name='endDate']").val();
+  //       }
+  //
+  //       let response = await this.bannerService.saveBannerItem(requestModel);
+  //       if (response.status) {
+  //         $('#banner-item-add-or-change').modal('hide');
+  //         ConfigSetting.ShowSuccess('Save sucess.');
+  //         this.reloadBannerItemEvent.emit();
+  //       } else {
+  //         ConfigSetting.ShowErrores(response.messages);
+  //       }
+  //     }
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   finally {
+  //     App.unblockUI();
+  //     this.submited = false;
+  //   }
+  //
+  // }
+   onFileChange(event) {
+      var files = event.target.files;
+      if(files.length){
+         let form_data: FormData  = new FormData();
+         form_data.append('file', files[0]);
+         this.bannerService.saveBannerItemImage(form_data).subscribe( res => {
+            console.log(res);
+            if(res.error){
+               ConfigSetting.ShowError(res.message)
+            } else {
+               ConfigSetting.ShowSuccess("Upload Image Success");
+               this.bannerItem.imageUrl = res.filename;
+            }
+         })
+      }
+   }
+
+   getURLImage(img_file_name) {
+      return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
+   }
+  // async onChangeImage(): Promise<void> {
+  //   App.blockUI();
+  //   try {
+  //     $('#file-uploader-popup').modal('show');
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   App.unblockUI();
+  // }
+
+  // async getUploadedFile($event): Promise<void> {
+  //   try {
+  //     this.bannerItem.imageUrl = ConfigSetting.CDN_URL + $event;
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  //   App.unblockUI();
+  // }
+   onSelectedCheckbox() {
       $('input[name=\'startDate\']').val('');
       $('input[name=\'endDate\']').val('');
-    } catch (ex) {
-      ConfigSetting.ShowErrorException(ex);
-    }
-  }
+   }
+  // async onSelectedCheckbox(): Promise<void> {
+  //   try {
+  //     $('input[name=\'startDate\']').val('');
+  //     $('input[name=\'endDate\']').val('');
+  //   } catch (ex) {
+  //     ConfigSetting.ShowErrorException(ex);
+  //   }
+  // }
 
 }
-

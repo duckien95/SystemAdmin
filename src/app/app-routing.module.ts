@@ -54,6 +54,11 @@ import { VendorRegisterProductManagerComponent } from './components/vendor-regis
 import { VariationThemAttributeComponent } from './components/variation-theme/variation-them-attribute/variation-them-attribute.component';
 import { FileUploaderPopupComponent } from './components/common/file-uploader-popup/file-uploader-popup.component';
 
+import { VtpServiceComponent } from './components/marketing-management/vtp-service/vtp-service.component';
+import { VtpServiceAddOrChangeComponent } from './components/marketing-management/vtp-service-add-or-change/vtp-service-add-or-change.component';
+import { PostComponent } from './components/marketing-management/post/post.component';
+import { PostAddOrChangeComponent } from './components/marketing-management/post-add-or-change/post-add-or-change.component'
+
 const routesConfig: Routes = [
   {
     path: '',
@@ -73,88 +78,98 @@ const routesConfig: Routes = [
   {
     path: 'g',
     component: LayoutComponent,
-    canActivate: [CheckPermissionService],
+    // canActivate: [CheckPermissionService],
     children: [
       {
         path: 'home',
         component: HomeComponent,
-        canActivate: [CheckPermissionService]
-      },                  
-      
+        // canActivate: [CheckPermissionService]
+      },
+
       {
         path: 'vendor',
         component: VendorComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'DetailVendor/:id',
         component: VendorDetailComponent,
-        canActivate: [CheckPermissionService]
-      },      
+        // canActivate: [CheckPermissionService]
+      },
       {
         path: 'banner',
         component: BannerComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'banner-item/:bannerId',
         component: BannerItemComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse/:id',
         component: WarehouseComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'template-define',
         component: TemplateDefineComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-detail/:id',
         component: WarehouseDetailComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'variationtheme',
         component: VariationthemeManagerComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-inventory/add',
         component: WarehouseInventoryAddOrChangeComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-inventory/change/:id',
         component: WarehouseInventoryAddOrChangeComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-inventory',
         component: WarehouseInventoryComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-vendor-inventory-manger',
         component: WarehouseVendorInventoryMangerComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse-vendor-inventory/:id',
         component: WarehouseVendorInventoryComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'category-register',
         component: VendorRegisterProductManagerComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
       },
       {
         path: 'admin-menu',
         component: AdminMenuComponent,
-        canActivate: [CheckPermissionService]
+        // canActivate: [CheckPermissionService]
+      },
+      {
+        path: 'services',
+        component: VtpServiceComponent,
+        // canActivate: [CheckPermissionService]
+      },
+      {
+        path: 'posts',
+        component: PostComponent,
+        // canActivate: [CheckPermissionService]
       }
     ]
   },
@@ -170,7 +185,7 @@ const routesConfig: Routes = [
     ValidatePasswordDirective,
     FileUploadComponent,
     MultipleFileUploadComponent,
-    BaseComponent,    
+    BaseComponent,
     BannerComponent,
     BannerItemComponent,
     BannerAddOrChangeComponent,
@@ -182,10 +197,10 @@ const routesConfig: Routes = [
     WarehouseAddOrChangeComponent,
     WarehouseAddressComponent,
     TemplateDefineComponent,
-    TemplateDefineHtmlComponent,    
+    TemplateDefineHtmlComponent,
     WarehouseDetailComponent,
-    VariationThemAddOrChangeComponent,    
-    VariationthemeManagerComponent,    
+    VariationThemAddOrChangeComponent,
+    VariationthemeManagerComponent,
     WarehouseInventoryAddOrChangeComponent,
     WarehouseInventoryAddOrChangeImeiComponent,
     WarehouseInventoryComponent,
@@ -194,11 +209,15 @@ const routesConfig: Routes = [
     WarehouseVendorInventoryComponent,
     VendorCategoryRegisterComponent,
     VendorProductRegisterComponent,
-    WarehouseVendorInventoryAddProductComponent,    
+    WarehouseVendorInventoryAddProductComponent,
     AdminMenuComponent,
     VendorRegisterProductManagerComponent,
     VariationThemAttributeComponent,
-    FileUploaderPopupComponent
+    FileUploaderPopupComponent,
+    VtpServiceComponent,
+    VtpServiceAddOrChangeComponent,
+    PostComponent,
+    PostAddOrChangeComponent
   ],
   imports: [
     FormsModule,

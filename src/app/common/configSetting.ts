@@ -11,9 +11,11 @@ declare var AjaxRequest: any;
 
 export class ConfigSetting {
   public static BASE_URL = 'http://localhost:62009/api/';
+  public static BACKEND_URL = 'http://localhost:3344';
   // public static BASE_URL = 'http://local.gico.cms/api/';
-
-  public static Headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+  public static Headers: Headers = new Headers();
+  // public static Headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+  // public static Headers: Headers = new Headers({ 'Content-Type': 'multipart/form-data' });
 
   public static CDN_URL = 'http://192.168.1.251:5000';
 
@@ -230,17 +232,17 @@ export class ConfigSetting {
   public static UrlPathTemplateConfigCheckCodeExist = 'TemplateConfig/CheckCodeExist';
   public static UrlPathTemplateConfigRemove = 'TemplateConfig/Remove';
 
-  public static UrlPathBannerSearch = 'Banner/Search';
-  public static UrlPathBannerGet = 'Banner/Get';
-  public static UrlPathBannerAdd = 'Banner/Add';
-  public static UrlPathBannerChange = 'Banner/Change';
-  public static UrlPathBannerRemove = 'Banner/Remove';
+  // public static UrlPathBannerSearch = 'Banner/Search';
+  // public static UrlPathBannerGet = 'Banner/Get';
+  // public static UrlPathBannerAdd = 'Banner/Add';
+  // public static UrlPathBannerChange = 'Banner/Change';
+  // public static UrlPathBannerRemove = 'Banner/Remove';
 
-  public static UrlPathBannerItemSearch = 'BannerItem/Search';
-  public static UrlPathBannerItemGet = 'BannerItem/Get';
-  public static UrlPathBannerItemAdd = 'BannerItem/Add';
-  public static UrlPathBannerItemChange = 'BannerItem/Change';
-  public static UrlPathBannerItemRemove = 'BannerItem/Remove';
+  // public static UrlPathBannerItemSearch = 'BannerItem/Search';
+  // public static UrlPathBannerItemGet = 'BannerItem/Get';
+  // public static UrlPathBannerItemAdd = 'BannerItem/Add';
+  // public static UrlPathBannerItemChange = 'BannerItem/Change';
+  // public static UrlPathBannerItemRemove = 'BannerItem/Remove';
   // Redirect URL
   public static UrlTemplateDetail = 'Template/Search';
 
@@ -307,6 +309,40 @@ export class ConfigSetting {
 
   public static UrlWarehouseVendorAddProduct = 'WarehouseVendor/AddProduct';
   public static UrlWarehouseVendorGetByWarehouseId = 'WarehouseVendor/Gets';
+
+  //Service API
+  public static UrlPathServiceGet = 'service/list_all';
+  public static UrlPathServiceParentGet = 'service/list_parent';
+  public static UrlPathServiceChildGet = 'service/list_child';
+  public static UrlPathServiceSearch = 'service/search';
+  public static UrlPathServiceCreate = 'service/create';
+  public static UrlPathServiceUpdate = 'service/update';
+  public static UrlPathServiceDelete = 'service/delete';
+
+  // Post API
+  public static UrlPathPostGet = 'post/list_all';
+  public static UrlPathPostCreate = 'post/create';
+  public static UrlPathPostSearch = 'post/search';
+  public static UrlPathPostUpdate = 'post/update';
+  public static UrlPathPostDelete = 'post/delete';
+  public static UrlPathWebUploadImage = 'web/upload_image';
+
+  //Banner API
+  public static UrlPathBannerGet = 'banner/list_all';
+  public static UrlPathBannerGetById = 'banner/get_by_id';
+  public static UrlPathBannerSearch = 'banner/search';
+  public static UrlPathBannerCreate = 'banner/create';
+  public static UrlPathBannerUpdate = 'banner/update';
+  public static UrlPathBannerDelete = 'banner/delete';
+
+  // public static UrlPathBannerItemSearch = 'BannerItem/Search';
+  public static UrlPathBannerItemGet = 'item-banner/list_all';
+  public static UrlPathBannerItemGetById = 'item-banner/get_by_id';
+  public static UrlPathBannerItemSearch = 'item-banner/search';
+  public static UrlPathBannerItemGetChild = 'item-banner/list_child';
+  public static UrlPathBannerItemCreate = 'item-banner/create';
+  public static UrlPathBannerItemUpdate = 'item-banner/update';
+  public static UrlPathBannerItemDelete = 'item-banner/delete';
 
   //#endregion
 

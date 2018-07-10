@@ -9,13 +9,13 @@
       <div class="login-content">
         <h1>VTP System Admin Login</h1>
         <p>CMS...</p>
-        <form class="login-form" (ngSubmit)="onLogin(loginForm)" autocomplete="off" #loginForm="ngForm">
+        <form class="login-form" (ngSubmit)="onLoginForm(loginForm)" autocomplete="off" #loginForm="ngForm">
           <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
             <span>Enter any username and password. </span>
           </div>
           <div class="row">
-            <div class="col-xs-6">
+            <!-- <div class="col-xs-6">
               <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email or mobile"
                 name="username" [(ngModel)]="model.email" required email #email="ngModel" />
               <div [hidden]="!(email.touched && email.errors?.required)" class="alert alert-danger">
@@ -24,7 +24,14 @@
               <div [hidden]="!(email.touched && email.errors?.email)" class="alert alert-danger">
                 Email is not valid
               </div>
+            </div> -->
+            <div class="col-xs-6">
+            <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email or mobile"
+              name="username" [(ngModel)]="model.email" required #email="ngModel" />
+            <div [hidden]="!(email.touched && email.errors?.required)" class="alert alert-danger">
+              Username is required
             </div>
+          </div>
             <div class="col-xs-6">
               <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password"
                 name="password" [(ngModel)]="model.password" required #password="ngModel" />

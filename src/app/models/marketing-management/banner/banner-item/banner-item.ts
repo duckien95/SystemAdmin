@@ -1,5 +1,5 @@
 export class BannerItem {
-    id: string;
+    _id: string;
     bannerItemName: string;
     bannerId: string;
     backgroundRGB: string;
@@ -10,5 +10,9 @@ export class BannerItem {
     isDefault: boolean;
     status: number;
     statusName: string;
+    updatedDate: string;
+    createdDate: string;
+    updatedUserId: string;
+    createdUserId: string;
     priority: number
 }

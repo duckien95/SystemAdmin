@@ -1,7 +1,11 @@
 export class Banner {
-    id: string;    
-    bannerName: string;    
+    _id: string;
+    bannerName: string;
     backgroundRGB: string;
-    status: number;        
-    statusName: string;    
+    status: number;
+    statusName: string;
+    updatedDate: string;
+    createdDate: string;
+    updatedUserId: string;
+    createdUserId: string;
 }

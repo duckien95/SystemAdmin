@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { ConfigSetting } from './configSetting';
 
 @Injectable()
 export class HttpClientService {
-
+   backendUrl = "http://localhost:3344/api/";
   constructor(
     private http: Http,
     private router: Router,
@@ -83,6 +87,35 @@ export class HttpClientService {
     }
     return Promise.resolve(errObject);
   }
+
+   postJsonObservable(relativePath, obj){
+      const headers = ConfigSetting.Headers;
+      headers.set('token', localStorage.getItem('cms_token'));
+      return this.http.post(this.backendUrl + relativePath, obj, { headers: headers }).map( (data: Response) => {
+         let result = JSON.parse(data["_body"]);
+         // console.log(this.backendUrl + relativePath,result);
+         return result;
+      }).catch( (error: any) => {
+         let err = JSON.parse(error["_body"]);
+         // console.error(this.backendUrl + relativePath , error);
+         // let errors = { error: true, message: 'Something went wrong' };
+         return Observable.of(err);
+      });
+   }
+
+   postImage(relativePath, file){
+      const headers = ConfigSetting.Headers;
+      headers.set('token', localStorage.getItem('cms_token'));
+      return this.http.post(this.backendUrl + relativePath, file, { headers: headers }).map( (data: Response) => {
+         let result = JSON.parse(data["_body"]);
+         // console.log(this.backendUrl + relativePath,result);
+         return result;
+      }).catch( (error: any) => {
+         // console.error(this.backendUrl + relativePath , error);
+         // let errors = { error: true, message: 'Something went wrong' };
+         return Observable.of(error);
+      });
+   }
 
   async postJson(absolutePath: string, obj): Promise<any> {
     const url: string = ConfigSetting.CreateUrl(absolutePath);
