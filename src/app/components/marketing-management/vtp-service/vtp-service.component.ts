@@ -57,11 +57,15 @@ export class VtpServiceComponent implements OnInit {
    }
 
    getListChildService(serviceId){
+      // console.log(`.${serviceId}`);
+      // $(`.${serviceId}`).toggle('slow');
       // console.log('service_id', serviceId)
       if(this.highlightServiceId == serviceId) {
          this.highlightServiceId = '';
       }
       else {
+         // console.log($(`#${serviceId}`);
+
          this.highlightServiceId = serviceId;
          this.vtpService.getListChildService({ 'parentServiceId': serviceId }).subscribe( res => {
             // console.log('child_service', res.data);
@@ -78,7 +82,7 @@ export class VtpServiceComponent implements OnInit {
       })
    }
 
-   onShowAdddService(){
+   onShowAddService(){
       this.vtpServiceAddOrChange.vtpServiceModel.serviceId = undefined;
       this.vtpServiceAddOrChange.initVtpServiceModel();
       $('#vtp-service-add-or-change').modal('show');
@@ -92,6 +96,7 @@ export class VtpServiceComponent implements OnInit {
          }
          else {
             ConfigSetting.ShowSuccess("Delete service success");
+            this.highlightServiceId = '';
             this.loadListService();
             // this.initVtpServiceModel();
          }
@@ -106,7 +111,6 @@ export class VtpServiceComponent implements OnInit {
    }
 
    public onRegisterConfirmation() {
-      // console.log('hallo');
       const obj = $('.service_remove_bs_confirmation');
       const register = obj.attr('confirmation_register');
       if (register === '1') {
@@ -118,8 +122,26 @@ export class VtpServiceComponent implements OnInit {
       });
       const $that = this;
       obj.on('confirmed.bs.confirmation', function () {
-         console.log(this);
          const id = $(this).attr('tmpid');
+         // console.log(id);
+         $that.deleteService(id);
+      });
+   }
+
+   public onChildRegisterConfirmation() {
+      const obj = $('.child_service_remove_bs_confirmation');
+      const register = obj.attr('confirmation_register');
+      if (register === '1') {
+         return;
+      }
+      obj.attr('confirmation_register', '1');
+      obj.confirmation({
+         rootSelector: '[data-toggle=confirmation]'
+      });
+      const $that = this;
+      obj.on('confirmed.bs.confirmation', function () {
+         const id = $(this).attr('tmpid');
+         // console.log(id);
          $that.deleteService(id);
       });
    }

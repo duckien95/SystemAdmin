@@ -4,7 +4,7 @@
         <div class="portlet light portlet-fit portlet-datatable">
             <div class="portlet-title portlet-title-action ">
                 <div class="actions">
-                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddService('')">
+                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddRadio('')">
                         <i class="fa fa-plus"></i> Add new </a>
                 </div>
             </div>
@@ -12,7 +12,7 @@
         <div class="portlet-body">
            <div class="text-center text-danger">{{ msg }}</div>
            <div class="table-container">
-                <form (ngSubmit)="searchService()" #searchForm="ngForm" autocomplete="off">
+                <form (ngSubmit)="searchRadio()" #searchForm="ngForm" autocomplete="off">
                     <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                            <tr role="row" class="heading">
@@ -20,16 +20,16 @@
                                     STT
                                 </th>
                                 <th>
-                                    Service ID
+                                    Radio ID
                                 </th>
                                 <th>
-                                    Name
+                                    Title
                                 </th>
                                 <th>
                                     Description
                                 </th>
                                 <th>
-                                    URL
+                                    Radio Schedules
                                 </th>
                                 <th>
                                     Status
@@ -52,7 +52,7 @@
                                 </td>
                                 <td>
                                    <div>
-                                      <input type="text" class="form-control form-filter input-sm" name="name" [(ngModel)]="searchParams.name" #name="ngModel" />
+                                      <input type="text" class="form-control form-filter input-sm" name="name" [(ngModel)]="searchParams.title" #name="ngModel" />
                                    </div>
                                 </td>
                                 <td>
@@ -76,37 +76,41 @@
                         </thead>
                         <tbody>
                            <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: searchParams.pageSize, currentPage: searchParams.pageIndex, totalItems: totalRow };let last = last "> -->
-                           <ng-template ngFor let-service let-i="index" let-lastParent="last" [ngForOf]="ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }">
-                              <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index" (click)="highlightServiceId = service._id"> -->
-                              <tr (click)="getListChildService(service._id)">
+                           <!-- <ng-template ngFor let-radio let-i="index" let-last="last" [ngForOf]="ListRadio | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }"> -->
+                              <tr *ngFor="let radio of ListRadio | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
+
                                  <td>
-                                     {{ i + 1}}
+                                     {{ i+1}}
                                  </td>
                                  <td>
-                                     {{service._id}}
+                                     {{radio._id}}
                                  </td>
                                 <td>
-                                    {{service.name}}
+                                    {{radio.title}}
                                 </td>
                                 <td>
-                                    {{service.description}}
+                                    {{radio.description}}
+                                </td>
+                                <!-- <td>
+                                    {{radio.publicDate | date: 'dd/MM/yyyy'}}
+                                </td> -->
+                                <td>
+                                   <a href="javascript:;" [routerLink]="['/g/radio-schedule',radio._id]" class="btn btn-circle btn-outline green">
+                                       <i class="fa fa-edit"></i> Radio Schedule</a>
                                 </td>
                                 <td>
-                                    {{service.url}}
-                                </td>
-                                <td>
-                                    {{service.status}}
+                                    {{radio.status}}
                                 </td>
                                 <!-- <td>
                                     <a href="javascript:;" [routerLink]="['/g/banner-item',banner.i]" class="btn btn-circle btn-outline green">
                                         <a><i class="fa fa-edit"></i> Banner Item</a>
                                 </td> -->
                                 <td>
-                                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateService(service._id)">
+                                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateRadio(radio._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
-                                    <button type="button" class="btn btn-circle btn-outline red fa fa-remove service_remove_bs_confirmation" data-toggle="confirmation"
-                                        attr.tmpid="{{service._id}}">
-                                        <span *ngIf="lastParent">{{onRegisterConfirmation()}}</span>
+                                    <button type="button" class="btn btn-circle btn-outline red fa fa-remove radio_remove_bs_confirmation" data-toggle="confirmation"
+                                        attr.tmpid="{{radio._id}}">
+                                        <span *ngIf="last">{{onRegisterConfirmation()}}</span>
                                         Remove
                                     </button>
                                     <!-- <button type="button" (click)="deleteService(service._id)" class="btn btn-circle btn-outline red fa fa-remove banner_remove_bs_confirmation">
@@ -114,50 +118,7 @@
                                     </button> -->
                                 </td>
 
-                           </tr>
-                           <ng-container *ngIf="highlightServiceId == service._id">
-
-                              <tr  *ngFor="let child of ListChildService; let lastChild = last">
-                                 <td>
-                                    <span class="glyphicon glyphicon-tag"></span>
-                                    <!-- Child {{ i+1}} -->
-                                 </td>
-                                 <td>
-                                     {{child._id}}
-                                 </td>
-                                <td>
-                                    {{child.name}}
-                                </td>
-                                <td>
-                                    {{child.description}}
-                                </td>
-                                <td>
-                                    {{child.url}}
-                                </td>
-                                <td>
-                                    {{child.status}}
-                                </td>
-                                <!-- <td>
-                                    <a href="javascript:;" [routerLink]="['/g/banner-item',banner.i]" class="btn btn-circle btn-outline green">
-                                        <a><i class="fa fa-edit"></i> Banner Item</a>
-                                </td> -->
-                                <td>
-                                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateService(child._id)">
-                                        <i class="fa fa-pencil"></i> Edit </a>
-                                    <button type="button" class="btn btn-circle btn-outline red fa fa-remove child_service_remove_bs_confirmation" data-toggle="confirmation"
-                                        attr.tmpid="{{child._id}}">
-                                        <span *ngIf="lastChild">{{onChildRegisterConfirmation()}}</span>
-                                        Remove
-                                    </button>
-                                    <!-- <button type="button" (click)="deleteService(child._id)" class="btn btn-circle btn-outline red fa fa-remove banner_remove_bs_confirmation">
-                                       Remove
-                                    </button> -->
-                                </td>
-                              </tr>
-                           </ng-container>
-                        </ng-template>
-
-
+                            </tr>
                         </tbody>
                     </table>
                     <div class="pull-right">
@@ -170,5 +131,5 @@
     </div>
 </div>
 <div class="popupDetail">
-    <app-vtp-service-add-or-change #vtpServiceAddOrChange (reloadServiceEvent)="loadListService()"></app-vtp-service-add-or-change>
+    <app-radio-add-or-change #radioAddOrChange (reloadRadioEvent)="loadListRadio()"></app-radio-add-or-change>
 </div>

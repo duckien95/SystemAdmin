@@ -29,6 +29,9 @@ import { MeasureUnitService } from './services/measure-unit.service';
 import { EmailOrSmsService } from './services/email-or-sms.service';
 import { LocationService } from './services/location.service';
 import { ProductGroupService } from './services/product-group.service';
+import { VtpService } from './services/marketing-management/vtp.service';
+import { PostService } from './services/marketing-management/post.service';
+import { RadioService } from './services/marketing-management/radio.service';
 // import { ManufacturerManagementService } from './services/manufacturer-management.service';
 import { WarehouseService } from './services/warehouse.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -48,18 +51,19 @@ import { BinLocationTypeService } from './services/binlocation-type.service';
 import { DistanceService } from './services/distance.service';
 import { VtpServiceComponent } from './components/marketing-management/vtp-service/vtp-service.component';
 import { VtpServiceAddOrChangeComponent } from './components/marketing-management/vtp-service-add-or-change/vtp-service-add-or-change.component';
-import { VtpService } from './services/marketing-management/vtp.service';
 
 import { PostComponent } from './components/marketing-management/post/post.component';
 import { PostAddOrChangeComponent } from './components/marketing-management/post-add-or-change/post-add-or-change.component';
-import { PostService } from './services/marketing-management/post.service';
 import { VtpChildServiceComponent } from './components/marketing-management/vtp-child-service/vtp-child-service.component';
+import { RadioComponent } from './components/marketing-management/radio/radio.component';
+import { RadioAddOrChangeComponent } from './components/marketing-management/radio-add-or-change/radio-add-or-change.component';
+import { RadioScheduleComponent } from './components/marketing-management/radio-schedule/radio-schedule.component';
+import { RadioScheduleAddOrChangeComponent } from './components/marketing-management/radio-schedule-add-or-change/radio-schedule-add-or-change.component';
 // import { WarehouseVendorService } from './services/warehouse-vendor.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    VtpChildServiceComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule
@@ -102,7 +106,8 @@ import { VtpChildServiceComponent } from './components/marketing-management/vtp-
     BinLocationTypeService,
     DistanceService,
     VtpService,
-    PostService
+    PostService,
+    RadioService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,134 @@
+<div id="radio-add-or-change"class="modal fade" tabindex="-1" role="dialog">
+   <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+     <div class="modal-body">
+      <div class="row">
+         <div class="col-md-12">
+           <!-- BEGIN VALIDATION STATES-->
+           <div class="portlet light portlet-fit portlet-form bordered">
+             <div class="portlet-title ">
+               <div class="caption">
+                 <i class="icon-settings font-red"></i>
+                 <span [hidden]="radioModel._id != undefined" class="caption-subject font-red sbold uppercase">Add new radio</span>
+                 <span [hidden]="radioModel._id == undefined" class="caption-subject font-red sbold uppercase">Change radio</span>
+               </div>
+             </div>
+             <div class="portlet-body">
+               <!-- BEGIN FORM-->
+               <form class="form-horizontal" (ngSubmit)="onAddOrChangeRadio(radioAddOrChange)" autocomplete="off" #radioAddOrChange="ngForm">
+
+                 <div class="form-body">
+                     <div class="form-group">
+                        <label class="control-label col-md-3">RadioId
+                           <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                           <input type="text" class="form-control" name="RadioId" [(ngModel)]="radioModel._id" readonly #radioId="ngModel" />
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Title
+                           <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-7" [ngClass]="{
+                           'has-error': (radioTitle.errors && (radioTitle.dirty || radioTitle.touched))
+                           || (!formValid && radioTitle.errors), 'has-success': !radioTitle.errors }">
+                           <input type="text" class="form-control" placeholder="Title" name="radioTitle" [(ngModel)]="radioModel.title" required #radioTitle="ngModel" />
+                           <span class="help-block" *ngIf="(radioTitle.invalid && (radioTitle.dirty  || radioTitle.touched))
+                           || (!formValid && radioTitle.errors)
+                           ">
+                              <p class="required" *ngIf="radioTitle.errors?.required">Radio title is required</p>
+                              <!-- <p class="required" *ngIf="radioTitle.errors.maxlength || serviceName.errors.minlength">Service name must be between 1 and 1024 characters</p> -->
+                           </span>
+                        </div>
+                     </div>
+                  <div class="form-group">
+                     <label class="control-label col-md-3">Description
+                        <span class="required"> * </span>
+                     </label>
+                     <div class="col-md-7" [ngClass]="{
+                     'has-error': (radioDescription.errors && (radioDescription.dirty || radioDescription.touched))
+                     || (!formValid && radioDescription.errors), 'has-success': !radioDescription.errors }">
+                        <textarea type="text" class="form-control" placeholder="Description" name="description" [(ngModel)]="radioModel.description" required #radioDescription="ngModel"></textarea>
+                        <span class="help-block" *ngIf="(radioDescription.invalid && (radioDescription.dirty  || radioDescription.touched))
+                        || (!formValid && radioDescription.errors)
+                        ">
+                           <p class="required" *ngIf="radioDescription.errors?.required">Radio description is required</p>
+                        <!-- <p class="required" *ngIf="serviceDescription.errors.maxlength || serviceDescription.errors.minlength">Service name must be between 1 and 1024 characters</p> -->
+                        </span>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="control-label col-md-3">Status
+                        <span class="required"> * </span>
+                     </label>
+                     <div class="col-md-7" [ngClass]="{
+                        'has-error': radioStatus.errors && (radioStatus.dirty  || (submited && !radioStatus.dirty)),
+                        'has-success': !radioStatus.errors}">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="radioModel.status" name="radioStatus" #radioStatus="ngModel" required>
+                           <option [ngValue]="0">Select status</option>
+                           <option *ngFor="let stt of statuses" [ngValue]="stt.id">{{stt.name}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="radioStatus.invalid && (radioStatus.dirty || radioStatus.touched)">
+                           <p class="required" *ngIf="radioStatus.errors.required">Service status is required</p>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3">Image URL
+                      <span class="required"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <audio  [src]="getURLMedia(radioModel.mediaUrl)" controls>
+                          <!-- <source [src]="getURLMedia(radioModel.mediaUrl)" controls> -->
+                        </audio>
+                      <input type="file" #radioMedialUrl (change)="onFileChange($event)" style="display: none">
+                      <div class="">
+                         <a (click)="radioMedialUrl.click()">Change audio </a>
+                      </div>
+
+                      <span class="help-block" *ngIf="(radioModel.mediaUrl == '' || radioModel.mediaUrl == null)">
+                        <p class="required">Media file is required</p>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label class="control-label col-md-3">Public Date
+                       <span class="required"> * </span>
+                    </label>
+
+                    <div class="col-md-7" [ngClass]="{
+                    'has-error': (publicDate.errors && (publicDate.dirty || publicDate.touched))
+                    || (!formValid && publicDate.errors), 'has-success': !publicDate.errors }">
+
+                       <input type="date" class="form-control"  name="publicDate" [ngModel]="radioModel.publicDate | date:'yyyy-MM-dd'"
+                       (ngModelChange)="radioModel.publicDate = $event" required #publicDate="ngModel"/>
+                       <span class="help-block" *ngIf="(publicDate.invalid && (publicDate.dirty  || publicDate.touched))
+                       || (!formValid && publicDate.errors)
+                       ">
+                          <p class="required" *ngIf="publicDate.errors?.required">Public date is required</p>
+                       </span>
+                    </div>
+                  </div> -->
+                 </div>
+                 <div class="form-actions">
+                   <div class="row">
+                     <div class="col-md-offset-3 col-md-9">
+                       <button type="submit" class="btn green">Save</button>
+                       <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                     </div>
+                   </div>
+                 </div>
+
+               </form>
+               <!-- END FORM-->
+             </div>
+           </div>
+           <!-- END VALIDATION STATES-->
+         </div>
+      </div>
+     </div>
+   </div>
+ </div>
+</div>

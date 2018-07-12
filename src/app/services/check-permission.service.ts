@@ -13,10 +13,10 @@ export class CheckPermissionService implements CanActivate {
     if (ConfigSetting.GetLoginStatus()) {
       return true;
     } else {
-      ConfigSetting.Logout();
-      const currentUrl = state.url;
-      this.router.navigate([ConfigSetting.LoginPage, currentUrl]);
-      // this.router.navigateByUrl(ConfigSetting.LoginPage);
+      // ConfigSetting.Logout();
+      // const currentUrl = state.url;
+      // this.router.navigate([ConfigSetting.LoginPage, currentUrl]);
+      this.router.navigateByUrl(ConfigSetting.LoginPage);
       return false;
     }
   }

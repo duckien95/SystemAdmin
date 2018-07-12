@@ -335,6 +335,7 @@ export class ConfigSetting {
   public static UrlPathBannerUpdate = 'banner/update';
   public static UrlPathBannerDelete = 'banner/delete';
 
+  // Banner Item API
   // public static UrlPathBannerItemSearch = 'BannerItem/Search';
   public static UrlPathBannerItemGet = 'item-banner/list_all';
   public static UrlPathBannerItemGetById = 'item-banner/get_by_id';
@@ -343,6 +344,23 @@ export class ConfigSetting {
   public static UrlPathBannerItemCreate = 'item-banner/create';
   public static UrlPathBannerItemUpdate = 'item-banner/update';
   public static UrlPathBannerItemDelete = 'item-banner/delete';
+
+  // Radio API
+  public static UrlPathRadioGet = 'radio/list_all_radio';
+  public static UrlPathRadioGetById = 'radio/get_radio_by_id';
+  public static UrlPathRadioSearch = 'radio/search';
+  public static UrlPathRadioCreate = 'radio/create';
+  public static UrlPathRadioUpdate = 'radio/update';
+  public static UrlPathRadioDelete = 'radio/delete';
+  public static UrlPathWebUploadMediaFile = 'web/upload_media_file';
+
+  public static UrlPathRadioScheduleGet = 'radio/list_all_schedule_radio';
+  public static UrlPathRadioScheduleGetById = 'radio/get_schedule_radio_by_id';
+  public static UrlPathRadioScheduleGetByParent = 'radio/get_schedule_radio_by_parent';
+  public static UrlPathRadioScheduleSearch = 'radio/schedule_search';
+  public static UrlPathRadioScheduleCreate = 'radio/schedule_create';
+  public static UrlPathRadioScheduleUpdate = 'radio/schedule_update';
+  public static UrlPathRadioScheduleDelete = 'radio/schedule_delete';
 
   //#endregion
 
@@ -383,29 +401,34 @@ export class ConfigSetting {
     localStorage.setItem(this.LoginStatus, tmp);
     ConfigSetting.SetAuthenToken = authenToken;
   }
-  public static GetLoginStatus(): boolean {
-    const tmp = localStorage.getItem(this.LoginStatus);
-    if (tmp == null) {
-      return false;
-    }
-    const loginObject = JSON.parse(tmp);
-    if (loginObject == null || loginObject === undefined) {
-      return false;
-    }
-    if (loginObject.status) {
-      try {
-        const currentDate = new Date();
-        if (loginObject.loginTime < currentDate.getTime()) {
-          return false;
-        }
-      } catch (ex) {
-        return false;
+   public static GetLoginStatus(): boolean {
+      const token = localStorage.getItem("cms_token");
+      if( token == null || token == undefined ) {
+         return false;
       }
       return true;
-    } else {
-      return false;
-    }
-  }
+    // const tmp = localStorage.getItem(this.LoginStatus);
+    // if (tmp == null) {
+    //   return false;
+    // }
+    // const loginObject = JSON.parse(tmp);
+    // if (loginObject == null || loginObject === undefined) {
+    //   return false;
+    // }
+    // if (loginObject.status) {
+    //   try {
+    //     const currentDate = new Date();
+    //     if (loginObject.loginTime < currentDate.getTime()) {
+    //       return false;
+    //     }
+    //   } catch (ex) {
+    //     return false;
+    //   }
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+   }
   public static CheckPermission(actionIds: string[]): Dictionary<boolean> {
     const tmp = localStorage.getItem(this.LoginStatus);
     if (tmp == null) {

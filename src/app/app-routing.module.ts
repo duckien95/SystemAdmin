@@ -58,6 +58,10 @@ import { VtpServiceComponent } from './components/marketing-management/vtp-servi
 import { VtpServiceAddOrChangeComponent } from './components/marketing-management/vtp-service-add-or-change/vtp-service-add-or-change.component';
 import { PostComponent } from './components/marketing-management/post/post.component';
 import { PostAddOrChangeComponent } from './components/marketing-management/post-add-or-change/post-add-or-change.component'
+import { RadioComponent } from './components/marketing-management/radio/radio.component';
+import { RadioAddOrChangeComponent } from './components/marketing-management/radio-add-or-change/radio-add-or-change.component';
+import { RadioScheduleComponent } from './components/marketing-management/radio-schedule/radio-schedule.component';
+import { RadioScheduleAddOrChangeComponent } from './components/marketing-management/radio-schedule-add-or-change/radio-schedule-add-or-change.component';
 
 const routesConfig: Routes = [
   {
@@ -78,7 +82,7 @@ const routesConfig: Routes = [
   {
     path: 'g',
     component: LayoutComponent,
-    // canActivate: [CheckPermissionService],
+    canActivate: [CheckPermissionService],
     children: [
       {
         path: 'home',
@@ -170,6 +174,16 @@ const routesConfig: Routes = [
         path: 'posts',
         component: PostComponent,
         // canActivate: [CheckPermissionService]
+      },
+      {
+        path: 'radios',
+        component: RadioComponent,
+        // canActivate: [CheckPermissionService]
+      },
+      {
+        path: 'radio-schedule/:radioId',
+        component: RadioScheduleComponent,
+        // canActivate: [CheckPermissionService]
       }
     ]
   },
@@ -217,7 +231,11 @@ const routesConfig: Routes = [
     VtpServiceComponent,
     VtpServiceAddOrChangeComponent,
     PostComponent,
-    PostAddOrChangeComponent
+    PostAddOrChangeComponent,
+    RadioComponent,
+    RadioAddOrChangeComponent,
+    RadioScheduleComponent,
+    RadioScheduleAddOrChangeComponent
   ],
   imports: [
     FormsModule,

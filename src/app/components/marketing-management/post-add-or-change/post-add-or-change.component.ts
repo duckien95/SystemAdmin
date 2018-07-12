@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { VtpService } from '../../../services/marketing-management/vtp.service';
 import { PostService } from '../../../services/marketing-management/post.service';
 import { PostModel } from '../../../models/marketing-management/post/post-model';
-import { PostComponent } from '../post/post.component';
 import { ConfigSetting } from '../../../common/configSetting';
 
 declare var App: any;
@@ -16,6 +15,7 @@ declare var $: any;
 })
 export class PostAddOrChangeComponent implements OnInit {
    @Output() reloadPostEvent = new EventEmitter();
+   @ViewChild('postAddOrChange') postAddOrChangeForm: any;
    postModel: PostModel;
    ListParentService: any = [];
    ListChildService: any = [];
@@ -62,7 +62,7 @@ export class PostAddOrChangeComponent implements OnInit {
             if(!res.error && res.data.length > 0){
                this.postModel = res.data[0];
                this.vtpService.getListService({ "serviceId": res.data[0].servicesId }).subscribe( resp => {
-                  // console.log(resp);
+                  console.log(resp);
                   if(!resp.error && resp.data.length > 0 && resp.parent != null){
                      this.vtpService.getListChildService({"parentServiceId": resp.parent._id }).subscribe(response => {
                         this.ListChildService = response.error ? [] : response.data;
@@ -104,9 +104,10 @@ export class PostAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Create post success");
-                  $('#post-add-or-change').modal('hide');
+                  this.postAddOrChangeForm.reset();
                   this.reloadPostEvent.emit();
                   this.initPostModel();
+                  $('#post-add-or-change').modal('hide');
                }
                // this.postModel = new PostModel();
             })
@@ -119,9 +120,10 @@ export class PostAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Update post success");
-                  $('#post-add-or-change').modal('hide');
+                  this.postAddOrChangeForm.reset();
                   this.reloadPostEvent.emit();
                   this.initPostModel();
+                  $('#post-add-or-change').modal('hide');
                }
             })
          }
@@ -172,13 +174,14 @@ export class PostAddOrChangeComponent implements OnInit {
 
    onSelectParentService(parentServiceId){
       this.vtpService.getListChildService({"parentServiceId": parentServiceId }).subscribe(res => {
+         console.log(res);
          this.ListChildService = res.error ? [] : res.data;
       })
 
    }
 
    getURLImage(img_file_name) {
-      return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
+      return img_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${img_file_name}` : '';
    }
 
 }

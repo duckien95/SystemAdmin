@@ -67,13 +67,14 @@
                         || (!formValid && targetUrl.errors),
                         'has-success': !targetUrl.errors
                          }">
-                        <input type="text" class="form-control" placeholder="Target URL" name="targetUrl" [(ngModel)]="bannerItem.targetUrl" required
-                          minlength="1" maxlength="2048" #targetUrl="ngModel" />
+                        <input type="text" class="form-control" placeholder="Target URL" name="targetUrl" [(ngModel)]="bannerItem.targetUrl"
+                        pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                        required #targetUrl="ngModel" />
                         <span class="help-block" *ngIf="(targetUrl.invalid && (targetUrl.dirty  || targetUrl.touched))
                         || (!formValid && targetUrl.errors)
                         ">
-                          <p class="required" *ngIf="targetUrl.errors?.required">TargetUrl is required</p>
-                          <p class="required" *ngIf="targetUrl.errors.maxlength || targetUrl.errors.minlength">TargetUrl must be between 1 and 2048 characters</p>
+                          <p class="required" *ngIf="targetUrl.errors?.required">Target url is required</p>
+                          <p class="required" *ngIf="targetUrl.errors?.pattern">Target url is not valid </p>
                         </span>
                       </div>
                     </div>
@@ -137,7 +138,7 @@
                         'has-error': (startDate.errors && (startDate.dirty || startDate.touched))
                         || (!formValid && startDate.errors), 'has-success': !startDate.errors }">
                            <!-- <input type="text" class="form-control" name="oldPublishDate" [value]="postModel.startDate | date: 'MM/dd/yyyy'" [disabled]="true"> -->
-                           <input type="date" class="form-control" placeholder="End Date" name="startDate" [ngModel]="bannerItem.startDate | date:'yyyy-MM-dd'"
+                           <input type="date" class="form-control" placeholder="Start Date" name="startDate" [ngModel]="bannerItem.startDate | date:'yyyy-MM-dd'"
                            (ngModelChange)="bannerItem.startDate = $event" [required]="!bannerItem.isDefault" #startDate="ngModel"/>
                            <span class="help-block" *ngIf="(startDate.invalid && (startDate.dirty  || startDate.touched))
                            || (!formValid && startDate.errors)

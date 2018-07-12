@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { promise } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Jsonp } from '@angular/http/src/http';
@@ -20,6 +20,7 @@ declare var $: any;
 })
 export class BannerItemAddOrChangeComponent implements OnInit {
   @Output() reloadBannerItemEvent = new EventEmitter();
+  @ViewChild('bannerItemAddOrChange') bannerItemForm: any;
   bannerId: string;
   bannerItemId: string;
   bannerItem: BannerItem;
@@ -29,8 +30,12 @@ export class BannerItemAddOrChangeComponent implements OnInit {
   submited: boolean;
   onGetDetailStatus: boolean;
   formValid: boolean;
-  constructor(private bannerService: BannerService,
-    private router: Router) { }
+  // minDate: string = new Date();
+   constructor(
+      private bannerService: BannerService,
+      private router: Router,
+      private cdRef:ChangeDetectorRef
+   ) { }
 
    ngOnInit() {
       this.bannerItem = new BannerItem();
@@ -47,10 +52,18 @@ export class BannerItemAddOrChangeComponent implements OnInit {
       }
    }
 
+   ngAfterViewChecked() {
+      // console.log( "! after view check");
+      // console.log('startDate', this.bannerItem.startDate);
+      this.cdRef.detectChanges();
+   }
+
    initBannerItem(){
       this.bannerItem = new BannerItem();
-      this.bannerService.getListBanner({ 'bannerId': this.bannerId }).subscribe( res => {
-         this.banner = res.error ? [] : res.data[0];
+      this.bannerService.getBannerById({ 'bannerId': this.bannerId }).subscribe( res => {
+         if(!res.error){
+            this.banner = res.data;
+         }
       })
    }
 
@@ -92,6 +105,12 @@ export class BannerItemAddOrChangeComponent implements OnInit {
   //   return false;
   // }
 
+   reloadAndReset() {
+      this.bannerItemForm.reset();
+      this.reloadBannerItemEvent.emit();
+      $('#banner-item-add-or-change').modal('hide');
+   }
+
    onAddOrChange(form) {
       this.formValid = form.valid;
       if(form.valid && this.bannerItem.imageUrl != undefined) {
@@ -104,9 +123,8 @@ export class BannerItemAddOrChangeComponent implements OnInit {
             this.bannerService.updateBannerItem(requestModel).subscribe( res => {
                // console.log(res);
                if(!res.error) {
-                  $('#banner-item-add-or-change').modal('hide');
                   ConfigSetting.ShowSuccess('Update banner item sucess.');
-                  this.reloadBannerItemEvent.emit();
+                  this.reloadAndReset();
                } else {
                   ConfigSetting.ShowError(res.message);
                }
@@ -115,9 +133,8 @@ export class BannerItemAddOrChangeComponent implements OnInit {
             requestModel.bannerId = this.bannerId;
             this.bannerService.createBannerItem(requestModel).subscribe( res => {
                if(!res.error) {
-                  $('#banner-item-add-or-change').modal('hide');
                   ConfigSetting.ShowSuccess('Create banner item sucess.');
-                  this.reloadBannerItemEvent.emit();
+                  this.reloadAndReset();
                } else {
                   ConfigSetting.ShowError(res.message);
                }
@@ -183,7 +200,7 @@ export class BannerItemAddOrChangeComponent implements OnInit {
    }
 
    getURLImage(img_file_name) {
-      return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
+      return img_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${img_file_name}` : '';
    }
   // async onChangeImage(): Promise<void> {
   //   App.blockUI();

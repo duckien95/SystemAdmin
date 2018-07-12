@@ -72,18 +72,22 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" [ngClass]="{
-                     'has-error': (serviceURL.errors && (serviceURL.dirty || serviceURL.touched))
-                     || (!formValid && serviceURL.errors), 'has-success': !serviceURL.errors }">
-                        <input type="text" class="form-control" placeholder="URL" name="url" [(ngModel)]="vtpServiceModel.url"   required #serviceURL="ngModel" />
-                        <!-- pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g" -->
-                        <span class="help-block" *ngIf="(serviceURL.invalid && (serviceURL.dirty  || serviceURL.touched))
-                        || (!formValid && serviceURL.errors)
+                     'has-error': (serviceUrl.errors && (serviceUrl.dirty || serviceUrl.touched))
+                     || (!formValid && serviceUrl.errors), 'has-success': !serviceUrl.errors }">
+                        <input type="text" class="form-control" placeholder="URL" name="serviceUrl" [(ngModel)]="vtpServiceModel.url"
+                        pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                        required #serviceUrl="ngModel"/>
+                        <span class="help-block" *ngIf="(serviceUrl.invalid && (serviceUrl.dirty  || serviceUrl.touched))
+                        || (!formValid && serviceUrl.errors)
                         ">
-                           <p class="required" *ngIf="serviceURL.errors?.required">Service URL is required</p>
-                           <!-- <p class="required" *ngIf="serviceURL.errors.pattern">Service URL is not valid</p> -->
+                           <p class="required" *ngIf="serviceUrl.errors?.required">Service URL is required</p>
+                           <p class="required" *ngIf="serviceUrl.errors?.pattern">Service URL is not valid</p>
+                           <!-- <p>{{ serviceUrl.errors | json }}</p> -->
+                        <!-- <p class="required" *ngIf="serviceDescription.errors.maxlength || serviceDescription.errors.minlength">Service name must be between 1 and 1024 characters</p> -->
                         </span>
                      </div>
                   </div>
+
                   <div class="form-group">
                      <label class="control-label col-md-3"> Display Order
                         <span class="required"> * </span>

@@ -116,6 +116,20 @@ export class HttpClientService {
          return Observable.of(error);
       });
    }
+   
+   postMediaFile(relativePath, file){
+      const headers = ConfigSetting.Headers;
+      headers.set('token', localStorage.getItem('cms_token'));
+      return this.http.post(this.backendUrl + relativePath, file, { headers: headers }).map( (data: Response) => {
+         let result = JSON.parse(data["_body"]);
+         // console.log(this.backendUrl + relativePath,result);
+         return result;
+      }).catch( (error: any) => {
+         // console.error(this.backendUrl + relativePath , error);
+         // let errors = { error: true, message: 'Something went wrong' };
+         return Observable.of(error);
+      });
+   }
 
   async postJson(absolutePath: string, obj): Promise<any> {
     const url: string = ConfigSetting.CreateUrl(absolutePath);

@@ -20,3 +20,8 @@ export class ServiceSearch {
    name: string;
    status: number;
 }
+
+export class RadioSearch {
+   title: string;
+   status: number;
+}

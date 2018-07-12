@@ -20,11 +20,6 @@ declare var App: any;
   styleUrls: ['./banner.component.css']
 })
 
-@Component({
-  selector: 'app-banner',
-  templateUrl: './banner.component.html',
-  styleUrls: ['./banner.component.css']
-})
 export class BannerComponent implements OnInit {
   @ViewChild(BannerAddOrChangeComponent) bannerAddOrChange: BannerAddOrChangeComponent;
   @ViewChild('searchForm') form: any;

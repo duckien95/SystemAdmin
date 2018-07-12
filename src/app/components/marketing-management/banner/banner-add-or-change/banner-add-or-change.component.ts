@@ -23,6 +23,7 @@ declare var $: any;
 export class BannerAddOrChangeComponent implements OnInit {
   @Input() bannerId: number;
   @Output() reloadBannerEvent = new EventEmitter();
+  @ViewChild('bannerAddOrChange') bannerAddOrChangeForm: any;
   banner: Banner;
   // statuses: KeyValueModel[];
   statuses: any;
@@ -62,9 +63,17 @@ export class BannerAddOrChangeComponent implements OnInit {
          ConfigSetting.ShowWaiting();
          return;
       }
-      this.bannerService.getListBanner({'bannerId': this.banner._id}).subscribe( res => {
-         this.banner = res.error ? [] : res.data[0];
+      this.bannerService.getBannerById({'bannerId': this.banner._id}).subscribe( res => {
+         if(!res.error) {
+            this.banner = res.data;
+         }
       })
+   }
+
+   reloadAndReset() {
+      this.bannerAddOrChangeForm.reset();
+      this.reloadBannerEvent.emit();
+      $('#banner-add-or-change').modal('hide');
    }
 
    onAddOrChange(form){
@@ -76,8 +85,7 @@ export class BannerAddOrChangeComponent implements OnInit {
                console.log(res);
                if(!res.error){
                   ConfigSetting.ShowSuccess('Save banner sucess');
-                  $('#banner-add-or-change').modal('hide');
-                  this.reloadBannerEvent.emit();
+                  this.reloadAndReset();                  
                }
                else {
                   ConfigSetting.ShowErrores(res.message);
@@ -89,8 +97,7 @@ export class BannerAddOrChangeComponent implements OnInit {
                console.log(res);
                if(!res.error){
                   ConfigSetting.ShowSuccess('Create banner sucess');
-                  $('#banner-add-or-change').modal('hide');
-                  this.reloadBannerEvent.emit();
+                  this.reloadAndReset();
                }
                else {
                   ConfigSetting.ShowErrores(res.message);

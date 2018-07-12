@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { VtpService } from '../../../services/marketing-management/vtp.service';
 import { VtpServiceModel } from '../../../models/marketing-management/services/vtp-service-model';
 import { ConfigSetting } from '../../../common/configSetting';
@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class VtpServiceAddOrChangeComponent implements OnInit {
    @Output() reloadServiceEvent = new EventEmitter();
+   @ViewChild('vtpServiceAddOrChange') vtpServiceForm: any;
    vtpServiceModel: VtpServiceModel;
    ListParentService: any = [];
    ListServiceStatus: any = [];
@@ -58,7 +59,15 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
       this.formValid = true;
    }
 
+   reloadAndReset(){
+      this.reloadServiceEvent.emit();
+      this.vtpServiceForm.reset();
+      // this.initVtpServiceModel();
+      $('#vtp-service-add-or-change').modal('hide');
+   }
+
    onAddOrChange(form){
+      // console.log(form);
       this.formValid = form.valid;
       if(this.formValid){
          console.log(this.vtpServiceModel.serviceId);
@@ -69,9 +78,8 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Create service success");
-                  this.reloadServiceEvent.emit();
-                  $('#vtp-service-add-or-change').modal('hide');
-                  this.initVtpServiceModel();
+                  this.reloadAndReset();
+
                }
             })
          }
@@ -82,16 +90,14 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Update service success");
-                  this.reloadServiceEvent.emit();
-                  $('#vtp-service-add-or-change').modal('hide');
-                  this.initVtpServiceModel();
+                  this.reloadAndReset();
                }
             })
          }
 
       }
       else {
-         ConfigSetting.ShowError("Can not create service");
+         ConfigSetting.ShowError("Can not create or update service");
       }
 
    }
