@@ -79,7 +79,7 @@
                            <ng-template ngFor let-service let-i="index" let-lastParent="last" [ngForOf]="ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }">
                               <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index" (click)="highlightServiceId = service._id"> -->
                               <tr (click)="getListChildService(service._id)">
-                                 <td>
+                                 <td >
                                      {{ i + 1}}
                                  </td>
                                  <td>

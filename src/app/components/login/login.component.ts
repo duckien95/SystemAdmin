@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
                   if(res.auth){
                      localStorage.setItem('cms_token', res.token);
                      localStorage.setItem('cms_app_id', res.appId);
+                     localStorage.setItem('cms_expire_time', JSON.stringify(Date.now() + 86400000)) //one day
                      this.router.navigate(['/g/services']);
                   }
                   else {

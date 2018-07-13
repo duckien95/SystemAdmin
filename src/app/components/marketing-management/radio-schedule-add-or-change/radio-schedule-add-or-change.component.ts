@@ -23,6 +23,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
    radioScheduleModel: RadioScheduleModel;
    statuses: any;
    formValid: boolean;
+   configSetting = ConfigSetting;
    // minDate: string = new Date();
     constructor(
        private radioService: RadioService,
@@ -35,11 +36,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
        this.radioModel = new RadioModel();
        this.radioScheduleModel = new RadioScheduleModel();
        this.formValid = true;
-       this.statuses = [
-         { 'value': 1, 'text': '1' },
-         { 'value': 2, 'text': '2' },
-         { 'value': 3, 'text': '3' }
-       ];
+       this.statuses = ConfigSetting.ListStatus;
     }
 
     onInitRadioSchedule() {
@@ -49,6 +46,9 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
             console.log(res);
             if(!res.error) {
                this.radioScheduleModel = res.data;
+            } else {
+               // this.radioScheduleModel = [];
+               ConfigSetting.ShowError('Can not get radio schedule');
             }
          })
       } else {
@@ -100,8 +100,8 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
       }
    }
 
-    getURLMedia(media_file_name) {
-       return media_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${media_file_name}` : '';
-    }
+    // getURLMedia(media_file_name) {
+    //    return media_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${media_file_name}` : '';
+    // }
 
 }

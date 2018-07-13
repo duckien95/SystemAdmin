@@ -25,3 +25,26 @@ export class RadioSearch {
    title: string;
    status: number;
 }
+
+export class ConsultServiceSearch {
+   title: string;
+   fullName: string;
+   phone: string;
+   status: number;
+}
+
+export class OfferPriceSearch {
+   fullName: string;
+   departurePlace: string;
+   destinationPlace: string;
+   service: string;
+   status: number;
+}
+
+export class RegisterAgencySearch {
+   fullName: string;
+   address: string;
+   registerAgencyAddress: string;
+   job: string;
+   status: number;
+}

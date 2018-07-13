@@ -40,19 +40,15 @@ export class BannerAddOrChangeComponent implements OnInit {
   ngOnInit() {
     this.banner = new Banner();
     this.formValid = true;
-    this.statuses = [
-      { 'value': 1, 'text': '1', 'checked': false },
-      { 'value': 2, 'text': '2', 'checked': false },
-      { 'value': 3, 'text': '3', 'checked': false }
-   ];
-    if (jQuery().datepicker) {
-      $('.date-picker').datepicker({
-        rtl: App.isRTL(),
-        orientation: 'left',
-        autoclose: true
-      });
-      // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-    }
+    this.statuses = ConfigSetting.ListStatus;
+    // if (jQuery().datepicker) {
+    //   $('.date-picker').datepicker({
+    //     rtl: App.isRTL(),
+    //     orientation: 'left',
+    //     autoclose: true
+    //   });
+    //   $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+    // }
   }
 
    resetBanner(){
@@ -64,9 +60,7 @@ export class BannerAddOrChangeComponent implements OnInit {
          return;
       }
       this.bannerService.getBannerById({'bannerId': this.banner._id}).subscribe( res => {
-         if(!res.error) {
-            this.banner = res.data;
-         }
+         this.banner = res.error ? [] : res.data;
       })
    }
 
@@ -85,7 +79,7 @@ export class BannerAddOrChangeComponent implements OnInit {
                console.log(res);
                if(!res.error){
                   ConfigSetting.ShowSuccess('Save banner sucess');
-                  this.reloadAndReset();                  
+                  this.reloadAndReset();
                }
                else {
                   ConfigSetting.ShowErrores(res.message);

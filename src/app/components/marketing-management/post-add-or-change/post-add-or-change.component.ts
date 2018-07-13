@@ -24,6 +24,7 @@ export class PostAddOrChangeComponent implements OnInit {
    parentServiceId: string;
    formValid: boolean;
    date: string;
+   configSetting = ConfigSetting;
 
    constructor(
       private postService: PostService,
@@ -47,11 +48,7 @@ export class PostAddOrChangeComponent implements OnInit {
    initPostModel(){
       // console.log('init add or change', this.vtpServiceModel.serviceId )
       // this.postModel.publishDate = "20/10/2005";
-      this.ListStatus = [
-         { id: 1, name: '1' },
-         { id: 2, name: '2' },
-         { id: 3, name: '3' }
-      ];
+      this.ListStatus = ConfigSetting.ListStatus;
       this.vtpService.getListParentService().subscribe( res => {
          this.ListParentService = res.error ? [] :  res.data;
       })
@@ -71,6 +68,8 @@ export class PostAddOrChangeComponent implements OnInit {
                })
 
                // this.postModel.parentServiceId = res.parant._id;
+            } else {
+               ConfigSetting.ShowError('Can not get list child');
             }
          })
 
@@ -80,6 +79,13 @@ export class PostAddOrChangeComponent implements OnInit {
          this.parentServiceId = null;
       }
       this.formValid = true;
+   }
+
+   resetAndReload() {
+      this.postAddOrChangeForm.reset();
+      this.reloadPostEvent.emit();
+      this.initPostModel();
+      $('#post-add-or-change').modal('hide');
    }
 
    onAddOrChangePost(form){
@@ -104,10 +110,7 @@ export class PostAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Create post success");
-                  this.postAddOrChangeForm.reset();
-                  this.reloadPostEvent.emit();
-                  this.initPostModel();
-                  $('#post-add-or-change').modal('hide');
+                  this.resetAndReload();
                }
                // this.postModel = new PostModel();
             })
@@ -120,10 +123,7 @@ export class PostAddOrChangeComponent implements OnInit {
                }
                else {
                   ConfigSetting.ShowSuccess("Update post success");
-                  this.postAddOrChangeForm.reset();
-                  this.reloadPostEvent.emit();
-                  this.initPostModel();
-                  $('#post-add-or-change').modal('hide');
+                  this.resetAndReload();
                }
             })
          }
@@ -180,8 +180,8 @@ export class PostAddOrChangeComponent implements OnInit {
 
    }
 
-   getURLImage(img_file_name) {
-      return img_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${img_file_name}` : '';
-   }
+   // getURLImage(img_file_name) {
+   //    return img_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${img_file_name}` : '';
+   // }
 
 }

@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="portlet-body">
-         <div class="text-danger text-center">{{ msg }}</div>
+         <!-- <div class="text-danger text-center">{{ msg }}</div> -->
         <div class="table-container">
           <form #searchForm="ngForm" (ngSubmit)="searchBannerItem()" autocomplete="off">
             <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
@@ -144,8 +144,8 @@
                     {{bannerItem.targetUrl}}
                   </td> -->
                   <td>
-                    <a href="{{getURLImage(bannerItem.imageUrl)}}" target="_blank">
-                      <img src="{{getURLImage(bannerItem.imageUrl)}}" width="100px" height="100px" style="border: 1px" />
+                    <a href="{{configSetting.getMediaURL(bannerItem.imageUrl)}}" target="_blank">
+                      <img src="{{configSetting.getMediaURL(bannerItem.imageUrl)}}" width="100px" height="100px" style="border: 1px" />
                     </a>
                   </td>
                   <td class="text-center">

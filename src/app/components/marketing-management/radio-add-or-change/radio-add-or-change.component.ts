@@ -18,6 +18,7 @@ export class RadioAddOrChangeComponent implements OnInit {
    statuses: any = [];
    fileUpload: any;
    formValid: boolean;
+   configSetting = ConfigSetting;
 
    constructor(
       private radioService: RadioService
@@ -25,11 +26,7 @@ export class RadioAddOrChangeComponent implements OnInit {
 
    ngOnInit() {
       this.radioModel = new RadioModel();
-      this.statuses = [
-         { id: 1, name: '1' },
-         { id: 2, name: '2' },
-         { id: 3, name: '3' }
-      ];
+      this.statuses = ConfigSetting.ListStatus;
       this.initRadioModel();
    }
 
@@ -41,6 +38,9 @@ export class RadioAddOrChangeComponent implements OnInit {
             if(!res.error){
                this.radioModel = res.radio;
                // this.radioModel.publicDate = res.schedule.publicDate;
+            } else {
+               // this.radioModel = [];
+               ConfigSetting.ShowError('Can not get radio')
             }
          })
       }
@@ -113,9 +113,9 @@ export class RadioAddOrChangeComponent implements OnInit {
    }
 
 
-   getURLMedia(media_file_name) {
-      return media_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${media_file_name}`: '';
-   }
+   // getURLMedia(media_file_name) {
+   //    return media_file_name != undefined ? `${ConfigSetting.BACKEND_URL}/images/${media_file_name}`: '';
+   // }
 
 
 }

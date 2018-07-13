@@ -123,7 +123,7 @@
                      || (!formValid && postStatus.errors), 'has-success': !postStatus.errors }">
                         <select class="form-control form-filter input-sm" [(ngModel)]="postModel.status" name="status" required #postStatus="ngModel">
                            <option [ngValue]="0">Select status</option>
-                           <option *ngFor="let stt of ListStatus" [ngValue]="stt.id">{{stt.name}}</option>
+                           <option *ngFor="let stt of ListStatus" [ngValue]="stt.value">{{stt.text}}</option>
                         </select>
                         <span class="help-block" *ngIf="postStatus.errors && (postStatus.dirty || postStatus.touched)">
                            <p class="required" *ngIf="postStatus.errors?.required">Post status is required</p>
@@ -153,7 +153,7 @@
                      </label>
                      <div class="col-md-7">
                         <!-- <div id="previewImages" width="100px" height="100px"></div> -->
-                       <img [src]="getURLImage(postModel.thumbnailImage)" width="100px" height="100px" style="border: 1px" />
+                       <img [src]="configSetting.getMediaURL(postModel.thumbnailImage)" width="100px" height="100px" style="border: 1px" />
                        <input type="file" #thumbnailImage name="thumbnailImage" (change)="onFileChange($event)" style="display:none"/>
                        <a (click)="thumbnailImage.click()">Change image </a>
                        <span class="help-block" *ngIf="(postModel.thumbnailImage == '' || postModel.thumbnailImage == null)">

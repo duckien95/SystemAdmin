@@ -62,6 +62,12 @@ import { RadioComponent } from './components/marketing-management/radio/radio.co
 import { RadioAddOrChangeComponent } from './components/marketing-management/radio-add-or-change/radio-add-or-change.component';
 import { RadioScheduleComponent } from './components/marketing-management/radio-schedule/radio-schedule.component';
 import { RadioScheduleAddOrChangeComponent } from './components/marketing-management/radio-schedule-add-or-change/radio-schedule-add-or-change.component';
+import { OfferPriceComponent } from './components/marketing-management/offer-price/offer-price.component';
+import { OfferPriceUpdateComponent } from './components/marketing-management/offer-price-update/offer-price-update.component';
+import { RegisterAgencyComponent } from './components/marketing-management/register-agency/register-agency.component';
+import { RegisterAgencyUpdateComponent } from './components/marketing-management/register-agency-update/register-agency-update.component';
+import { ConsultComponent } from './components/marketing-management/consult/consult.component';
+import { ConsultUpdateComponent } from './components/marketing-management/consult-update/consult-update.component';
 
 const routesConfig: Routes = [
   {
@@ -184,7 +190,22 @@ const routesConfig: Routes = [
         path: 'radio-schedule/:radioId',
         component: RadioScheduleComponent,
         // canActivate: [CheckPermissionService]
-      }
+     },
+     {
+      path: 'offer-price',
+      component: OfferPriceComponent,
+      // canActivate: [CheckPermissionService]
+     },
+     {
+      path: 'consult-service',
+      component: ConsultComponent,
+     // canActivate: [CheckPermissionService]
+     },
+     {
+     path: 'register-agency',
+     component: RegisterAgencyComponent,
+     // canActivate: [CheckPermissionService]
+     }
     ]
   },
   { path: '**', component: HomeComponent }
@@ -235,7 +256,13 @@ const routesConfig: Routes = [
     RadioComponent,
     RadioAddOrChangeComponent,
     RadioScheduleComponent,
-    RadioScheduleAddOrChangeComponent
+    RadioScheduleAddOrChangeComponent,
+    OfferPriceComponent,
+    OfferPriceUpdateComponent,
+    RegisterAgencyComponent,
+    RegisterAgencyUpdateComponent,
+    ConsultComponent,
+    ConsultUpdateComponent
   ],
   imports: [
     FormsModule,

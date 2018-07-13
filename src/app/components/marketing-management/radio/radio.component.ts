@@ -18,7 +18,7 @@ export class RadioComponent implements OnInit {
    searchParams: RadioSearch;
    ListRadio: any = [];
    statuses: any;
-   pageSize: number = 4;
+   pageSize: number = 24;
    pageIndex: number = 0;
    msg: string;
    constructor(
@@ -28,24 +28,15 @@ export class RadioComponent implements OnInit {
    ngOnInit() {
       this.loadListRadio();
       this.searchParams = new RadioSearch();
-      this.statuses = [
-         { 'value': 0, 'text': 'Status'},
-         { 'value': 1, 'text': '1' },
-         { 'value': 2, 'text': '2' },
-         { 'value': 3, 'text': '3' }
-      ];
+      this.statuses = ConfigSetting.ListStatusSearch;
    }
 
    searchRadio(){
       this.msg = '';
       this.radioService.searchRadio(this.searchParams).subscribe( res => {
-         if(res.error){
-            this.msg = res.message;
-            this.ListRadio = [];
-         } else if(res.data.length){
+         if(!res.error && res.data.length){
             this.ListRadio =  res.data;
-         } else {
-            this.msg = "Radio not found";
+         }  else {
             this.ListRadio = [];
          }
 
@@ -55,9 +46,7 @@ export class RadioComponent implements OnInit {
    loadListRadio() {
       this.radioService.getListRadio({}).subscribe( res => {
          console.log(res);
-         if(!res.error) {
-            this.ListRadio = res.data;
-         }
+         this.ListRadio = res.error ? [] : res.data;
       })
    }
    onShowAddRadio(){

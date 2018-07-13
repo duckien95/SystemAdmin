@@ -28,6 +28,8 @@ export class BannerItemComponent implements OnInit {
   searchParams: BannerItemSearch;
   banner: Banner;
   // statuses: KeyValueModel[];
+
+  configSetting = ConfigSetting;
   statuses: any;
   currentBannerId: string;
   bannerItems: BannerItem[];
@@ -43,25 +45,20 @@ export class BannerItemComponent implements OnInit {
 
 
   ngOnInit() {
-    if (jQuery().datepicker) {
-      $('.date-picker').datepicker({
-        rtl: App.isRTL(),
-        orientation: 'left',
-        autoclose: true
-      });
-      // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-    }
+    // if (jQuery().datepicker) {
+    //   $('.date-picker').datepicker({
+    //     rtl: App.isRTL(),
+    //     orientation: 'left',
+    //     autoclose: true
+    //   });
+    //   // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+    // }
     // this.searchParams = new BannerItemSearchRequest();
     this.searchParams = new BannerItemSearch();
     this.searchParams.status = 0;
     // this.searchParams.pageIndex = 0;
     // this.searchParams.pageSize = 30;
-    this.statuses = [
-      { 'value': 0, 'text': 'Status' },
-     { 'value': 1, 'text': '1' },
-     { 'value': 2, 'text': '2' },
-     { 'value': 3, 'text': '3' }
-    ];
+    this.statuses = ConfigSetting.ListStatusSearch;
     this.banner = new Banner();
     this.router.paramMap.subscribe((param: ParamMap) => {
       // console.log(param);
@@ -90,22 +87,18 @@ export class BannerItemComponent implements OnInit {
    searchBannerItem(){
       this.msg = '';
       this.bannerService.searchBannerItem(this.searchParams).subscribe( res => {
-         if(res.error){
-            this.msg = res.message;
-            this.bannerItems = [];
-         } else if(res.data.length){
-            this.bannerItems =  res.data;
-         } else {
-            this.msg = "Banner item not found";
+         if(!res.error && res.data.length){
+            this.bannerItems = res.data;
+         }  else {
             this.bannerItems = [];
          }
 
       })
    }
 
-   getURLImage(img_file_name) {
-      return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
-   }
+   // getURLImage(img_file_name) {
+   //    return ConfigSetting.getMediaURL(img_file_name);
+   // }
 
   // async getBannerItems(): Promise<void> {
   //   if (this.searchForm.valid) {
@@ -139,6 +132,7 @@ export class BannerItemComponent implements OnInit {
       }
       else {
          this.bannerItemAddOrChange.bannerId = this.currentBannerId;
+         this.bannerItemAddOrChange.bannerItemId = undefined;
          this.bannerItemAddOrChange.initBannerItem();
       }
 

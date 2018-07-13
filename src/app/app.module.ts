@@ -32,6 +32,7 @@ import { ProductGroupService } from './services/product-group.service';
 import { VtpService } from './services/marketing-management/vtp.service';
 import { PostService } from './services/marketing-management/post.service';
 import { RadioService } from './services/marketing-management/radio.service';
+import { NoteService } from './services/marketing-management/note.service';
 // import { ManufacturerManagementService } from './services/manufacturer-management.service';
 import { WarehouseService } from './services/warehouse.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -59,6 +60,12 @@ import { RadioComponent } from './components/marketing-management/radio/radio.co
 import { RadioAddOrChangeComponent } from './components/marketing-management/radio-add-or-change/radio-add-or-change.component';
 import { RadioScheduleComponent } from './components/marketing-management/radio-schedule/radio-schedule.component';
 import { RadioScheduleAddOrChangeComponent } from './components/marketing-management/radio-schedule-add-or-change/radio-schedule-add-or-change.component';
+import { OfferPriceComponent } from './components/marketing-management/offer-price/offer-price.component';
+import { OfferPriceUpdateComponent } from './components/marketing-management/offer-price-update/offer-price-update.component';
+import { RegisterAgencyComponent } from './components/marketing-management/register-agency/register-agency.component';
+import { RegisterAgencyUpdateComponent } from './components/marketing-management/register-agency-update/register-agency-update.component';
+import { ConsultComponent } from './components/marketing-management/consult/consult.component';
+import { ConsultUpdateComponent } from './components/marketing-management/consult-update/consult-update.component';
 // import { WarehouseVendorService } from './services/warehouse-vendor.service';
 
 @NgModule({
@@ -107,7 +114,8 @@ import { RadioScheduleAddOrChangeComponent } from './components/marketing-manage
     DistanceService,
     VtpService,
     PostService,
-    RadioService
+    RadioService,
+    NoteService
   ],
   bootstrap: [AppComponent]
 })

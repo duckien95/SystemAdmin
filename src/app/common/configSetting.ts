@@ -354,6 +354,7 @@ export class ConfigSetting {
   public static UrlPathRadioDelete = 'radio/delete';
   public static UrlPathWebUploadMediaFile = 'web/upload_media_file';
 
+  // Radio Schedule API
   public static UrlPathRadioScheduleGet = 'radio/list_all_schedule_radio';
   public static UrlPathRadioScheduleGetById = 'radio/get_schedule_radio_by_id';
   public static UrlPathRadioScheduleGetByParent = 'radio/get_schedule_radio_by_parent';
@@ -362,7 +363,77 @@ export class ConfigSetting {
   public static UrlPathRadioScheduleUpdate = 'radio/schedule_update';
   public static UrlPathRadioScheduleDelete = 'radio/schedule_delete';
 
+  // Add Note API
+  public static UrlPathOfferPriceGet = 'note/list_offer_price';
+  public static UrlPathOfferPriceGetById = 'note/get_offer_price_by_id';
+  public static UrlPathOfferPriceUpdate = 'note/offer_price_update';
+  public static UrlPathOfferPriceSearch = 'note/offer_price_search';
+
+  public static UrlPathConsultServiceGet = 'note/list_consult_service';
+  public static UrlPathConsultServiceGetById = 'note/get_consult_service_by_id';
+  public static UrlPathConsultServiceUpdate = 'note/consult_service_update';
+  public static UrlPathConsultServiceSearch = 'note/register_agency_search';
+
+  public static UrlPathRegisterAgencyGet = 'note/list_register_agency';
+  public static UrlPathRegisterAgencyGetById = 'note/get_register_agency_by_id';
+  public static UrlPathRegisterAgencyUpdate = 'note/register_agency_update';
+  public static UrlPathRegisterAgencySearch = 'note/register_agency_search';
+
+   public static getMediaURL(img_file_name) {
+      if(img_file_name == undefined) {
+         img_file_name = 'image-undefined.png';
+      }
+      return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
+   }
+
+   public static ListStatusNote = [
+      { 'value': 1, 'text': '1. New' },
+      { 'value': 2, 'text': '2. Archieved' },
+      { 'value': 3, 'text': '3. Processing' },
+      { 'value': 4, 'text': '4. Closed'},
+   ];
+
+   public static ListStatusNoteSearch = [
+      { 'value': 0, 'text': 'Status' },
+      { 'value': 1, 'text': '1. New' },
+      { 'value': 2, 'text': '2. Archieved' },
+      { 'value': 3, 'text': '3. Processing' },
+      { 'value': 4, 'text': '4. Closed'},
+   ];
+
+   public static ListStatus = [
+      { 'value': 1, 'text': '1' },
+      { 'value': 2, 'text': '2' },
+      { 'value': 3, 'text': '3' },
+      { 'value': 4, 'text': '4' }
+   ];
+
+   public static ListStatusSearch = [
+      { 'value': 0, 'text': 'Status' },
+      { 'value': 1, 'text': '1' },
+      { 'value': 2, 'text': '2' },
+      { 'value': 3, 'text': '3' },
+      { 'value': 4, 'text': '4' }
+   ];
+
   //#endregion
+
+   public static formatNote(note: string) {
+      let date = new Date();
+      let username =  localStorage.getItem('cms_app_id');
+      let month = date.getMonth(),
+         day = date.getDate(),
+         hour = date.getHours(),
+         minute = date.getMinutes();
+      let dateUserFormat = ( day < 10 ? '0' + day : day ) + '/'
+                        + ( month < 10 ? '0' + month : month ) + '/'
+                        + date.getFullYear() + '_'
+                        + ( hour < 10 ? '0' + hour : hour )+ ':'
+                        + ( minute < 10 ? '0' + minute : minute ) + '_'
+                        + username;
+
+      return `${dateUserFormat} ${note}`;
+   }
 
   public static LoginExpiretime = 30;
 
@@ -404,6 +475,11 @@ export class ConfigSetting {
    public static GetLoginStatus(): boolean {
       const token = localStorage.getItem("cms_token");
       if( token == null || token == undefined ) {
+         return false;
+      }
+      const expire_time = JSON.parse(localStorage.getItem('cms_expire_time'));
+      console.log(Date.now());
+      if (expire_time && (Date.now() > expire_time) ) {
          return false;
       }
       return true;

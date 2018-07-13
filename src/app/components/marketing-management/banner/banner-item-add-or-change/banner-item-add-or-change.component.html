@@ -83,10 +83,10 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-7">
-                        <img [src]="getURLImage(bannerItem.imageUrl)" width="100px" height="100px" style="border: 1px" />
+                        <img [src]="configSetting.getMediaURL(bannerItem.imageUrl)" width="100px" height="100px" style="border: 1px" />
                         <input type="file" #bannerItemImage (change)="onFileChange($event)" style="display: none">
                         <a (click)="bannerItemImage.click()">Change image </a>
-                        <span class="help-block" *ngIf="(bannerItem.imageUrl == '' || bannerItem.imageUrl == null) && !formValid">
+                        <span class="help-block" *ngIf="(bannerItem.imageUrl == '' || bannerItem.imageUrl == null)">
                           <p class="required">Image is required</p>
                         </span>
                       </div>

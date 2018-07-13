@@ -50,12 +50,7 @@ export class BannerComponent implements OnInit {
     // this.searchParams.pageSize = 24;
     this.getBannersStatus = false;
     this.onDeleteStatus = false;
-    this.statuses = [
-      { 'value': 0, 'text': 'Status' },
-     { 'value': 1, 'text': '1' },
-     { 'value': 2, 'text': '2' },
-     { 'value': 3, 'text': '3' }
-    ];
+    this.statuses = ConfigSetting.ListStatusSearch;
     this.getBanners();
   }
 
@@ -69,11 +64,8 @@ export class BannerComponent implements OnInit {
    searchBanner(){
       this.msg = '';
       this.bannerService.searchBanner(this.searchParams).subscribe( res => {
-         if(res.error){
-            this.msg = res.message;
-            this.banners = [];
-         } else if(res.data.length){
-            this.banners =  res.data;
+         if(!res.error && res.data.length){
+            this.banners = res.data;
          } else {
             this.msg = "Banner not found";
             this.banners = [];

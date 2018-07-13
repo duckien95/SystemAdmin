@@ -21,6 +21,7 @@ declare var $: any;
 export class BannerItemAddOrChangeComponent implements OnInit {
   @Output() reloadBannerItemEvent = new EventEmitter();
   @ViewChild('bannerItemAddOrChange') bannerItemForm: any;
+  configSetting = ConfigSetting;
   bannerId: string;
   bannerItemId: string;
   bannerItem: BannerItem;
@@ -42,14 +43,10 @@ export class BannerItemAddOrChangeComponent implements OnInit {
       this.banner = new Banner();
       this.formValid = true;
       this.submited = false;
-      this.statuses = [
-        { 'value': 1, 'text': '1', 'checked': false },
-        { 'value': 2, 'text': '2', 'checked': false },
-        { 'value': 3, 'text': '3', 'checked': false }
-      ];
-      if (jQuery().datetimepicker) {
-         $('.datetimepicker1').datetimepicker();
-      }
+      this.statuses = ConfigSetting.ListStatus;
+      // if (jQuery().datetimepicker) {
+      //    $('.datetimepicker1').datetimepicker();
+      // }
    }
 
    ngAfterViewChecked() {
@@ -61,9 +58,7 @@ export class BannerItemAddOrChangeComponent implements OnInit {
    initBannerItem(){
       this.bannerItem = new BannerItem();
       this.bannerService.getBannerById({ 'bannerId': this.bannerId }).subscribe( res => {
-         if(!res.error){
-            this.banner = res.data;
-         }
+         this.banner = res.error ? [] : res.data;
       })
    }
 
@@ -73,6 +68,10 @@ export class BannerItemAddOrChangeComponent implements OnInit {
          if(!res.error){
             this.banner = res.banner;
             this.bannerItem =  res.bannerItem;
+         } else {
+            // this.banner = [];
+            // this.bannerItem = [];
+            ConfigSetting.ShowError("Can not get baner and banner item");
          }
 
       })

@@ -59,7 +59,7 @@
                       <span class="required"> * </span>
                     </label>
                     <div class="col-md-7">
-                        <audio  [src]="getURLMedia(radioModel.mediaUrl)" controls>
+                        <audio  [src]="configSetting.getMediaURL(radioModel.mediaUrl)" controls>
                           <!-- <source [src]="getURLMedia(radioModel.mediaUrl)" controls> -->
                         </audio>
                     </div>

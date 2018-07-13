@@ -18,7 +18,7 @@ export class PostComponent implements OnInit {
    ListPost: any = [];
    searchParams: PostSearch;
    statuses: any;
-   pageSize: number =  4;
+   pageSize: number =  24;
    pageIndex:number = 0;
    msg: string;
 
@@ -28,12 +28,7 @@ export class PostComponent implements OnInit {
    ) { }
 
    ngOnInit() {
-      this.statuses = [
-         { 'value': 0, 'text': 'Status' },
-         { 'value': 1, 'text': '1' },
-         { 'value': 2, 'text': '2' },
-         { 'value': 3, 'text': '3' }
-      ];
+      this.statuses = ConfigSetting.ListStatusSearch;
       this.searchParams = new PostSearch();
       this.loadListPost();
    }
@@ -48,13 +43,9 @@ export class PostComponent implements OnInit {
       this.msg = '';
       let requestModel = this.searchParams;
       this.postService.searchPost(requestModel).subscribe( res => {
-         if(res.error){
-            this.msg = res.message;
-            this.ListPost = [];
-         } else if(res.data.length){
+         if(!res.error && res.data.length){
             this.ListPost =  res.data;
-         } else {
-            this.msg = "Post not found";
+         }  else {
             this.ListPost = [];
          }
 
