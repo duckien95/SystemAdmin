@@ -19,7 +19,7 @@ export class OfferPriceComponent implements OnInit {
    ListOfferPrice: OfferPriceModel[];
    searchParams: OfferPriceSearch;
    statuses: any;
-   pageSize: number = 10;
+   pageSize: number = 24;
    pageIndex: number = 0;
    constructor(
       private noteService: NoteService

@@ -27,7 +27,7 @@
                            <div class="col-md-7" [ngClass]="{'has-error': (parentService.errors && (parentService.dirty || parentService.touched))
                            || (!formValid && parentService.errors), 'has-success': !parentService.errors }">
                               <select class="form-control form-filter input-sm" name="parentService" [(ngModel)]="parentServiceId" (change)="onSelectParentService($event.target.value)" required #parentService="ngModel">
-                                 <!-- <option [value]="0">Parent</option> -->
+                                 <option [value]="">Select parent</option>
                                  <option *ngFor="let par of ListParentService" [value]="par._id">{{ par.name }}</option>
                               </select>
                               <span class="help-block" *ngIf="parentService.invalid && (parentService.dirty || parentService.touched)">

@@ -372,7 +372,7 @@ export class ConfigSetting {
   public static UrlPathConsultServiceGet = 'note/list_consult_service';
   public static UrlPathConsultServiceGetById = 'note/get_consult_service_by_id';
   public static UrlPathConsultServiceUpdate = 'note/consult_service_update';
-  public static UrlPathConsultServiceSearch = 'note/register_agency_search';
+  public static UrlPathConsultServiceSearch = 'note/consult_service_search';
 
   public static UrlPathRegisterAgencyGet = 'note/list_register_agency';
   public static UrlPathRegisterAgencyGetById = 'note/get_register_agency_by_id';

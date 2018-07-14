@@ -76,7 +76,7 @@ export class PostAddOrChangeComponent implements OnInit {
       }
       else {
          this.postModel = new PostModel();
-         this.parentServiceId = null;
+         // this.parentServiceId = null;
       }
       this.formValid = true;
    }
