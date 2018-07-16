@@ -62,7 +62,7 @@ export class RadioService {
    }
 
    uploadMediaFile(file) {
-      // return this.httpClient.postMediaFile(ConfigSetting.UrlPathWebUploadMediaFile, file);
-      return this.httpClient.postMediaFile(ConfigSetting.UrlPathWebUploadImage, file);
+      return this.httpClient.postMediaFile(ConfigSetting.UrlPathWebUploadMediaFile, file);
+      // return this.httpClient.postMediaFile(ConfigSetting.UrlPathWebUploadImage, file);
    }
 }

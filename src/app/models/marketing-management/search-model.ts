@@ -7,6 +7,8 @@ export class BannerSearch{
 export class BannerItemSearch {
    // id: string;
    bannerItemName: string;
+   isDefault: boolean;
+   priority: number;
    status: number;
 }
 

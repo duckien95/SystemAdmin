@@ -76,24 +76,22 @@
                      </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3">Image URL
+                    <label class="control-label col-md-3">Audio URL
                       <span class="required"> * </span>
                     </label>
                     <div class="col-md-7">
-                       <div class="">
 
-                       </div>
-                        <audio  [src]="configSetting.getMediaURL(radioModel.mediaUrl)" controls>
+
+                     <input type="file" #radioMedialUrl (change)="onFileChange($event)" style="display: none">
+                     <div class="">
+                        <audio  [src]="configSetting.getAudioURL(radioModel.mediaUrl)" controls>
                           <!-- <source [src]="getURLMedia(radioModel.mediaUrl)" controls> -->
                         </audio>
                         <a (click)="radioMedialUrl.click()">Change audio </a>
-
-                      <input type="file" #radioMedialUrl (change)="onFileChange($event)" style="display: none">
-
-
-                      <span class="help-block" *ngIf="(radioModel.mediaUrl == '' || radioModel.mediaUrl == null)">
-                        <p class="required">Media file is required</p>
-                      </span>
+                     </div>
+                     <span class="help-block" *ngIf="(radioModel.mediaUrl == '' || radioModel.mediaUrl == null)">
+                        <p class="required">Audio file is required</p>
+                     </span>
                     </div>
                   </div>
                   <!-- <div class="form-group">

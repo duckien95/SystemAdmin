@@ -21,6 +21,7 @@ export class RadioComponent implements OnInit {
    pageSize: number = 24;
    pageIndex: number = 0;
    msg: string;
+   configSetting = ConfigSetting;
    constructor(
       private radioService: RadioService
    ) { }

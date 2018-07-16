@@ -10,7 +10,7 @@
             </div> -->
         </div>
         <div class="portlet-body">
-           <div class="text-center text-danger">{{ msg }}</div>
+           <!-- <div class="text-center text-danger">{{ msg }}</div> -->
            <div class="table-container">
                 <form (ngSubmit)="searchConsultService()" #searchForm="ngForm" autocomplete="off">
                     <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
@@ -31,7 +31,7 @@
                               <th>
                                  Title
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Status
                               </th>
                               <th>
@@ -93,12 +93,12 @@
                                 <td>
                                     {{consult.title}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{consult.status}}
                                 </td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateConsultService(consult._id)">
-                                        <i class="fa fa-pencil"></i> Edit </a>
+                                        <i class="fa fa-pencil"></i> Add Note </a>
 
                                 </td>
 

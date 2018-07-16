@@ -386,6 +386,13 @@ export class ConfigSetting {
       return `${ConfigSetting.BACKEND_URL}/images/${img_file_name}`;
    }
 
+   public static getAudioURL(audio_file_name) {
+      if(audio_file_name == undefined) {
+         return '';
+      }
+      return `${ConfigSetting.BACKEND_URL}/audios/${audio_file_name}`;
+   }
+
    public static ListStatusNote = [
       { 'value': 1, 'text': '1. New' },
       { 'value': 2, 'text': '2. Archieved' },

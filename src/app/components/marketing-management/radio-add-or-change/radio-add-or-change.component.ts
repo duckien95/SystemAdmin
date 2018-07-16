@@ -105,7 +105,7 @@ export class RadioAddOrChangeComponent implements OnInit {
                ConfigSetting.ShowError(res.message)
             }
             else {
-               ConfigSetting.ShowSuccess("Upload media Success");
+               ConfigSetting.ShowSuccess("Upload audio success");
                this.radioModel.mediaUrl = res.filename;
             }
          })

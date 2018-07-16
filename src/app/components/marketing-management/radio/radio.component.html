@@ -28,10 +28,13 @@
                                 <th>
                                     Description
                                 </th>
-                                <th>
+                                <th class="text-center">
+                                    Audio
+                                </th>
+                                <th class="text-center">
                                     Radio Schedules
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Status
                                 </th>
                                 <th>
@@ -54,6 +57,8 @@
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="name" [(ngModel)]="searchParams.title" #name="ngModel" />
                                    </div>
+                                </td>
+                                <td>
                                 </td>
                                 <td>
                                 </td>
@@ -91,14 +96,15 @@
                                 <td>
                                     {{radio.description}}
                                 </td>
-                                <!-- <td>
-                                    {{radio.publicDate | date: 'dd/MM/yyyy'}}
-                                </td> -->
-                                <td>
+                                <td class="text-center">
+                                   <audio  [src]="configSetting.getAudioURL(radio.mediaUrl)" controls>
+                                   </audio>
+                                </td>
+                                <td class="text-center">
                                    <a href="javascript:;" [routerLink]="['/g/radio-schedule',radio._id]" class="btn btn-circle btn-outline green">
                                        <i class="fa fa-edit"></i> Radio Schedule</a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{radio.status}}
                                 </td>
                                 <!-- <td>

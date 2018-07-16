@@ -26,13 +26,13 @@
                                 <th>
                                     Title
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Public Date
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Status
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Actions
                                 </th>
                            </tr>
@@ -74,13 +74,13 @@
                                 <td>
                                     {{radio.title}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{radio.publicDate | date: 'dd/MM/yyyy hh:mm aaa'}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{radio.status}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateRadio(radio._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
                                     <button type="button" class="btn btn-circle btn-outline red fa fa-remove radio_schedule_remove_bs_confirmation" data-toggle="confirmation"

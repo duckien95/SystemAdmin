@@ -36,13 +36,13 @@
                               <th>
                                  Agency Address
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Size (LxWxH)
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Status
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Start Date
                               </th>
                               <th>
@@ -121,13 +121,13 @@
                                  <td>
                                     {{ agency.registerAgencyAddress }}
                                  </td>
-                                 <td>
-                                    {{ agency.length }}
+                                 <td class="text-center">
+                                    {{ agency.length + ' x ' + agency.width + ' x ' + agency.height }}
                                  </td>
-                                 <td>
+                                 <td class="text-center">
                                     {{ agency.status }}
                                  </td>
-                                 <td>
+                                 <td class="text-center">
                                     {{ agency.startDate| date: 'dd/MM/yyyy' }}
                                  </td>
                                 <td>
