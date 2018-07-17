@@ -45,7 +45,7 @@
                               <th class="text-center">
                                  Start Date
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Actions
                               </th>
                            </tr>
@@ -58,6 +58,9 @@
                                    </div>
                                 </td>
                                <td>
+                                  <div>
+                                     <input type="text" class="form-control form-filter input-sm" name="phone" [(ngModel)]="searchParams.phone" #phone="ngModel" />
+                                  </div>
                                </td>
                                 <td>
                                    <div>
@@ -69,7 +72,11 @@
                                       <input type="text" class="form-control form-filter input-sm" name="job" [(ngModel)]="searchParams.job" #job="ngModel" />
                                    </div>
                                 </td>
-                                <td></td>
+                                <td>
+                                   <div>
+                                      <input type="text" class="form-control form-filter input-sm" name="personalId" [(ngModel)]="searchParams.personalOrBusinessRegisterId" #personalId="ngModel" />
+                                   </div>
+                                </td>
                                 <td>
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="registerAgencyAddress" [(ngModel)]="searchParams.registerAgencyAddress" #registerAgencyAddress="ngModel" />
@@ -87,7 +94,7 @@
                                 <td>
 
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
                                             <i class="fa fa-search"></i> Search</button>
@@ -101,7 +108,7 @@
                               <tr *ngFor="let agency of ListRegisterAgency | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
 
                                  <td>
-                                     {{ i+1}}
+                                     {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                  </td>
                                  <td>
                                     {{ agency.fullName }}
@@ -116,7 +123,7 @@
                                     {{ agency.job }}
                                  </td>
                                  <td>
-                                    {{ agency.pesonalOrBusinessRegisterId }}
+                                    {{ agency.personalOrBusinessRegisterId }}
                                  </td>
                                  <td>
                                     {{ agency.registerAgencyAddress }}
@@ -130,7 +137,7 @@
                                  <td class="text-center">
                                     {{ agency.startDate| date: 'dd/MM/yyyy' }}
                                  </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateRegisterAgency(agency._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
 

@@ -34,7 +34,7 @@
                                 <th class="text-center">
                                     Status
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Actions
                                 </th>
                            </tr>
@@ -66,7 +66,7 @@
                                       </select>
                                    </div>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
                                             <i class="fa fa-search"></i> Search</button>
@@ -78,9 +78,9 @@
                            <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: searchParams.pageSize, currentPage: searchParams.pageIndex, totalItems: totalRow };let last = last "> -->
                            <ng-template ngFor let-service let-i="index" let-lastParent="last" [ngForOf]="ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }">
                               <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index" (click)="highlightServiceId = service._id"> -->
-                              <tr (click)="getListChildService(service._id)">
+                              <tr>
                                  <td >
-                                     {{ i + 1}}
+                                      {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                  </td>
                                  <td>
                                      {{service._id}}
@@ -101,7 +101,7 @@
                                     <a href="javascript:;" [routerLink]="['/g/banner-item',banner.i]" class="btn btn-circle btn-outline green">
                                         <a><i class="fa fa-edit"></i> Banner Item</a>
                                 </td> -->
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateService(service._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
                                     <button type="button" class="btn btn-circle btn-outline red fa fa-remove service_remove_bs_confirmation" data-toggle="confirmation"
@@ -109,6 +109,8 @@
                                         <span *ngIf="lastParent">{{onRegisterConfirmation()}}</span>
                                         Remove
                                     </button>
+                                    <a href="javascript:;" class="btn btn-circle btn-outline blue" (click)="getListChildService(service._id)">
+                                        <i class="fa fa-pencil"></i> View Child </a>
                                     <!-- <button type="button" (click)="deleteService(service._id)" class="btn btn-circle btn-outline red fa fa-remove banner_remove_bs_confirmation">
                                        Remove
                                     </button> -->
@@ -134,14 +136,14 @@
                                 <td>
                                     {{child.url}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{child.status}}
                                 </td>
                                 <!-- <td>
                                     <a href="javascript:;" [routerLink]="['/g/banner-item',banner.i]" class="btn btn-circle btn-outline green">
                                         <a><i class="fa fa-edit"></i> Banner Item</a>
                                 </td> -->
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateService(child._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
                                     <button type="button" class="btn btn-circle btn-outline red fa fa-remove child_service_remove_bs_confirmation" data-toggle="confirmation"

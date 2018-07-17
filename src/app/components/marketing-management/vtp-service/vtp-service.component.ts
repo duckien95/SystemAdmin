@@ -31,12 +31,7 @@ export class VtpServiceComponent implements OnInit {
 
    ngOnInit() {
       this.searchParams = new ServiceSearch();
-      this.statuses = [
-         { 'value': 0, 'text': 'Status' },
-         { 'value': 1, 'text': '1' },
-         { 'value': 2, 'text': '2' },
-         { 'value': 3, 'text': '3' }
-      ];
+      this.statuses = ConfigSetting.ListStatusSearch;
       this.loadListService();
    }
 
@@ -44,13 +39,9 @@ export class VtpServiceComponent implements OnInit {
       this.msg = '';
       var requestModel =  this.searchParams;
       this.vtpService.searchService(requestModel).subscribe( res => {
-         if(res.error){
-            this.msg = res.message;
-            this.ListService = [];
-         } else if(res.data.length){
+         if(!res.error && res.data.length){
             this.ListService =  res.data;
          } else {
-            this.msg = "Service not found";
             this.ListService = [];
          }
       })

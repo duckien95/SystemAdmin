@@ -34,13 +34,14 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
       let date = new Date();
       this.currentDateTime =  "2018-06-07T00:00";
        this.radioModel = new RadioModel();
-       this.radioScheduleModel = new RadioScheduleModel();
        this.formValid = true;
        this.statuses = ConfigSetting.ListStatus;
+      this.onInitRadioSchedule();
     }
 
     onInitRadioSchedule() {
       // console.log(this.radioModel);
+      this.formValid = true;
       if(this.radioScheduleId != undefined) {
          this.radioService.getRadioScheduleById({ 'radioScheduleId': this.radioScheduleId }).subscribe( res => {
             console.log(res);
@@ -52,7 +53,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
             }
          })
       } else {
-         console.log('radioScheduleId is undefined');
+         // console.log('radioScheduleId is undefined');
          this.radioScheduleModel = new RadioScheduleModel();
       }
    }
@@ -66,12 +67,11 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
    onAddOrChangeRadioSchedule(form) {
       this.formValid = form.valid;
       if(form.valid) {
-
-         // console.log(requestModel);
          if(this.radioScheduleId != undefined){
+            console.log('radio != undefined');
             let requestModel = this.radioScheduleModel;
             this.radioService.updateRadioSchedule(requestModel).subscribe( res => {
-            // console.log(res);
+               console.log(res);
                if(!res.error) {
                   ConfigSetting.ShowSuccess('Update radio schedule sucess.');
                   this.reloadAndReset();

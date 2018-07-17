@@ -49,13 +49,15 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-7" [ngClass]="{
-                          'has-error': status.errors && (status.dirty  || (submited && !status.dirty)),
-                          'has-success': !status.errors
+                          'has-error': (status.errors && (status.dirty || status.touched))
+                          || (!formValid && status.errors), 'has-success': !status.errors
                        }">
                         <select class="form-control form-filter input-sm" [(ngModel)]="banner.status" name="status" #status="ngModel" required>
                           <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
                         </select>
-                        <span class="help-block" *ngIf="status.invalid && (status.dirty || status.touched)">
+                        <span class="help-block" *ngIf="(status.invalid && (status.dirty || status.touched))
+                        || (!formValid && status.errors) 
+                        ">
                           <p class="required" *ngIf="status.errors.required">Status is required</p>
                         </span>
                       </div>

@@ -5,7 +5,7 @@ import { PostSearch } from '../../../models/marketing-management/search-model';
 import { PostAddOrChangeComponent } from '../post-add-or-change/post-add-or-change.component';
 import { ConfigSetting } from '../../../common/configSetting';
 
-declare var jquery: any;
+declare var jQuery: any;
 declare var $: any;
 
 @Component({
@@ -28,6 +28,12 @@ export class PostComponent implements OnInit {
    ) { }
 
    ngOnInit() {
+      // if (jQuery().datepicker) {
+      //   $('.date-picker').datepicker({
+      //     orientation: 'left',
+      //     autoclose: true
+      //   });
+      // }
       this.statuses = ConfigSetting.ListStatusSearch;
       this.searchParams = new PostSearch();
       this.loadListPost();

@@ -31,7 +31,7 @@
                                 <th class="text-center">
                                     Status
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Actions
                                 </th>
                            </tr>
@@ -50,6 +50,14 @@
                                    </div>
                                 </td>
                                 <td>
+                                   <div class="margin-bottom-5">
+                                    <input type="date" class="form-control form-filter input-sm" name="fromPublishDate" placeholder="From"
+                                      [ngModel]="searchParams.fromPublishDate" (ngModelChange)="searchParams.fromPublishDate = $event" #fromPublishDate="ngModel" />
+                                  </div>
+                                  <div class="margin-bottom-5">
+                                    <input type="date" class="form-control form-filter input-sm" name="toPublishDate" placeholder="To"
+                                     [ngModel]="searchParams.toPublishDate" (ngModelChange)="searchParams.toPublishDate = $event" #toPublishDate="ngModel" />
+                                  </div>
                                 </td>
                                 <td>
                                    <div>
@@ -58,7 +66,7 @@
                                       </select>
                                    </div>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
                                             <i class="fa fa-search"></i> Search</button>
@@ -70,7 +78,7 @@
                            <!-- <tr *ngFor="let service of ListService | paginate: { itemsPerPage: searchParams.pageSize, currentPage: searchParams.pageIndex, totalItems: totalRow };let last = last "> -->
                               <tr *ngFor="let post of ListPost | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last ">
                                  <td>
-                                     {{ i+1}}
+                                    {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                  </td>
                                  <td>
                                      {{post._id}}
@@ -88,7 +96,7 @@
                                     <a href="javascript:;" [routerLink]="['/g/banner-item',banner.i]" class="btn btn-circle btn-outline green">
                                         <a><i class="fa fa-edit"></i> Banner Item</a>
                                 </td> -->
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdatePost(post._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
                                     <button type="button" class="btn btn-circle btn-outline red fa fa-remove post_remove_bs_confirmation" data-toggle="confirmation"

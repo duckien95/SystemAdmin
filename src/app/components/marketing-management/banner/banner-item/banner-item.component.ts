@@ -39,6 +39,8 @@ export class BannerItemComponent implements OnInit {
   pageIndex: number = 0;
   onDeleteStatus: boolean;
   msg: string = '';
+
+  today = new Date().toJSON().split('T')[0];
   constructor(private bannerService: BannerService,
     private router: ActivatedRoute) {
   }
@@ -51,7 +53,7 @@ export class BannerItemComponent implements OnInit {
     //     orientation: 'left',
     //     autoclose: true
     //   });
-    //   // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+    //   $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
     // }
     // this.searchParams = new BannerItemSearchRequest();
     this.searchParams = new BannerItemSearch();
@@ -86,6 +88,7 @@ export class BannerItemComponent implements OnInit {
 
    searchBannerItem(){
       this.msg = '';
+      this.searchParams.bannerId = this.currentBannerId;
       this.bannerService.searchBannerItem(this.searchParams).subscribe( res => {
          if(!res.error && res.data.length){
             this.bannerItems = res.data;
@@ -124,17 +127,10 @@ export class BannerItemComponent implements OnInit {
   // }
 
    onShowAddOrChangeForm(id: string){
-      if(id != ''){
-         this.currentBannerItemId = id;
-         this.bannerItemAddOrChange.bannerItemId = id;
-         this.bannerItemAddOrChange.bannerId = this.currentBannerId;
-         this.bannerItemAddOrChange.onGetDetail();
-      }
-      else {
-         this.bannerItemAddOrChange.bannerId = this.currentBannerId;
-         this.bannerItemAddOrChange.bannerItemId = undefined;
-         this.bannerItemAddOrChange.initBannerItem();
-      }
+      this.currentBannerItemId = id;
+      this.bannerItemAddOrChange.bannerItemId = id;
+      this.bannerItemAddOrChange.bannerId = this.currentBannerId;
+      this.bannerItemAddOrChange.initBannerItem();
 
       $('#banner-item-add-or-change').modal('show');
    }

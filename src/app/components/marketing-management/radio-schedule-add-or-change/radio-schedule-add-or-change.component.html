@@ -23,7 +23,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="RadioId" [(ngModel)]="radioModel._id" readonly #radioId="ngModel" />
+                           <input type="text" class="form-control" name="RadioId" value="{{radioModel._id}}" readonly/>
                         </div>
                      </div>
                      <div class="form-group">
@@ -31,7 +31,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" placeholder="Title" name="radioTitle" [(ngModel)]="radioModel.title" readonly #radioTitle="ngModel" />
+                           <input type="text" class="form-control" placeholder="Title" name="radioTitle" value="{{radioModel.title}}" readonly />
                         </div>
                      </div>
                   <div class="form-group">
@@ -39,21 +39,10 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" >
-                        <textarea type="text" class="form-control" placeholder="Description" name="description" [(ngModel)]="radioModel.description" readonly #radioDescription="ngModel"></textarea>
+                        <textarea type="text" class="form-control" placeholder="Description" name="description" value="{{radioModel.description}}" readonly></textarea>
                      </div>
                   </div>
 
-                  <div class="form-group">
-                     <label class="control-label col-md-3">Status
-                        <span class="required"> * </span>
-                     </label>
-                     <div class="col-md-7">
-                        <select class="form-control form-filter input-sm" [(ngModel)]="radioModel.status" name="radioStatus" #radioStatus="ngModel" readonly>
-                           <option [ngValue]="0">Select status</option>
-                           <option *ngFor="let stt of statuses" [ngValue]="stt.value">{{stt.text}}</option>
-                        </select>
-                     </div>
-                  </div>
                   <div class="form-group">
                     <label class="control-label col-md-3">Audio URL
                       <span class="required"> * </span>
@@ -64,6 +53,25 @@
                         </audio>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                     <label class="control-label col-md-3">Status
+                        <span class="required"> * </span>
+                     </label>
+                     <div class="col-md-7" [ngClass]="{
+                        'has-error': radioStatus.errors && (radioStatus.dirty  || (submited && !radioStatus.dirty))|| (!formValid && radioStatus.errors),
+                        'has-success': !radioStatus.errors}">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="radioScheduleModel.status" name="radioStatus" #radioStatus="ngModel" required>
+                           <option *ngFor="let stt of statuses" [ngValue]="stt.value">{{stt.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="(radioStatus.invalid && (radioStatus.dirty || radioStatus.touched))
+                        || (!formValid && radioStatus.errors)
+                        ">
+                           <p class="required" *ngIf="radioStatus.errors.required">Radio status is required</p>
+                        </span>
+                     </div>
+                  </div>
+
                   <div class="form-group">
                     <label class="control-label col-md-3">Public Date
                        <span class="required"> * </span>

@@ -11,7 +11,7 @@ import { ConfigSetting } from './configSetting';
 
 @Injectable()
 export class HttpClientService {
-   backendUrl = "http://localhost:3344/api/";
+   // backendUrl = "http://localhost:3344/api/";
   constructor(
     private http: Http,
     private router: Router,
@@ -91,13 +91,13 @@ export class HttpClientService {
    postJsonObservable(relativePath, obj){
       const headers = ConfigSetting.Headers;
       headers.set('token', localStorage.getItem('cms_token'));
-      return this.http.post(this.backendUrl + relativePath, obj, { headers: headers }).map( (data: Response) => {
+      return this.http.post(ConfigSetting.BACKEND_API_URL + relativePath, obj, { headers: headers }).map( (data: Response) => {
          let result = JSON.parse(data["_body"]);
-         // console.log(this.backendUrl + relativePath,result);
+         // console.log(ConfigSetting.BACKEND_API_URL + relativePath,result);
          return result;
       }).catch( (error: any) => {
          let err = JSON.parse(error["_body"]);
-         // console.error(this.backendUrl + relativePath , error);
+         console.error(ConfigSetting.BACKEND_API_URL + relativePath , error);
          // let errors = { error: true, message: 'Something went wrong' };
          return Observable.of(err);
       });
@@ -106,26 +106,26 @@ export class HttpClientService {
    postImage(relativePath, file){
       const headers = ConfigSetting.Headers;
       headers.set('token', localStorage.getItem('cms_token'));
-      return this.http.post(this.backendUrl + relativePath, file, { headers: headers }).map( (data: Response) => {
+      return this.http.post(ConfigSetting.BACKEND_API_URL + relativePath, file, { headers: headers }).map( (data: Response) => {
          let result = JSON.parse(data["_body"]);
-         // console.log(this.backendUrl + relativePath,result);
+         // console.log(ConfigSetting.BACKEND_API_URL + relativePath,result);
          return result;
       }).catch( (error: any) => {
-         // console.error(this.backendUrl + relativePath , error);
+         // console.error(ConfigSetting.BACKEND_API_URL + relativePath , error);
          // let errors = { error: true, message: 'Something went wrong' };
          return Observable.of(error);
       });
    }
-   
+
    postMediaFile(relativePath, file){
       const headers = ConfigSetting.Headers;
       headers.set('token', localStorage.getItem('cms_token'));
-      return this.http.post(this.backendUrl + relativePath, file, { headers: headers }).map( (data: Response) => {
+      return this.http.post(ConfigSetting.BACKEND_API_URL + relativePath, file, { headers: headers }).map( (data: Response) => {
          let result = JSON.parse(data["_body"]);
-         // console.log(this.backendUrl + relativePath,result);
+         // console.log(ConfigSetting.BACKEND_API_URL + relativePath,result);
          return result;
       }).catch( (error: any) => {
-         // console.error(this.backendUrl + relativePath , error);
+         // console.error(ConfigSetting.BACKEND_API_URL + relativePath , error);
          // let errors = { error: true, message: 'Something went wrong' };
          return Observable.of(error);
       });

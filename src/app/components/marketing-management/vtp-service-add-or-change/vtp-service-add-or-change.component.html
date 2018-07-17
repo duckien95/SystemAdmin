@@ -109,13 +109,15 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" [ngClass]="{
-                        'has-error': serviceStatus.errors && (serviceStatus.dirty  || (submited && !serviceStatus.dirty)),
-                        'has-success': !serviceStatus.errors}">
+                        'has-error': serviceStatus.errors && (serviceStatus.dirty  || (submited && !serviceStatus.dirty))
+                        || (!formValid && serviceStatus.errors), 'has-success': !serviceStatus.errors}">
                         <select class="form-control form-filter input-sm" [(ngModel)]="vtpServiceModel.status" name="parent" #serviceStatus="ngModel" required>
-                           <option [ngValue]="0">Select status</option>
-                           <option *ngFor="let stt of ListServiceStatus" [ngValue]="stt.id">{{stt.name}}</option>
+                           <!-- <option [ngValue]="0">Select status</option> -->
+                           <option *ngFor="let stt of ListServiceStatus" [ngValue]="stt.value">{{stt.text}}</option>
                         </select>
-                        <span class="help-block" *ngIf="serviceStatus.invalid && (serviceStatus.dirty || serviceStatus.touched)">
+                        <span class="help-block" *ngIf="(serviceStatus.invalid && (serviceStatus.dirty || serviceStatus.touched))
+                        || (!formValid && serviceStatus.errors)
+                        ">
                            <p class="required" *ngIf="serviceStatus.errors.required">Service status is required</p>
                         </span>
                      </div>

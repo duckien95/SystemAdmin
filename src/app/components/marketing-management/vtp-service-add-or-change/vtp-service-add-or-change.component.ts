@@ -32,11 +32,7 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
 
    initVtpServiceModel(){
       // console.log('init add or change', this.vtpServiceModel.serviceId )
-      this.ListServiceStatus = [
-         { id: 1, name: '1' },
-         { id: 2, name: '2' },
-         { id: 3, name: '3' }
-      ];
+      this.ListServiceStatus = ConfigSetting.ListStatus;
       this.vtpService.getListParentService().subscribe( res => {
          // console.log(res);
          this.ListParentService = res.error ? [] :  res.data;

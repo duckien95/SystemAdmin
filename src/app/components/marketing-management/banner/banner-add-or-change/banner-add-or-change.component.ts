@@ -51,17 +51,16 @@ export class BannerAddOrChangeComponent implements OnInit {
     // }
   }
 
-   resetBanner(){
-      this.banner = new Banner();
-   }
-   onGetDetail(){
-      if(this.banner._id == undefined) {
-         ConfigSetting.ShowWaiting();
-         return;
+   initBanner() {
+      this.formValid = true;
+      if(this.banner._id == '') {
+         this.banner = new Banner();
+      } else {
+         this.bannerService.getBannerById({'bannerId': this.banner._id}).subscribe( res => {
+            this.banner = res.error ? [] : res.data;
+         })
       }
-      this.bannerService.getBannerById({'bannerId': this.banner._id}).subscribe( res => {
-         this.banner = res.error ? [] : res.data;
-      })
+
    }
 
    reloadAndReset() {

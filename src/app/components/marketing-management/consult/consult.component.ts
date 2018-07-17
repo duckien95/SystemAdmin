@@ -21,6 +21,8 @@ export class ConsultComponent implements OnInit {
    pageIndex: number = 0;
    pageSize: number = 24;
    msg: string;
+
+   indexNumber: number;
    constructor(
       private noteService: NoteService
    ) { }
@@ -28,6 +30,7 @@ export class ConsultComponent implements OnInit {
    ngOnInit() {
       this.searchParams = new ConsultServiceSearch();
       this.statuses= ConfigSetting.ListStatusNoteSearch;
+      this.indexNumber = this.pageSize * this.pageIndex - ( this.pageIndex > 0 ? this.pageSize : 0 );
       this.loadListConsultService();
    }
 

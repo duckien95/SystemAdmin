@@ -34,7 +34,7 @@
                               <th class="text-center">
                                  Status
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Actions
                               </th>
                            </tr>
@@ -51,8 +51,11 @@
                                       <input type="text" class="form-control form-filter input-sm" name="phone" [(ngModel)]="searchParams.phone" #phone="ngModel" />
                                    </div>
                                 </td>
-                                <td>
-                                </td>
+                                 <td>
+                                    <div>
+                                       <input type="text" class="form-control form-filter input-sm" name="address" [(ngModel)]="searchParams.address" #address="ngModel" />
+                                   </div>
+                                 </td>
                                 <td>
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="title" [(ngModel)]="searchParams.title" #title="ngModel" />
@@ -65,7 +68,7 @@
                                       </select>
                                    </div>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
                                             <i class="fa fa-search"></i> Search</button>
@@ -79,7 +82,8 @@
                               <tr *ngFor="let consult of ListConsultService | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
 
                                  <td>
-                                     {{ i+1}}
+                                     {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
+                                     <!-- {{ indexNumber + i + 1}} -->
                                  </td>
                                  <td>
                                      {{consult.fullName}}
@@ -96,7 +100,7 @@
                                 <td class="text-center">
                                     {{consult.status}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateConsultService(consult._id)">
                                         <i class="fa fa-pencil"></i> Add Note </a>
 

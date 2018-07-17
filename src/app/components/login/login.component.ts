@@ -100,20 +100,25 @@ export class LoginComponent implements OnInit {
    onLoginForm(loginForm){
       try {
          if (loginForm.valid) {
-               this.accountService.loginSystem(this.model.email, this.model.password).subscribe( res => {
-                  console.log(res);
-                  if(res.auth){
-                     localStorage.setItem('cms_token', res.token);
-                     localStorage.setItem('cms_app_id', res.appId);
-                     localStorage.setItem('cms_expire_time', JSON.stringify(Date.now() + 86400000)) //one day
-                     this.router.navigate(['/g/services']);
-                  }
-                  else {
-                     this.router.navigate(['/login']);
-                  }
-               })
+            this.accountService.loginSystem(this.model.email, this.model.password).subscribe( res => {
+               console.log(res);
+               if(res.auth){
+                  localStorage.setItem('cms_token', res.token);
+                  localStorage.setItem('cms_app_id', res.appId);
+                  localStorage.setItem('cms_expire_time', JSON.stringify(Date.now() + 86400000)) //one day
+                  ConfigSetting.ShowSuccess('Login success');
+                  this.router.navigate(['/g/services']);
+               }
+               else {
+                  ConfigSetting.ShowError(res.message);
+                  this.router.navigate(['/login']);
+               }
+            })
+         } else {
+            ConfigSetting.ShowError('Can not submit form');
          }
       } catch (error) {
+         console.log('err');
          ConfigSetting.ShowErrorException(error);
       }
    }

@@ -64,14 +64,16 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" [ngClass]="{
-                        'has-error': radioStatus.errors && (radioStatus.dirty  || (submited && !radioStatus.dirty)),
-                        'has-success': !radioStatus.errors}">
+                        'has-error': (radioStatus.errors && (radioStatus.dirty  || radioStatus.touched))
+                        || (!formValid && radioStatus.errors) ,'has-success': !radioStatus.errors}">
                         <select class="form-control form-filter input-sm" [(ngModel)]="radioModel.status" name="radioStatus" #radioStatus="ngModel" required>
                            <!-- <option [ngValue]="0">Select status</option> -->
                            <option *ngFor="let stt of statuses" [ngValue]="stt.value">{{stt.text}}</option>
                         </select>
-                        <span class="help-block" *ngIf="radioStatus.invalid && (radioStatus.dirty || radioStatus.touched)">
-                           <p class="required" *ngIf="radioStatus.errors.required">Service status is required</p>
+                        <span class="help-block" *ngIf="(radioStatus.invalid && (radioStatus.dirty || radioStatus.touched))
+                        || (!formValid && radioStatus.errors)
+                        ">
+                           <p class="required" *ngIf="radioStatus.errors.required">Radio status is required</p>
                         </span>
                      </div>
                   </div>

@@ -40,26 +40,28 @@
                               <th class="text-center">
                                  Time
                               </th>
-                              <th>
+                              <th class="text-center">
                                  Actions
                               </th>
                            </tr>
                            <tr role="row" class="filter">
                                 <td>
-                                </td>
-
+                                 </td>
                                 <td>
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="fullname" [(ngModel)]="searchParams.fullName" #fullname="ngModel" />
                                    </div>
-                                </td>
-                               <td>
-                               </td>
-                                <td>
-                                   <div>
-                                      <input type="text" class="form-control form-filter input-sm" name="departurePlace" [(ngModel)]="searchParams.departurePlace" #departurePlace="ngModel" />
-                                   </div>
-                                </td>
+                                 </td>
+                                 <td>
+                                    <div>
+                                       <input type="text" class="form-control form-filter input-sm" name="phone" [(ngModel)]="searchParams.phone" #phone="ngModel" />
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div>
+                                       <input type="text" class="form-control form-filter input-sm" name="departurePlace" [(ngModel)]="searchParams.departurePlace" #departurePlace="ngModel" />
+                                    </div>
+                                 </td>
                                 <td>
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="destinationPlace" [(ngModel)]="searchParams.destinationPlace" #destinationPlace="ngModel" />
@@ -78,7 +80,7 @@
                                    </div>
                                 </td>
                                 <td></td>
-                                <td>
+                                <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
                                             <i class="fa fa-search"></i> Search</button>
@@ -92,7 +94,7 @@
                               <tr *ngFor="let offer of ListOfferPrice | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
 
                                  <td>
-                                     {{ i+1}}
+                                     {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                  </td>
                                  <td>
                                      {{offer.fullName}}
@@ -115,7 +117,7 @@
                                 <td class="text-center">
                                     {{offer.timeTarget}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateOfferPrice(offer._id)">
                                         <i class="fa fa-pencil"></i> Edit </a>
 

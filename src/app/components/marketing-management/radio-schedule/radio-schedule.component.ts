@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { ConfigSetting } from '../../../common/configSetting';
 import { RadioService } from '../../../services/marketing-management/radio.service';
-import { RadioSearch } from '../../../models/marketing-management/search-model';
+import { RadioScheduleSearch } from '../../../models/marketing-management/search-model';
 import { RadioModel } from '../../../models/marketing-management/radios/radio-model';
 import { RadioScheduleAddOrChangeComponent } from '../radio-schedule-add-or-change/radio-schedule-add-or-change.component';
 
@@ -17,32 +17,28 @@ declare var $: any;
 export class RadioScheduleComponent implements OnInit {
 
    @ViewChild(RadioScheduleAddOrChangeComponent) radioScheduleAddOrChange: RadioScheduleAddOrChangeComponent;
+   searchParams: RadioScheduleSearch;
    radioModel: RadioModel;
    currentRadioId: string;
-   searchParams: RadioSearch;
    ListRadioSchedule: any = [];
    statuses: any;
    pageSize: number = 24;
    pageIndex: number = 0;
+
    constructor(
       private radioService: RadioService,
       private router: ActivatedRoute
    ) { }
 
    ngOnInit() {
-      this.searchParams = new RadioSearch();
+      this.searchParams = new RadioScheduleSearch();
       this.radioModel = new RadioModel();
       this.router.paramMap.subscribe((param: ParamMap) => {
         // console.log(param);
         this.currentRadioId = param.get('radioId');
       });
       this.loadListRadioSchedule();
-      this.statuses = [
-         { 'value': 0, 'text': 'Status'},
-         { 'value': 1, 'text': '1' },
-         { 'value': 2, 'text': '2' },
-         { 'value': 3, 'text': '3' }
-      ];
+      this.statuses = ConfigSetting.ListStatus;
    }
 
    loadListRadioSchedule() {
@@ -62,10 +58,22 @@ export class RadioScheduleComponent implements OnInit {
       })
    }
 
+   searchRadioSchedule() {
+      this.radioService.searchRadioSchedule(this.searchParams).subscribe(res => {
+         if( !res.error && res.data.length){
+            this.ListRadioSchedule = res.data;
+         } else {
+            this.ListRadioSchedule = [];
+         }
+      })
+   }
+
    onShowAddRadioSchedule(){
+      // console.log('radio_model', this.radioModel);
       this.radioScheduleAddOrChange.radioScheduleId = undefined;
       this.radioScheduleAddOrChange.radioModel = this.radioModel;
       this.radioScheduleAddOrChange.onInitRadioSchedule();
+      this.radioScheduleAddOrChange.radioScheduleForm.reset();
       $('#radio-schedule-add-or-change').modal('show');
    }
 

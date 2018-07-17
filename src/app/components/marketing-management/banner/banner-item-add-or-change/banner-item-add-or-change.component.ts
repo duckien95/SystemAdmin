@@ -56,26 +56,29 @@ export class BannerItemAddOrChangeComponent implements OnInit {
    }
 
    initBannerItem(){
-      this.bannerItem = new BannerItem();
-      this.bannerService.getBannerById({ 'bannerId': this.bannerId }).subscribe( res => {
-         this.banner = res.error ? [] : res.data;
-      })
+      this.formValid = true;
+      if(this.bannerItemId != '') {
+         this.bannerService.getBannerItemById({ 'bannerItemId': this.bannerItemId, 'bannerId': this.bannerId }).subscribe( res => {
+            console.log(res);
+            if(!res.error){
+               this.banner = res.banner;
+               this.bannerItem =  res.bannerItem;
+            } else {
+               // this.banner = [];
+               // this.bannerItem = [];
+               ConfigSetting.ShowError("Can not get baner and banner item");
+            }
+
+         })
+      } else {
+         this.bannerService.getBannerById({ 'bannerId': this.bannerId }).subscribe( res => {
+            this.banner = res.error ? [] : res.data;
+         });
+         this.bannerItem = new BannerItem();
+      }
+
    }
 
-   onGetDetail(){
-      this.bannerService.getBannerItemById({ 'bannerItemId': this.bannerItemId, 'bannerId': this.bannerId }).subscribe( res => {
-         console.log(res);
-         if(!res.error){
-            this.banner = res.banner;
-            this.bannerItem =  res.bannerItem;
-         } else {
-            // this.banner = [];
-            // this.bannerItem = [];
-            ConfigSetting.ShowError("Can not get baner and banner item");
-         }
-
-      })
-   }
 
   // async onGetDetail(): Promise<boolean> {
   //   if (this.onGetDetailStatus) {

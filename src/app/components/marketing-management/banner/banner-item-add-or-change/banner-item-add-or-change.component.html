@@ -9,7 +9,7 @@
               <div class="portlet-title ">
                 <div class="caption">
                   <i class="icon-settings font-red"></i>
-                  <span  class="caption-subject font-red sbold uppercase">{{ bannerItemId == undefined ? 'Add new banner item' : 'Change banner item' }}</span>
+                  <span  class="caption-subject font-red sbold uppercase">{{ bannerItemId == '' ? 'Add new banner item' : 'Change banner item' }}</span>
                 </div>
               </div>
               <div class="portlet-body">
@@ -196,7 +196,7 @@
                         <span class="help-block" *ngIf="(status.invalid && (status.dirty  || status.touched))
                         || (!formValid && status.errors)
                         ">
-                          <p class="required" *ngIf="status.errors.required">Status is required</p>
+                          <p class="required" *ngIf="status.errors?.required">Status is required</p>
                         </span>
                       </div>
                     </div>

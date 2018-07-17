@@ -95,11 +95,7 @@ export class BannerComponent implements OnInit {
   //
    onShowAddOrChangeForm(id: string) {
       this.bannerAddOrChange.banner._id = id;
-      if(id != '') {
-         this.bannerAddOrChange.onGetDetail();
-      } else {
-         this.bannerAddOrChange.resetBanner();
-      }
+      this.bannerAddOrChange.initBanner();
       $('#banner-add-or-change').modal('show');
    }
   // async onShowAddOrChangeForm(id: string): Promise<void> {

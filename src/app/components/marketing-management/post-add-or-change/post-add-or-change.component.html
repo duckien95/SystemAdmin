@@ -30,7 +30,9 @@
                                  <option [value]="">Select parent</option>
                                  <option *ngFor="let par of ListParentService" [value]="par._id">{{ par.name }}</option>
                               </select>
-                              <span class="help-block" *ngIf="parentService.invalid && (parentService.dirty || parentService.touched)">
+                              <span class="help-block" *ngIf="(parentService.invalid && (parentService.dirty || parentService.touched))
+                              || (!formValid && parentService.errors)
+                              ">
                                  <p class="required" *ngIf="parentService.errors.required">Parent service is required</p>
                               </span>
                            </div>
@@ -46,7 +48,9 @@
                               <!-- <option [value]="0">Child Service</option> -->
                               <option *ngFor="let child of ListChildService" [value]="child._id">{{ child.name }}</option>
                            </select>
-                           <span class="help-block" *ngIf="childService.invalid && (childService.dirty || childService.touched)">
+                           <span class="help-block" *ngIf="(childService.invalid && (childService.dirty || childService.touched))
+                           || (!formValid && childService.errors)
+                           ">
                               <p class="required" *ngIf="childService.errors.required">Child service is required</p>
                            </span>
                         </div>
@@ -122,10 +126,12 @@
                      <div class="col-md-7" [ngClass]="{'has-error': (postStatus.errors && (postStatus.dirty || postStatus.touched))
                      || (!formValid && postStatus.errors), 'has-success': !postStatus.errors }">
                         <select class="form-control form-filter input-sm" [(ngModel)]="postModel.status" name="status" required #postStatus="ngModel">
-                           <option [ngValue]="0">Select status</option>
+                           <!-- <option [ngValue]="0">Select status</option> -->
                            <option *ngFor="let stt of ListStatus" [ngValue]="stt.value">{{stt.text}}</option>
                         </select>
-                        <span class="help-block" *ngIf="postStatus.errors && (postStatus.dirty || postStatus.touched)">
+                        <span class="help-block" *ngIf="(postStatus.invalid && (postStatus.dirty || postStatus.touched))
+                        || (!formValid && postStatus.errors)
+                        ">
                            <p class="required" *ngIf="postStatus.errors?.required">Post status is required</p>
                         </span>
                      </div>

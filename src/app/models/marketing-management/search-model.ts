@@ -6,6 +6,11 @@ export class BannerSearch{
 
 export class BannerItemSearch {
    // id: string;
+   bannerId: string;
+   fromStartDate: string;
+   toStartDate: string;
+   fromEndDate: string;
+   toEndDate: string;
    bannerItemName: string;
    isDefault: boolean;
    priority: number;
@@ -16,6 +21,8 @@ export class PostSearch {
    // id: string;
    title: string;
    status: number;
+   fromPublishDate: string;
+   toPublishDate: string;
 }
 
 export class ServiceSearch {
@@ -28,14 +35,21 @@ export class RadioSearch {
    status: number;
 }
 
+export class RadioScheduleSearch {
+   fromPublishDate: string;
+   toPublishDate: string;
+}
+
 export class ConsultServiceSearch {
    title: string;
+   address: string;
    fullName: string;
    phone: string;
    status: number;
 }
 
 export class OfferPriceSearch {
+   phone: string;
    fullName: string;
    departurePlace: string;
    destinationPlace: string;
@@ -44,9 +58,11 @@ export class OfferPriceSearch {
 }
 
 export class RegisterAgencySearch {
+   phone: string;
    fullName: string;
    address: string;
    registerAgencyAddress: string;
    job: string;
+   personalOrBusinessRegisterId: string;
    status: number;
 }
