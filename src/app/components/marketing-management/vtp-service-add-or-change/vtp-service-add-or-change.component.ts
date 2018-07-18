@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class VtpServiceAddOrChangeComponent implements OnInit {
    @Output() reloadServiceEvent = new EventEmitter();
+   @Output() resetHighlightServiceId = new EventEmitter();
    @ViewChild('vtpServiceAddOrChange') vtpServiceForm: any;
    vtpServiceModel: VtpServiceModel;
    ListParentService: any = [];
@@ -57,6 +58,7 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
 
    reloadAndReset(){
       this.reloadServiceEvent.emit();
+      this.resetHighlightServiceId.emit();
       this.vtpServiceForm.reset();
       // this.initVtpServiceModel();
       $('#vtp-service-add-or-change').modal('hide');

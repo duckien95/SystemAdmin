@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import { VtpService } from '../../../services/marketing-management/vtp.service';
 import { PostService } from '../../../services/marketing-management/post.service';
 import { PostSearch } from '../../../models/marketing-management/search-model';
@@ -21,6 +22,8 @@ export class PostComponent implements OnInit {
    pageSize: number =  24;
    pageIndex:number = 0;
    msg: string;
+   configSetting = ConfigSetting;
+
 
    constructor(
       private postService: PostService,
@@ -28,12 +31,6 @@ export class PostComponent implements OnInit {
    ) { }
 
    ngOnInit() {
-      // if (jQuery().datepicker) {
-      //   $('.date-picker').datepicker({
-      //     orientation: 'left',
-      //     autoclose: true
-      //   });
-      // }
       this.statuses = ConfigSetting.ListStatusSearch;
       this.searchParams = new PostSearch();
       this.loadListPost();

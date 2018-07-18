@@ -20,6 +20,10 @@ export class VtpService {
       return this.httpClient.postJsonObservable(ConfigSetting.UrlPathServiceGet , obj);
    }
 
+   getListSiblingService(obj) {
+      return this.httpClient.postJsonObservable(ConfigSetting.UrlPathServiceSiblingGet, obj);
+   }
+
    getListParentService(){
       return this.httpClient.postJsonObservable(ConfigSetting.UrlPathServiceParentGet, {});
    }

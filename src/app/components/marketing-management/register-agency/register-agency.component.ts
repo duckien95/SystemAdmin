@@ -19,6 +19,7 @@ export class RegisterAgencyComponent implements OnInit {
    statuses: any;
    pageSize: number = 24;
    pageIndex: number = 0;
+   configSetting = ConfigSetting;
 
    constructor(
       private noteService: NoteService

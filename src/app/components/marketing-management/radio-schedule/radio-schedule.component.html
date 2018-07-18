@@ -24,6 +24,9 @@
                                     STT
                                 </th>
                                 <th>
+                                   Radio Schedule Id
+                                </th>
+                                <th>
                                     Title
                                 </th>
                                 <th class="text-center">
@@ -42,17 +45,26 @@
                                    <!-- STT -->
                                 </td>
                                 <td>
+                                   <!-- Radio Schedule Id -->
+                                </td>
+                                <td>
                                    <!-- Title -->
                                 </td>
                                 <td>
                                    <!-- Public Date -->
                                    <div class="margin-bottom-5">
-                                    <input type="date" class="form-control form-filter input-sm" name="fromPublishDate" placeholder="From"
-                                      [ngModel]="searchParams.fromPublishDate" (ngModelChange)="searchParams.fromPublishDate = $event" #fromPublishDate="ngModel" />
+                                      <my-date-picker name="fromPublishDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                                      (dateChanged)="searchParams.fromPublishDate = configSetting.changeDatetimeEvent($event)" required>
+                                      </my-date-picker>
+                                    <!-- <input type="date" class="form-control form-filter input-sm" name="fromPublishDate" placeholder="From"
+                                      [ngModel]="searchParams.fromPublishDate" (ngModelChange)="searchParams.fromPublishDate = $event" #fromPublishDate="ngModel" /> -->
                                   </div>
                                   <div class="margin-bottom-5">
-                                    <input type="date" class="form-control form-filter input-sm" name="toPublishDate" placeholder="To"
-                                     [ngModel]="searchParams.toPublishDate" (ngModelChange)="searchParams.toPublishDate = $event" #toPublishDate="ngModel" />
+                                    <my-date-picker name="toPublishDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                                    (dateChanged)="searchParams.toPublishDate = configSetting.changeDatetimeEvent($event)" required>
+                                    </my-date-picker>
+                                    <!-- <input type="date" class="form-control form-filter input-sm" name="toPublishDate" placeholder="To"
+                                     [ngModel]="searchParams.toPublishDate" (ngModelChange)="searchParams.toPublishDate = $event" #toPublishDate="ngModel" /> -->
                                   </div>
                                 </td>
                                 <td>
@@ -76,7 +88,10 @@
                               <tr *ngFor="let radio of ListRadioSchedule | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
 
                                  <td>
-                                     {{ i+1}}
+                                    {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
+                                 </td>
+                                 <td>
+                                    {{ radio._id }}
                                  </td>
                                 <td>
                                     {{radio.title}}

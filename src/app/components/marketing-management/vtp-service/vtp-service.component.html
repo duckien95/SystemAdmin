@@ -32,6 +32,9 @@
                                     URL
                                 </th>
                                 <th class="text-center">
+                                   Child
+                                </th>
+                                <th class="text-center">
                                     Status
                                 </th>
                                 <th class="text-center">
@@ -56,8 +59,15 @@
                                    </div>
                                 </td>
                                 <td>
+                                   <div>
+                                      <input type="text" class="form-control form-filter input-sm" name="description" [(ngModel)]="searchParams.description" #description="ngModel" />
+                                   </div>
                                 </td>
                                 <td>
+                                   <!-- URL -->
+                                </td>
+                                <td>
+                                    <!-- Category -->
                                 </td>
                                 <td>
                                    <div>
@@ -95,6 +105,12 @@
                                     {{service.url}}
                                 </td>
                                 <td class="text-center">
+                                   <ng-container *ngIf="service.parentId == 0">
+                                      <a href="javascript:;" class="btn btn-circle btn-outline blue" (click)="getListChildService(service._id)">
+                                      <i class="fa fa-pencil"></i> View Child </a>
+                                    </ng-container>
+                                </td>
+                                <td class="text-center">
                                     {{service.status}}
                                 </td>
                                 <!-- <td>
@@ -109,8 +125,7 @@
                                         <span *ngIf="lastParent">{{onRegisterConfirmation()}}</span>
                                         Remove
                                     </button>
-                                    <a href="javascript:;" class="btn btn-circle btn-outline blue" (click)="getListChildService(service._id)">
-                                        <i class="fa fa-pencil"></i> View Child </a>
+
                                     <!-- <button type="button" (click)="deleteService(service._id)" class="btn btn-circle btn-outline red fa fa-remove banner_remove_bs_confirmation">
                                        Remove
                                     </button> -->
@@ -135,6 +150,9 @@
                                 </td>
                                 <td>
                                     {{child.url}}
+                                </td>
+                                <td>
+
                                 </td>
                                 <td class="text-center">
                                     {{child.status}}
@@ -172,5 +190,5 @@
     </div>
 </div>
 <div class="popupDetail">
-    <app-vtp-service-add-or-change #vtpServiceAddOrChange (reloadServiceEvent)="loadListService()"></app-vtp-service-add-or-change>
+    <app-vtp-service-add-or-change #vtpServiceAddOrChange (reloadServiceEvent)="loadListService()" (resetHighlightServiceId)="highlightServiceId = ''"></app-vtp-service-add-or-change>
 </div>

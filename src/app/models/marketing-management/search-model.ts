@@ -9,8 +9,10 @@ export class BannerItemSearch {
    bannerId: string;
    fromStartDate: string;
    toStartDate: string;
-   fromEndDate: string;
-   toEndDate: string;
+   // fromEndDate: string;
+   // toEndDate: string;
+   fromEndDate: Date;
+   toEndDate: Date;
    bannerItemName: string;
    isDefault: boolean;
    priority: number;
@@ -21,23 +23,27 @@ export class PostSearch {
    // id: string;
    title: string;
    status: number;
-   fromPublishDate: string;
-   toPublishDate: string;
+   // fromPublishDate: string;
+   // toPublishDate: string;
+   fromPublishDate: Date;
+   toPublishDate: Date;
 }
 
 export class ServiceSearch {
    name: string;
+   description: string;
    status: number;
 }
 
 export class RadioSearch {
    title: string;
+   description: string;
    status: number;
 }
 
 export class RadioScheduleSearch {
-   fromPublishDate: string;
-   toPublishDate: string;
+   fromPublishDate: Date;
+   toPublishDate: Date;
 }
 
 export class ConsultServiceSearch {
@@ -65,4 +71,6 @@ export class RegisterAgencySearch {
    job: string;
    personalOrBusinessRegisterId: string;
    status: number;
+   fromEndDate: Date;
+   toEndDate: Date;
 }

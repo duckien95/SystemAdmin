@@ -24,6 +24,7 @@ export class RadioScheduleComponent implements OnInit {
    statuses: any;
    pageSize: number = 24;
    pageIndex: number = 0;
+   configSetting = ConfigSetting;
 
    constructor(
       private radioService: RadioService,

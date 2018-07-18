@@ -35,14 +35,6 @@ export class PostAddOrChangeComponent implements OnInit {
    ngOnInit() {
       this.postModel =  new PostModel();
       this.initPostModel();
-      // if (jQuery().datepicker) {
-      //   $('.date-picker').datepicker({
-      //     rtl: App.isRTL(),
-      //     orientation: 'left',
-      //     autoclose: true
-      //   });
-      //   $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-      // }
    }
 
    initPostModel(){
@@ -58,12 +50,19 @@ export class PostAddOrChangeComponent implements OnInit {
             // console.log(res);
             if(!res.error && res.data.length > 0){
                this.postModel = res.data[0];
-               this.vtpService.getListService({ "serviceId": res.data[0].servicesId }).subscribe( resp => {
-                  console.log(resp);
-                  if(!resp.error && resp.data.length > 0 && resp.parent != null){
-                     this.vtpService.getListChildService({"parentServiceId": resp.parent._id }).subscribe(response => {
-                        this.ListChildService = response.error ? [] : response.data;
-                     })
+               // this.vtpService.getListService({ "serviceId": res.data[0].servicesId }).subscribe( resp => {
+               //    console.log(resp);
+               //    if(!resp.error && resp.data.length > 0 && resp.parent != null){
+               //       this.vtpService.getListChildService({"parentServiceId": resp.parent._id }).subscribe(response => {
+               //          this.ListChildService = response.error ? [] : response.data;
+               //       })
+               //    }
+               // })
+               this.vtpService.getListSiblingService({'serviceId': res.data[0].servicesId}).subscribe( resp => {
+                  if(!resp.error && res.data.length) {
+                     this.ListChildService = resp.data;
+                  } else {
+                     this.ListChildService = [];
                   }
                })
 

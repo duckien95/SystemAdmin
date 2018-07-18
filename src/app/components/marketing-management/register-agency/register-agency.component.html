@@ -21,9 +21,9 @@
                               <th>
                                  Fullname
                               </th>
-                              <th>
+                              <!-- <th>
                                  Phone
-                              </th>
+                              </th> -->
                               <th>
                                  Address
                               </th>
@@ -57,11 +57,11 @@
                                       <input type="text" class="form-control form-filter input-sm" name="fullname" [(ngModel)]="searchParams.fullName" #fullname="ngModel" />
                                    </div>
                                 </td>
-                               <td>
+                               <!-- <td>
                                   <div>
                                      <input type="text" class="form-control form-filter input-sm" name="phone" [(ngModel)]="searchParams.phone" #phone="ngModel" />
                                   </div>
-                               </td>
+                               </td> -->
                                 <td>
                                    <div>
                                       <input type="text" class="form-control form-filter input-sm" name="address" [(ngModel)]="searchParams.address" #address="ngModel" />
@@ -91,8 +91,19 @@
                                       </select>
                                    </div>
                                 </td>
-                                <td>
+                                <td class="time-column">
+                                   <div class="margin-bottom-5">
+                                      <my-date-picker name="fromStartDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                                      (dateChanged)="searchParams.fromStartDate = configSetting.changeDatetimeEvent($event)" required>
+                                      </my-date-picker>
 
+                                   </div>
+                                   <div class="margin-bottom-5">
+                                      <my-date-picker name="toStartDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="To"
+                                      (dateChanged)="searchParams.toStartDate = configSetting.changeDatetimeEvent($event)" required>
+                                      </my-date-picker>
+
+                                   </div>
                                 </td>
                                 <td class="text-center">
                                     <div class="margin-bottom-5">
@@ -113,9 +124,9 @@
                                  <td>
                                     {{ agency.fullName }}
                                  </td>
-                                 <td>
+                                 <!-- <td>
                                     {{ agency.phone }}
-                                 </td>
+                                 </td> -->
                                  <td>
                                     {{ agency.address }}
                                  </td>
@@ -139,7 +150,7 @@
                                  </td>
                                 <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateRegisterAgency(agency._id)">
-                                        <i class="fa fa-pencil"></i> Edit </a>
+                                        <i class="fa fa-pencil"></i> Add Note </a>
 
                                 </td>
 

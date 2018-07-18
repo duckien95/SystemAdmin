@@ -31,10 +31,10 @@
                   <th class="text-center">
                     ImageUrl
                   </th>
-                  <th class="text-center">
+                  <th class="text-center time-column">
                     Start Date
                   </th>
-                  <th class="text-center">
+                  <th class="text-center time-column">
                     End Date
                   </th>
                   <th class="text-center">
@@ -67,22 +67,34 @@
                   </td>
                   <td>
                     <div class="margin-bottom-5">
-                      <input type="date" class="form-control form-filter input-sm" name="fromStartDate" placeholder="From" [min]="today"
-                        [ngModel]="searchParams.fromStartDate" (ngModelChange)="searchParams.fromStartDate = $event" #fromStartDate="ngModel" />
+                        <my-date-picker name="fromStartDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                        (dateChanged)="searchParams.fromStartDate = configSetting.changeDatetimeEvent($event)" required>
+                        </my-date-picker>
+                      <!-- <input type="date" class="form-control form-filter input-sm" name="fromStartDate" placeholder="From" [min]="today"
+                        [ngModel]="searchParams.fromStartDate" (ngModelChange)="searchParams.fromStartDate = $event" #fromStartDate="ngModel" /> -->
                     </div>
                     <div class="margin-bottom-5">
-                      <input type="date" class="form-control form-filter input-sm" name="toStartDate" placeholder="To" [min]="searchParams.fromStartDate"
-                       [ngModel]="searchParams.toStartDate" (ngModelChange)="searchParams.toStartDate = $event" #toStartDate="ngModel" />
+                        <my-date-picker name="toStartDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="To"
+                        (dateChanged)="searchParams.toStartDate = configSetting.changeDatetimeEvent($event)" required>
+                        </my-date-picker>
+                      <!-- <input type="date" class="form-control form-filter input-sm" name="toStartDate" placeholder="To" [min]="searchParams.fromStartDate"
+                       [ngModel]="searchParams.toStartDate" (ngModelChange)="searchParams.toStartDate = $event" #toStartDate="ngModel" /> -->
                     </div>
                   </td>
                   <td>
                      <div class="margin-bottom-5">
-                       <input type="date" class="form-control form-filter input-sm" name="fromEndDate" placeholder="From"
-                        [ngModel]="searchParams.fromEndDate" (ngModelChange)="searchParams.fromEndDate = $event" #fromEndDate="ngModel" />
+                        <my-date-picker name="fromEndDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                        (dateChanged)="searchParams.fromEndDate = configSetting.changeDatetimeEvent($event)" required>
+                        </my-date-picker>
+                       <!-- <input type="date" class="form-control form-filter input-sm" name="fromEndDate" placeholder="From"
+                        [ngModel]="searchParams.fromEndDate" (ngModelChange)="searchParams.fromEndDate = $event" #fromEndDate="ngModel" /> -->
                      </div>
                      <div class="margin-bottom-5">
-                       <input type="date" class="form-control form-filter input-sm" name="toEndDate" placeholder="To"
-                        [ngModel]="searchParams.toEndDate" (ngModelChange)="searchParams.toEndDate = $event" #toEndDate="ngModel" />
+                        <my-date-picker name="toEndDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="To"
+                        (dateChanged)="searchParams.toEndDate = configSetting.changeDatetimeEvent($event)" required>
+                        </my-date-picker>
+                       <!-- <input type="date" class="form-control form-filter input-sm" name="toEndDate" placeholder="To"
+                        [ngModel]="searchParams.toEndDate" (ngModelChange)="searchParams.toEndDate = $event" #toEndDate="ngModel" /> -->
                      </div>
                   </td>
                   <td class="text-center">

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
+import { MyDatePickerModule } from 'mydatepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -276,7 +278,9 @@ const routesConfig: Routes = [
     NgbModule.forRoot(),
     FileUploadModule,
     AutoCompleteModule,
-    CustomFormsModule
+    CustomFormsModule,
+    MyDateRangePickerModule,
+    MyDatePickerModule
   ],
   exports: [
     RouterModule,

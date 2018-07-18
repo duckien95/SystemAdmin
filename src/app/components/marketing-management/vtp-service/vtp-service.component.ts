@@ -48,9 +48,7 @@ export class VtpServiceComponent implements OnInit {
    }
 
    getListChildService(serviceId){
-      // console.log(`.${serviceId}`);
-      // $(`.${serviceId}`).toggle('slow');
-      // console.log('service_id', serviceId)
+      console.log(serviceId);
       if(this.highlightServiceId == serviceId) {
          this.highlightServiceId = '';
       }
@@ -83,7 +81,7 @@ export class VtpServiceComponent implements OnInit {
    deleteService(id){
       this.vtpService.deleteService({ "serviceId": id}).subscribe( res => {
          if(res.error){
-            ConfigSetting.ShowError(res.message)
+            ConfigSetting.ShowError(res.message);
          }
          else {
             ConfigSetting.ShowSuccess("Delete service success");

@@ -1,4 +1,4 @@
-
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import { Headers } from '@angular/http';
 import { Convert } from './convert';
 import { Dictionary } from '../models/dictionary';
@@ -11,8 +11,8 @@ declare var AjaxRequest: any;
 
 export class ConfigSetting {
   public static BASE_URL = 'http://localhost:62009/api/';
-  // public static BACKEND_URL = 'http://localhost:3344';
-  public static BACKEND_URL = 'http://125.212.238.119:3344';
+  public static BACKEND_URL = 'http://localhost:3344';
+  // public static BACKEND_URL = 'http://125.212.238.119:3344';
   public static BACKEND_API_URL = ConfigSetting.BACKEND_URL + '/api/';
   // public static BASE_URL = 'http://local.gico.cms/api/';
   public static Headers: Headers = new Headers();
@@ -316,6 +316,7 @@ export class ConfigSetting {
   public static UrlPathServiceGet = 'service/list_all';
   public static UrlPathServiceParentGet = 'service/list_parent';
   public static UrlPathServiceChildGet = 'service/list_child';
+  public static UrlPathServiceSiblingGet = 'service/list_sibling';
   public static UrlPathServiceSearch = 'service/search';
   public static UrlPathServiceCreate = 'service/create';
   public static UrlPathServiceUpdate = 'service/update';
@@ -381,6 +382,16 @@ export class ConfigSetting {
   public static UrlPathRegisterAgencyUpdate = 'note/register_agency_update';
   public static UrlPathRegisterAgencySearch = 'note/register_agency_search';
 
+
+   // my-date-picker-options
+   public static myDatePickerOptions: IMyDpOptions = {
+      dateFormat: 'dd/mm/yyyy'
+   }
+
+   public static changeDatetimeEvent(event: IMyDateModel) {
+      return event.jsdate;
+   }
+
    public static getMediaURL(img_file_name) {
       if(img_file_name == undefined) {
          img_file_name = 'image-undefined.png';
@@ -430,16 +441,18 @@ export class ConfigSetting {
    public static formatNote(note: string) {
       let date = new Date();
       let username =  localStorage.getItem('cms_app_id');
-      let month = date.getMonth(),
+      let month = date.getMonth() + 1,
          day = date.getDate(),
          hour = date.getHours(),
-         minute = date.getMinutes();
-      let dateUserFormat = ( day < 10 ? '0' + day : day ) + '/'
-                        + ( month < 10 ? '0' + month : month ) + '/'
+         minute = date.getMinutes(),
+         second = date.getSeconds();
+      let dateUserFormat = ( day < 10 ? '0' + day : day ) + '-'
+                        + ( month < 10 ? '0' + month : month ) + '-'
                         + date.getFullYear() + '_'
                         + ( hour < 10 ? '0' + hour : hour )+ ':'
-                        + ( minute < 10 ? '0' + minute : minute ) + '_'
-                        + username;
+                        + ( minute < 10 ? '0' + minute : minute ) + ':'
+                        + ( second < 10 ? '0' + second : second ) + '_'
+                        + username + ' : ';
 
       return `${dateUserFormat} ${note}`;
    }

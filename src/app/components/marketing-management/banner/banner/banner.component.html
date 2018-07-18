@@ -78,13 +78,16 @@
                                        {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                     </td>
                                     <td>
-                                        {{banner._id}}
+                                       {{banner._id}}
                                     </td>
                                     <td>
                                         {{banner.bannerName}}
                                     </td>
                                     <td>
-                                        {{banner.backgroundRGB}}
+                                       <div [ngStyle]="{'background-color':banner.backgroundRGB}">
+                                          {{banner.backgroundRGB}}
+                                       </div>
+
                                     </td>
                                     <td class="text-center">
                                         {{banner.status}}
