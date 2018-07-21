@@ -37,9 +37,10 @@ export class RadioScheduleComponent implements OnInit {
       this.router.paramMap.subscribe((param: ParamMap) => {
         // console.log(param);
         this.currentRadioId = param.get('radioId');
+        this.searchParams.radioId = this.currentRadioId;
       });
       this.loadListRadioSchedule();
-      this.statuses = ConfigSetting.ListStatus;
+      this.statuses = ConfigSetting.ListStatusSearch;
    }
 
    loadListRadioSchedule() {

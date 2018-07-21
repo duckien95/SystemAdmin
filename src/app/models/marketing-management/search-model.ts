@@ -42,6 +42,8 @@ export class RadioSearch {
 }
 
 export class RadioScheduleSearch {
+   radioId: string;
+   status: number;
    fromPublishDate: Date;
    toPublishDate: Date;
 }
