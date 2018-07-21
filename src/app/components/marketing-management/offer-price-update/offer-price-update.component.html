@@ -53,7 +53,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <textarea type="text" class="form-control" name="previousNote" [(ngModel)]="offerPriceModel.note" rows="10" #previous="ngModel"></textarea>
+                           <textarea type="text" class="form-control" name="previousNote" [value]="offerPriceModel.note" rows="10"></textarea>
                            <!-- <div type="text" class="form-control">{{ offerPriceModel.note }}</div> -->
                         </div>
                      </div>
@@ -100,7 +100,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="RadioId" [(ngModel)]="offerPriceModel.fullName" readonly #fullName="ngModel" />
+                           <input type="text" class="form-control" name="RadioId" [value]="offerPriceModel.fullName" readonly />
                         </div>
                      </div>
 
@@ -109,7 +109,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="phone" [(ngModel)]="offerPriceModel.phone" readonly #phone="ngModel" />
+                           <input type="text" class="form-control" name="phone" [value]="offerPriceModel.phone" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -117,7 +117,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="address" [(ngModel)]="offerPriceModel.address" readonly #address="ngModel" />
+                           <input type="text" class="form-control" name="address" [value]="offerPriceModel.address" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -125,7 +125,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="service" [(ngModel)]="offerPriceModel.service" readonly #service="ngModel" />
+                           <input type="text" class="form-control" name="service" [value]="offerPriceModel.service" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -133,7 +133,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="unit" [(ngModel)]="offerPriceModel.unit" readonly #unit="ngModel" />
+                           <input type="text" class="form-control" name="unit" [value]="offerPriceModel.unit" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -141,7 +141,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="packageMaterial" [(ngModel)]="offerPriceModel.packageMaterial" readonly #packageMaterial="ngModel" />
+                           <input type="text" class="form-control" name="packageMaterial" [value]="offerPriceModel.packageMaterial" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -149,7 +149,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="size" value="{{ offerPriceModel.length }} x {{ offerPriceModel.width }} x {{ offerPriceModel.height }} " readonly />
+                           <input type="text" class="form-control" name="size" value="{{ offerPriceModel.length }} cm x {{ offerPriceModel.width }} cm x {{ offerPriceModel.height }} cm " readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -157,7 +157,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="departurePlace" [(ngModel)]="offerPriceModel.departurePlace" readonly #departurePlace="ngModel" />
+                           <input type="text" class="form-control" name="departurePlace" [value]="offerPriceModel.departurePlace" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -165,7 +165,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="destinationPlace" [(ngModel)]="offerPriceModel.destinationPlace" readonly #destinationPlace="ngModel" />
+                           <input type="text" class="form-control" name="destinationPlace" [value]="offerPriceModel.destinationPlace" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -173,7 +173,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="timeTarget" [(ngModel)]="offerPriceModel.timeTarget" readonly #timeTarget="ngModel" />
+                           <input type="text" class="form-control" name="timeTarget" [value]="offerPriceModel.timeTarget + ' h'" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -181,7 +181,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="temperatureRequired" [(ngModel)]="offerPriceModel.temperatureRequired" readonly #temperatureRequired="ngModel" />
+                           <input type="text" class="form-control" name="temperatureRequired" [value]="offerPriceModel.temperatureRequired + ' &deg;C'" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -189,7 +189,8 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="priceRequired" [(ngModel)]="offerPriceModel.priceRequired" readonly #priceRequired="ngModel" />
+                           <input type="text" class="form-control" name="priceRequired" [textMask]="{mask: configSetting.MaskFormat.currency('')}"
+                           [value]="offerPriceModel.priceRequired" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -197,7 +198,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="wareContent" [(ngModel)]="offerPriceModel.wareContent" readonly #wareContent="ngModel" />
+                           <input type="text" class="form-control" name="wareContent" [value]="offerPriceModel.wareContent" readonly />
                         </div>
                      </div>
 

@@ -144,8 +144,12 @@
                      <div class="col-md-7" [ngClass]="{
                      'has-error': (publishDate.errors && (publishDate.dirty || publishDate.touched))
                      || (!formValid && publishDate.errors), 'has-success': !publishDate.errors }">
-                        <!-- <input type="text" class="form-control" name="oldPublishDate" [value]="postModel.publishDate | date: 'MM/dd/yyyy'" [disabled]="true"> -->
-                        <input type="date" class="form-control" placeholder="Publish Date" name="publishDate" [ngModel]="postModel.publishDate | date:'yyyy-MM-dd'" (ngModelChange)="postModel.publishDate = $event" required #publishDate="ngModel"/>
+                        <!-- <my-date-picker name="publishDate" [options]="configSetting.myDatePickerOptions" [(ngModel)]="model" [locale]="'vi'" placeholder="From"
+                        (dateChanged)="postModel.publishDate = configSetting.changeDatetimeEvent($event)"  required #publishDate="ngModel" >
+                        </my-date-picker> -->
+                        <!-- (dateChanged)="postModel.publishDate = configSetting.changeDatetimeEvent($event)" -->
+                        <input type="date" class="form-control" placeholder="Publish Date" name="publishDate" [ngModel]="postModel.publishDate | date:'yyyy-MM-dd'"
+                         (ngModelChange)="postModel.publishDate = $event" required #publishDate="ngModel"/>
                         <span class="help-block" *ngIf="(publishDate.invalid && (publishDate.dirty  || publishDate.touched))
                         || (!formValid && publishDate.errors)
                         ">

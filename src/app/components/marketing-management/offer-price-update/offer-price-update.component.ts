@@ -20,6 +20,7 @@ export class OfferPriceUpdateComponent implements OnInit {
    newNote: string;
    statuses: any;
    formValid: boolean;
+   configSetting = ConfigSetting;
    constructor(
       private noteService: NoteService
    ) { }

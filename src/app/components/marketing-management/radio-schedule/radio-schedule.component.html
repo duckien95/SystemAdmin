@@ -60,7 +60,7 @@
                                       [ngModel]="searchParams.fromPublishDate" (ngModelChange)="searchParams.fromPublishDate = $event" #fromPublishDate="ngModel" /> -->
                                   </div>
                                   <div class="margin-bottom-5">
-                                    <my-date-picker name="toPublishDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="From"
+                                    <my-date-picker name="toPublishDate" [options]="configSetting.myDatePickerOptions" [locale]="'vi'" placeholder="To"
                                     (dateChanged)="searchParams.toPublishDate = configSetting.changeDatetimeEvent($event)" required>
                                     </my-date-picker>
                                     <!-- <input type="date" class="form-control form-filter input-sm" name="toPublishDate" placeholder="To"

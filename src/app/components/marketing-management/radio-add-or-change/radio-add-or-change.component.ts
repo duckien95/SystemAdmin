@@ -31,6 +31,7 @@ export class RadioAddOrChangeComponent implements OnInit {
    }
 
    initRadioModel(){
+      this.radioForm.reset();
       if(this.radioModel._id != undefined){
          console.log(this.radioModel._id);
          this.radioService.getRadioById({ "radioId": this.radioModel._id }).subscribe( res => {

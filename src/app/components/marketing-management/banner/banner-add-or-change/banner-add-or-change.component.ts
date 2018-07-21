@@ -53,6 +53,7 @@ export class BannerAddOrChangeComponent implements OnInit {
 
    initBanner() {
       this.formValid = true;
+      this.bannerAddOrChangeForm.reset();
       if(this.banner._id == '') {
          this.banner = new Banner();
       } else {

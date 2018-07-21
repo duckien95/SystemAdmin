@@ -57,6 +57,7 @@ export class BannerItemAddOrChangeComponent implements OnInit {
 
    initBannerItem(){
       this.formValid = true;
+      this.bannerItemForm.reset();
       if(this.bannerItemId != '') {
          this.bannerService.getBannerItemById({ 'bannerItemId': this.bannerItemId, 'bannerId': this.bannerId }).subscribe( res => {
             console.log(res);

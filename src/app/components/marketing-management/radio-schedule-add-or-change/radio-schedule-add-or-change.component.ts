@@ -42,6 +42,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
     onInitRadioSchedule() {
       // console.log(this.radioModel);
       this.formValid = true;
+      this.radioScheduleForm.reset();
       if(this.radioScheduleId != undefined) {
          this.radioService.getRadioScheduleById({ 'radioScheduleId': this.radioScheduleId }).subscribe( res => {
             console.log(res);

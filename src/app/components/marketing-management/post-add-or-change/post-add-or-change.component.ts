@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import {IMyDpOptions} from 'mydatepicker';
 import { VtpService } from '../../../services/marketing-management/vtp.service';
 import { PostService } from '../../../services/marketing-management/post.service';
 import { PostModel } from '../../../models/marketing-management/post/post-model';
@@ -23,14 +24,17 @@ export class PostAddOrChangeComponent implements OnInit {
    fileUpload: any;
    parentServiceId: string;
    formValid: boolean;
-   date: string;
    configSetting = ConfigSetting;
-
+   public myDatePickerOptions: IMyDpOptions = {
+   // other options...
+   dateFormat: 'dd.mm.yyyy',
+};
+   public model: any = { date: { year: 2018, month: 10, day: 9 } };
    constructor(
       private postService: PostService,
       private vtpService: VtpService,
       // @Host() postComponent: PostComponent
-   ) { }
+   ) {}
 
    ngOnInit() {
       this.postModel =  new PostModel();
@@ -40,6 +44,8 @@ export class PostAddOrChangeComponent implements OnInit {
    initPostModel(){
       // console.log('init add or change', this.vtpServiceModel.serviceId )
       // this.postModel.publishDate = "20/10/2005";
+      this.formValid = true;
+      this.postAddOrChangeForm.reset();
       this.ListStatus = ConfigSetting.ListStatus;
       this.vtpService.getListParentService().subscribe( res => {
          this.ListParentService = res.error ? [] :  res.data;
@@ -77,7 +83,6 @@ export class PostAddOrChangeComponent implements OnInit {
          this.postModel = new PostModel();
          // this.parentServiceId = null;
       }
-      this.formValid = true;
    }
 
    resetAndReload() {

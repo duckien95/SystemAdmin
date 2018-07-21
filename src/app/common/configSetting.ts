@@ -1,4 +1,5 @@
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
+import { createNumberMask, emailMask } from 'text-mask-addons/dist/textMaskAddons';
 import { Headers } from '@angular/http';
 import { Convert } from './convert';
 import { Dictionary } from '../models/dictionary';
@@ -11,8 +12,8 @@ declare var AjaxRequest: any;
 
 export class ConfigSetting {
   public static BASE_URL = 'http://localhost:62009/api/';
-  public static BACKEND_URL = 'http://localhost:3344';
-  // public static BACKEND_URL = 'http://125.212.238.119:3344';
+  // public static BACKEND_URL = 'http://localhost:3344';
+  public static BACKEND_URL = 'http://125.212.238.119:3344';
   public static BACKEND_API_URL = ConfigSetting.BACKEND_URL + '/api/';
   // public static BASE_URL = 'http://local.gico.cms/api/';
   public static Headers: Headers = new Headers();
@@ -383,6 +384,27 @@ export class ConfigSetting {
   public static UrlPathRegisterAgencySearch = 'note/register_agency_search';
 
 
+  // money
+   public static MaskFormat = {
+      currency: function (c = null) {
+         if (c == null) c = 'đ';
+         return createNumberMask({
+            prefix: '',
+            suffix: ' VNĐ', // This will put the dollar sign at the end, with a space.
+            thousandsSeparatorSymbol: '.',
+            allowLeadingZeroes: true
+         });
+      },
+      thousandFormat: function (c = null) {
+         return createNumberMask({
+            prefix: '',
+            suffix: '',
+            thousandsSeparatorSymbol: '.',
+            allowLeadingZeroes: true
+         });
+      },
+   };
+
    // my-date-picker-options
    public static myDatePickerOptions: IMyDpOptions = {
       dateFormat: 'dd/mm/yyyy'
@@ -479,6 +501,12 @@ export class ConfigSetting {
   }
   public static get GetAuthenToken(): string {
     return localStorage.getItem(this.LocalStorageAuthenKey);
+  }
+
+  public static logoutSystem() {
+     localStorage.removeItem('cms_token');
+     localStorage.removeItem('cms_app_id');
+     localStorage.removeItem('cms_expire_time');
   }
 
   public static SetLoginStatus(authenToken: string, isAdministrator: boolean, actionIds: Dictionary<boolean>): void {

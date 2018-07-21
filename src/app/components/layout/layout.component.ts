@@ -29,9 +29,7 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
    logout() {
       console.log('logout');
-      localStorage.removeItem('cms_token');
-      localStorage.removeItem('cms_app_id');
-      localStorage.removeItem('cms_expire_time');
+      ConfigSetting.logoutSystem();
    }
 
 

@@ -40,7 +40,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <textarea type="text" class="form-control" name="previousNote" [(ngModel)]="registerAgencyModel.note" rows="10" readonly #previous="ngModel"></textarea>
+                           <textarea type="text" class="form-control" name="previousNote" [value]="registerAgencyModel.note" rows="10" readonly></textarea>
                            <!-- <div type="text" class="form-control">{{ registerAgencyModel.note }}</div> -->
                         </div>
                      </div>
@@ -74,7 +74,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="RadioId" [(ngModel)]="registerAgencyModel.fullName" readonly #fullName="ngModel" />
+                           <input type="text" class="form-control" name="RadioId" [value]="registerAgencyModel.fullName" readonly />
                         </div>
                      </div>
 
@@ -83,7 +83,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="phone" [(ngModel)]="registerAgencyModel.phone" readonly #phone="ngModel" />
+                           <input type="text" class="form-control" name="phone" [value]="registerAgencyModel.phone" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -91,7 +91,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="email" [(ngModel)]="registerAgencyModel.email" readonly #email="ngModel" />
+                           <input type="text" class="form-control" name="email" [value]="registerAgencyModel.email" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -99,7 +99,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="address" [(ngModel)]="registerAgencyModel.address" readonly #address="ngModel" />
+                           <input type="text" class="form-control" name="address" [value]="registerAgencyModel.address" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -107,7 +107,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="pesonalOrBusinessRegisterId" [(ngModel)]="registerAgencyModel.pesonalOrBusinessRegisterId" readonly #pesonalOrBusinessRegisterId="ngModel" />
+                           <input type="text" class="form-control" name="pesonalOrBusinessRegisterId" [value]="registerAgencyModel.personalOrBusinessRegisterId" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -115,8 +115,8 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <!-- <input type="text" class="form-control" name="issuedDate" value="{{registerAgencyModel.issuedDate}}" readonly #issuedDate="ngModel" /> -->
-                           <input type="date" class="form-control" name="issuedDate" [ngModel]="registerAgencyModel.issuedDate | date: 'yyyy-dd-MM'" readonly #issuedPlace="ngModel" />
+                           <input type="text" class="form-control" name="issuedDate" [value]="registerAgencyModel.issuedDate | date: 'dd/MM/yyyy'" readonly/>
+                           <!-- <input type="date" class="form-control" name="issuedDate" [ngModel]="registerAgencyModel.issuedDate | date: 'yyyy-dd-MM'" readonly #issuedPlace="ngModel" /> -->
                         </div>
                      </div>
                      <div class="form-group">
@@ -124,7 +124,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="issuedPlace" [ngModel]="registerAgencyModel.issuedPlace" readonly #issuedPlace="ngModel" />
+                           <input type="text" class="form-control" name="issuedPlace" [value]="registerAgencyModel.issuedPlace" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -132,7 +132,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="createdUserId" [(ngModel)]="registerAgencyModel.createdUserId" readonly #createdUserId="ngModel" />
+                           <input type="text" class="form-control" name="createdUserId" [value]="registerAgencyModel.createdUserId" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -140,7 +140,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="job" [(ngModel)]="registerAgencyModel.job" readonly #job="ngModel" />
+                           <input type="text" class="form-control" name="job" [value]="registerAgencyModel.job" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -148,7 +148,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="registerAgencyAddress" [(ngModel)]="registerAgencyModel.registerAgencyAddress" readonly #registerAgencyAddress="ngModel" />
+                           <input type="text" class="form-control" name="registerAgencyAddress" [value]="registerAgencyModel.registerAgencyAddress" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -156,7 +156,8 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="totalSquare" [(ngModel)]="registerAgencyModel.totalSquare" readonly #totalSquare="ngModel" />
+                           <input type="text" class="form-control" name="totalSquare" [textMask]="{mask: configSetting.MaskFormat.thousandFormat('')}"
+                           [value]="registerAgencyModel.totalSquare" readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -164,7 +165,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="text" class="form-control" name="size" value="{{ registerAgencyModel.length }} x {{ registerAgencyModel.width }} x {{ registerAgencyModel.height }} " readonly />
+                           <input type="text" class="form-control" name="size" value="{{ registerAgencyModel.length }} m x {{ registerAgencyModel.width }} m x {{ registerAgencyModel.height }} m " readonly />
                         </div>
                      </div>
                      <div class="form-group">
@@ -172,7 +173,7 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7">
-                           <input type="date" class="form-control" name="startDate" [ngModel]="registerAgencyModel.startDate | date: 'yyyy-dd-MM'" readonly #startDate="ngModel" />
+                           <input type="text" class="form-control" name="startDate" [value]="registerAgencyModel.startDate | date: 'dd/MM/yyyy'" readonly />
                         </div>
                      </div>
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { MyDatePickerModule } from 'mydatepicker';
+import { TextMaskModule } from 'angular2-text-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -111,12 +112,12 @@ const routesConfig: Routes = [
       {
         path: 'banner',
         component: BannerComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
       },
       {
         path: 'banner-item/:bannerId',
         component: BannerItemComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
       },
       {
         path: 'warehouse/:id',
@@ -176,37 +177,37 @@ const routesConfig: Routes = [
       {
         path: 'services',
         component: VtpServiceComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
       },
       {
         path: 'posts',
         component: PostComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
       },
       {
         path: 'radios',
         component: RadioComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
       },
       {
         path: 'radio-schedule/:radioId',
         component: RadioScheduleComponent,
-        // canActivate: [CheckPermissionService]
+        canActivate: [CheckPermissionService]
      },
      {
       path: 'offer-price',
       component: OfferPriceComponent,
-      // canActivate: [CheckPermissionService]
+      canActivate: [CheckPermissionService]
      },
      {
       path: 'consult-service',
       component: ConsultComponent,
-     // canActivate: [CheckPermissionService]
+      canActivate: [CheckPermissionService]
      },
      {
      path: 'register-agency',
      component: RegisterAgencyComponent,
-     // canActivate: [CheckPermissionService]
+     canActivate: [CheckPermissionService]
      }
     ]
   },
@@ -280,7 +281,8 @@ const routesConfig: Routes = [
     AutoCompleteModule,
     CustomFormsModule,
     MyDateRangePickerModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    TextMaskModule
   ],
   exports: [
     RouterModule,

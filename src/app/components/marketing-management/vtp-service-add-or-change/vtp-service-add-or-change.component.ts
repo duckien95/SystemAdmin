@@ -33,6 +33,8 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
 
    initVtpServiceModel(){
       // console.log('init add or change', this.vtpServiceModel.serviceId )
+      this.formValid = true;
+      this.vtpServiceForm.reset();
       this.ListServiceStatus = ConfigSetting.ListStatus;
       this.vtpService.getListParentService().subscribe( res => {
          // console.log(res);
@@ -53,7 +55,7 @@ export class VtpServiceAddOrChangeComponent implements OnInit {
          this.vtpServiceModel.parentId = "0";
          // this.vtpServiceModel.status = 0;
       }
-      this.formValid = true;
+
    }
 
    reloadAndReset(){
