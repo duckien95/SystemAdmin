@@ -5,15 +5,32 @@ import { Convert } from './convert';
 import { Dictionary } from '../models/dictionary';
 import { forEach } from '@angular/router/src/utils/collection';
 import { retry } from 'rxjs/operators/retry';
+import { HttpClientService } from './http-client.service';
 
 declare var jquery: any;
 declare var $: any;
 declare var AjaxRequest: any;
 
 export class ConfigSetting {
+   // public static ListOrganization;
+   //
+   // constructor(
+   //    private httpClient: HttpClientService
+   // ){
+   //
+   // }
+   // public static initConfigSetting() {
+   //    this.httpClient.postJsonObservable(ConfigSetting.UrlPathEmployeeGetParent, {}).subscribe( res => {
+   //       // console.log(res);
+   //       if(!res.error) {
+   //          this.ListOrganization = res.data;
+   //       }
+   //       // this.ListOrganization = res;
+   //    })
+   // }
   public static BASE_URL = 'http://localhost:62009/api/';
-  // public static BACKEND_URL = 'http://localhost:3344';
-  public static BACKEND_URL = 'http://125.212.238.119:3344';
+  public static BACKEND_URL = 'http://localhost:3344';
+  // public static BACKEND_URL = 'http://125.212.238.119:3344';
   public static BACKEND_API_URL = ConfigSetting.BACKEND_URL + '/api/';
   // public static BASE_URL = 'http://local.gico.cms/api/';
   public static Headers: Headers = new Headers();
@@ -383,6 +400,19 @@ export class ConfigSetting {
   public static UrlPathRegisterAgencyUpdate = 'note/register_agency_update';
   public static UrlPathRegisterAgencySearch = 'note/register_agency_search';
 
+  public static UrlPathEmployeeSearch = 'employee/employee_search';
+  public static UrlPathEmployeeGet = 'employee/list_employee';
+  public static UrlPathEmployeeGetById = 'employee/get_employee_by_id';
+  public static UrlPathEmployeeGetChild = 'employee/org_list_child';
+  public static UrlPathEmployeeGetParent = 'employee/org_list_parent';
+  public static UrlPathEmployeeDeactivateEmail = 'employee/deactivate_email';
+  public static UrlPathEmployeeDeactivateAccount = 'employee/deactivate_account';
+  public static UrlPathEmployeeAddSecondEmail = 'employee/add_second_email';
+  public static UrlPathExportInactivateEmail = 'employee/export_inactive_account';
+
+  public static getUrlExportInactivateAccount(str) {
+     return ConfigSetting.BACKEND_URL + str;
+  }
 
   // money
    public static MaskFormat = {
@@ -459,6 +489,16 @@ export class ConfigSetting {
    ];
 
   //#endregion
+
+  public static convertIntergerToDate(number) {
+   let date = new Date(number);
+   let month = date.getMonth() + 1,
+      day = date.getDate();
+   let dateFormat = ( day < 10 ? '0' + day : day ) + '/'
+                     + ( month < 10 ? '0' + month : month ) + '/'
+                     + date.getFullYear();
+   return dateFormat;
+ }
 
    public static formatNote(note: string) {
       let date = new Date();

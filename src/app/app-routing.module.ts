@@ -71,6 +71,8 @@ import { RegisterAgencyComponent } from './components/marketing-management/regis
 import { RegisterAgencyUpdateComponent } from './components/marketing-management/register-agency-update/register-agency-update.component';
 import { ConsultComponent } from './components/marketing-management/consult/consult.component';
 import { ConsultUpdateComponent } from './components/marketing-management/consult-update/consult-update.component';
+import { VtpEmployeeComponent } from './components/vtp-employee/vtp-employee.component';
+import { VtpEmployeeChangeComponent } from './components/vtp-employee/vtp-employee-change/vtp-employee-change.component';
 
 const routesConfig: Routes = [
   {
@@ -208,7 +210,12 @@ const routesConfig: Routes = [
      path: 'register-agency',
      component: RegisterAgencyComponent,
      canActivate: [CheckPermissionService]
-     }
+  },
+     {
+    path: 'list-employee',
+    component: VtpEmployeeComponent,
+    canActivate: [CheckPermissionService]
+    }
     ]
   },
   { path: '**', component: HomeComponent }
@@ -265,7 +272,9 @@ const routesConfig: Routes = [
     RegisterAgencyComponent,
     RegisterAgencyUpdateComponent,
     ConsultComponent,
-    ConsultUpdateComponent
+    ConsultUpdateComponent,
+    VtpEmployeeComponent,
+    VtpEmployeeChangeComponent
   ],
   imports: [
     FormsModule,

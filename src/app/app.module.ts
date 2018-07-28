@@ -33,6 +33,7 @@ import { VtpService } from './services/marketing-management/vtp.service';
 import { PostService } from './services/marketing-management/post.service';
 import { RadioService } from './services/marketing-management/radio.service';
 import { NoteService } from './services/marketing-management/note.service';
+import { VtpEmployeeService } from './services/vtp-employee.service';
 // import { ManufacturerManagementService } from './services/manufacturer-management.service';
 import { WarehouseService } from './services/warehouse.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -115,7 +116,8 @@ import { ConsultUpdateComponent } from './components/marketing-management/consul
     VtpService,
     PostService,
     RadioService,
-    NoteService
+    NoteService,
+    VtpEmployeeService
   ],
   bootstrap: [AppComponent]
 })

@@ -76,3 +76,21 @@ export class RegisterAgencySearch {
    fromEndDate: Date;
    toEndDate: Date;
 }
+
+export class EmployeeSearch {
+   fullName: string;
+   employeeCode: string;
+   dateOfBirth: Date;
+   fromBirthday: Date;
+   toBirthday: Date;
+   telephoneNumber:string;
+   mobileNumber: string;
+   organizationId: number;
+   positionName: string;
+   organizationName: string;
+   email: string;
+   secondEmail: Array<string>;
+   list_level_one: Array<any>;
+   list_level_two: Array<any>;
+   list_level_three: Array<any>
+}
