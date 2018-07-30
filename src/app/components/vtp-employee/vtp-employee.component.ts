@@ -41,7 +41,7 @@ export class VtpEmployeeComponent implements OnInit {
    ) { }
 
    ngOnInit() {
-      $('#parent').slimScroll({
+      $('#tree-list-org').slimScroll({
          height: '150px'
       });
       this.searchParams = new EmployeeSearch();

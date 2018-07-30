@@ -91,33 +91,27 @@
                </div>
             </div>
                <div class="col-lg-4 col-md-3 col-sm-12">
-               <div class="form-group">
+               <!-- <div class="form-group">
                   <div class="checkbox">
-                     <!-- <label data-toggle="collapse" data-target="#parent1">
-                        <input type="checkbox"/>
-                     </label> -->
                      <div class="caption">
                        <span class="caption-subject font-green sbold uppercase"> Chọn đơn vị công tác </span>
                      </div>
                   </div>
                   <div id="parent" class="collapse1 margin-left-5">
                      <ng-template ngFor let-parent [ngForOf]="ListParent" let-i="index" [ngForTrackBy]="trackById">
-                        <div class="checkbox" style="padding: 0 0 0 20px">
+                        <div class="checkbox org-parent" style="padding: 0 0 0 20px">
                            <input type="checkbox" class="level-one" value="{{parent.organizationId}}" name="{{parent._id}}"/>
                            <label data-toggle="collapse" [attr.data-target]="'#' + parent._id">
-                              <!-- <input type="checkbox" class="level-one" value="{{parent.organizationId}}" name="{{parent._id}}"/>  -->
                               {{parent.name}}
                            </label>
                         </div>
 
                         <div id="{{parent._id}}" class="collapse margin-left-5">
                            <ng-template ngFor let-child [ngForOf]="parent.children" let-i="index" [ngForTrackBy]="trackById">
-                              <div class="checkbox margin-left-10">
+                              <div class="checkbox org-child margin-left-10">
                                  <input type="checkbox" class="level-two" value="{{parent.organizationId + '|'+ child.organizationId}}"/>
                                  <label data-toggle="collapse" [attr.data-target]="'#' + child._id">
-                                    <!-- <input type="checkbox" class="level-two" value="{{parent.organizationId + '|'+ child.organizationId}}"/> -->
                                     {{ child.name }}
-                                    <!-- (change)="chooseLevelTwo(child.organizationId, parent.organizationId)" -->
                                  </label>
                               </div>
                               <div id="{{child._id}}" class="collapse margin-left-5 ">
@@ -133,6 +127,52 @@
                         </div>
                      </ng-template>
                   </div>
+               </div> -->
+               <div class="form-group">
+                  <div class="checkbox">
+                     <div class="caption">
+                       <span class="caption-subject font-green sbold uppercase"> Chọn đơn vị công tác </span>
+                     </div>
+                  </div>
+                  <ul class="tree" id="tree-list-org">
+                     <ng-template ngFor let-parent [ngForOf]="ListParent" let-i="index" [ngForTrackBy]="trackById">
+                        <li class="li-list-org">
+                           <!-- <div class="checkbox" style="padding: 0 0 0 20px"> -->
+                              <input type="checkbox" class="level-one" value="{{parent.organizationId}}" name="{{parent._id}}"/>
+                              <label data-toggle="collapse" [attr.data-target]="'#' + parent._id">
+                                 <!-- <input type="checkbox" class="level-one" value="{{parent.organizationId}}" name="{{parent._id}}"/>  -->
+                                 {{parent.name}}
+                              </label>
+                           <!-- </div> -->
+
+                           <ul id="{{parent._id}}" class="collapse">
+                              <ng-template ngFor let-child [ngForOf]="parent.children" let-i="index" [ngForTrackBy]="trackById">
+                                 <li class="li-list-org">
+                                 <!-- <div class="checkbox org-child margin-left-10"> -->
+                                    <input type="checkbox" class="level-two" value="{{parent.organizationId + '|'+ child.organizationId}}"/>
+                                    <label data-toggle="collapse" [attr.data-target]="'#' + child._id">
+                                       <!-- <input type="checkbox" class="level-two" value="{{parent.organizationId + '|'+ child.organizationId}}"/> -->
+                                       {{ child.name }}
+                                       <!-- (change)="chooseLevelTwo(child.organizationId, parent.organizationId)" -->
+                                    </label>
+                                 <!-- </div> -->
+                                 <ul id="{{child._id}}" class="collapse">
+                                    <ng-template ngFor let-childTwo [ngForOf]="child.children" let-i="index" [ngForTrackBy]="trackById">
+                                       <li class="li-list-org">
+                                       <!-- <div class="checkbox"> -->
+                                          <label data-toggle="collapse" [attr.data-target]="'#' + childTwo._id">
+                                             <input type="checkbox" class="level-three" value="{{child.organizationId + '|'+ childTwo.organizationId}}"/> {{ childTwo.name }}
+                                          </label>
+                                       <!-- </div> -->
+                                       </li>
+                                    </ng-template>
+                                 </ul>
+                              </li>
+                              </ng-template>
+                           </ul>
+                        </li>
+                     </ng-template>
+                  </ul>
                </div>
 
             </div>
