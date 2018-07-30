@@ -4,7 +4,7 @@ export class RegisterAgencyModel {
    email : string;
    phone : string;
    address : string;
-   pesonalOrBusinessRegisterId : string;
+   personalOrBusinessRegisterId : string;
    issuedDate : string;
    issuedPlace: string;
    createdUserId : string;

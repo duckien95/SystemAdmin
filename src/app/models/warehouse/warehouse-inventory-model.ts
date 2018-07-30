@@ -19,6 +19,11 @@ export class WarehouseInventoryModel {
     isCancelButton: boolean;
     isApplyButton: boolean;
     isAccountingButton: boolean;
+
+    vendorName: string;
+    warehouseName: string;
+    saleName: string;
+    senderName: string;
 }
 export class WarehouseInventoryDetailModel {
     id: string;

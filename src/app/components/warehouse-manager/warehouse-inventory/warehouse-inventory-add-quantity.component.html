@@ -14,7 +14,7 @@
               </div>
               <div class="portlet-body">
                 <!-- BEGIN FORM-->
-                <form class="form-horizontal" (ngSubmit)="onSubmit(vendorAddOrChange)" autocomplete="off" #vendorAddOrChange="ngForm">
+                <form class="form-horizontal" (ngSubmit)="onSubmit()" autocomplete="off" #vendorAddOrChange="ngForm">
                   <div class="form-body">
                     <table class="table table-bordered" id="table_variants">
                       <thead>
@@ -71,7 +71,7 @@
                     </table>
                     <div class="form-group">
                       <div class="col-md-11 text-right">
-                        <button type="button" id="btnSearch" class="btn btn-sm btn-success" (click)="onAddItem();">
+                        <button type="button" id="btnSearch" class="btn btn-sm btn-success" (click)="onAddItem(10000000);">
                           <i class="fa fa-plus fa-fw"></i>Thêm loại</button>
                       </div>
                     </div>

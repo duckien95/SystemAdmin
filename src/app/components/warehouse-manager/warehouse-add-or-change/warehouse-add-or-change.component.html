@@ -34,9 +34,9 @@
                       <label class="control-label col-md-3">Name
                         <span class="required"> * </span>
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
+                      <div class="col-md-7" [ngClass]="{
                         'has-error': name.errors && (name.dirty ||submited&&!name.dirty),
-                        'has-success': !name.errors 
+                        'has-success': !name.errors
                      }">
                         <input type="text" class="form-control" placeholder="Name" [(ngModel)]="warehouse.name" name="name" required #name="ngModel"
                         />
@@ -50,9 +50,9 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-7">
-                        <div class="input-group" [ngClass]="{ 
+                        <div class="input-group" [ngClass]="{
                           'has-error': email.errors && (email.dirty ||submited&&!email.dirty),
-                          'has-success': !email.errors 
+                          'has-success': !email.errors
                        }">
                           <span class="input-group-addon">
                             <i class="fa fa-envelope"></i>
@@ -71,9 +71,9 @@
                     <div class="form-group">
                       <label class="control-label col-md-3">Phone Number
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
+                      <div class="col-md-7" [ngClass]="{
                         'has-error': phone.errors && (phone.dirty ||submited&&!phone.dirty),
-                        'has-success': !phone.errors 
+                        'has-success': !phone.errors
                      }">
                         <input type="text" class="form-control" placeholder="phoneNumber" name="phone" [(ngModel)]="warehouse.phoneNumber" maxlength="50"
                           #phone="ngModel" required pattern="[0-9]+" />
@@ -83,9 +83,9 @@
                     <div class="form-group">
                       <label class="control-label col-md-3">Province
                       </label>
-                      <div class="col-md-6" [ngClass]="{ 
+                      <div class="col-md-6" [ngClass]="{
                         'has-error': province.errors && (province.dirty ||submited&&!province.dirty),
-                        'has-success': !province.errors 
+                        'has-success': !province.errors
                      }">
                         <input type="text" disabled="disabled" class="form-control" name="province" [(ngModel)]="warehouse.provinceName" #province="ngModel"
                         />
@@ -95,21 +95,21 @@
                     <div class="form-group">
                       <label class="control-label col-md-3">District
                       </label>
-                      <div class="col-md-6" [ngClass]="{ 
+                      <div class="col-md-6" [ngClass]="{
                           'has-error': district.errors && (district.dirty ||submited&&!district.dirty),
-                          'has-success': !district.errors 
+                          'has-success': !district.errors
                        }">
                         <input type="text" disabled="disabled" class="form-control" name="district" [(ngModel)]="warehouse.districtName" #district="ngModel"
                         />
 
                       </div>
-                    </div>  
+                    </div>
                     <div class="form-group">
                       <label class="control-label col-md-3">Ward
                       </label>
-                      <div class="col-md-6" [ngClass]="{ 
+                      <div class="col-md-6" [ngClass]="{
                             'has-error': village.errors && (village.dirty ||submited&&!village.dirty),
-                            'has-success': !village.errors 
+                            'has-success': !village.errors
                          }">
                         <input type="text" disabled="disabled" class="form-control" name="village" [(ngModel)]="warehouse.villageName" #village="ngModel"
                         />
@@ -119,24 +119,24 @@
                     <div class="form-group">
                       <label class="control-label col-md-3">Street
                       </label>
-                      <div class="col-md-6" [ngClass]="{ 
+                      <div class="col-md-6" [ngClass]="{
                             'has-error': road.errors && (road.dirty ||submited&&!road.dirty),
-                            'has-success': !road.errors 
+                            'has-success': !road.errors
                          }">
                         <input type="text" disabled="disabled" class="form-control" name="road" [(ngModel)]="warehouse.roadName" #road="ngModel"
                         />
-                        <button type="button" class="btn grey-salsa btn-outline" (click)="onShowWarehouseAddress(1)">Edit Adress</button>
+                        <button type="button" class="btn grey-salsa btn-outline" (click)="onShowWarehouseAddress('1')">Edit Adress</button>
                       </div>
                     </div>
 
-                   
+
 
                     <div class="form-group">
                       <label class="control-label col-md-3">Type
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
+                      <div class="col-md-7" [ngClass]="{
                         'has-error': type.errors && (type.dirty ||submited&&!type.dirty),
-                        'has-success': !type.errors 
+                        'has-success': !type.errors
                      }">
                         <select class="form-control" [(ngModel)]="warehouse.type" name="type" required #type="ngModel">
                           <option *ngFor="let item of types" [ngValue]="item.value">{{item.text}}</option>
@@ -149,9 +149,9 @@
                     <div class="form-group">
                       <label class="control-label col-md-3">Status
                       </label>
-                      <div class="col-md-7" [ngClass]="{ 
+                      <div class="col-md-7" [ngClass]="{
                         'has-error': status.errors && (status.dirty ||submited&&!status.dirty),
-                        'has-success': !type.errors 
+                        'has-success': !type.errors
                      }">
                         <select class="form-control" [(ngModel)]="warehouse.status" name="status" required #status="ngModel">
                           <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
@@ -204,5 +204,5 @@
 
 
 <div class="popup">
-  <app-warehouse-address #warehouseAddress (updateAddress)="onUpdateAddress($event)"></app-warehouse-address>
+  <app-warehouse-address #warehouseAddress (updateAddress)="onUpdateAddress()"></app-warehouse-address>
 </div>

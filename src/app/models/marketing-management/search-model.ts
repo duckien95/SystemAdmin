@@ -7,10 +7,8 @@ export class BannerSearch{
 export class BannerItemSearch {
    // id: string;
    bannerId: string;
-   fromStartDate: string;
-   toStartDate: string;
-   // fromEndDate: string;
-   // toEndDate: string;
+   fromStartDate: Date;
+   toStartDate: Date;
    fromEndDate: Date;
    toEndDate: Date;
    bannerItemName: string;
@@ -73,8 +71,8 @@ export class RegisterAgencySearch {
    job: string;
    personalOrBusinessRegisterId: string;
    status: number;
-   fromEndDate: Date;
-   toEndDate: Date;
+   fromStartDate: Date;
+   toStartDate: Date;
 }
 
 export class EmployeeSearch {

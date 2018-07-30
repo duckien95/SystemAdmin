@@ -12,7 +12,7 @@ export class OfferPriceModel {
    width: number;
    height: number;
    departurePlace: string;
-   destinatonPlace: string;
+   destinationPlace: string;
    timeTarget: number;
    temperatureRequired: string;
    priceRequired: number;

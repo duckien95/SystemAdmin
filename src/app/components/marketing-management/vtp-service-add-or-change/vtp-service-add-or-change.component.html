@@ -23,8 +23,8 @@
                            <span class="required"> * </span>
                         </label>
                         <div class="col-md-7" [ngClass]="{
-                           'has-error': serviceParent.errors && (serviceParent.dirty  || (submited && !serviceParent.dirty)),
-                           'has-success': !serviceParent.errors}">
+                           'has-error': (serviceParent.errors && (serviceParent.dirty || serviceParent.touched))
+                           || (!formValid && serviceParent.errors), 'has-success': !serviceParent.errors}">
                            <select class="form-control form-filter input-sm" name="parentService" [(ngModel)]="vtpServiceModel.parentId"  required #serviceParent="ngModel">
                               <option [value]="0">Parent</option>
                               <option *ngFor="let par of ListParentService" [value]="par._id">{{ par.name }}</option>
@@ -109,7 +109,7 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" [ngClass]="{
-                        'has-error': serviceStatus.errors && (serviceStatus.dirty  || (submited && !serviceStatus.dirty))
+                        'has-error': (serviceStatus.errors && (serviceStatus.dirty || serviceStatus.touched))
                         || (!formValid && serviceStatus.errors), 'has-success': !serviceStatus.errors}">
                         <select class="form-control form-filter input-sm" [(ngModel)]="vtpServiceModel.status" name="parent" #serviceStatus="ngModel" required>
                            <!-- <option [ngValue]="0">Select status</option> -->

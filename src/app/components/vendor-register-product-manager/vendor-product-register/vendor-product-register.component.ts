@@ -53,6 +53,10 @@ export class VendorProductRegisterComponent implements OnInit {
     App.unblockUI();
   }
 
+  pageChanged(event) {
+     
+ }
+
   async onGet() {
     App.blockUI();
 

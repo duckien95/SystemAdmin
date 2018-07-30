@@ -22,6 +22,7 @@ export class VtpEmployeeComponent implements OnInit {
    searchParams: EmployeeSearch;
    pageSize: number = 24;
    pageIndex: number = 0;
+   trackById: number;
    configSetting = ConfigSetting;
 
    ListParent: any;

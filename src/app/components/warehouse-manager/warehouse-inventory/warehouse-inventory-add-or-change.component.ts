@@ -625,4 +625,8 @@ export class WarehouseInventoryAddOrChangeComponent implements OnInit {
         }
     }
 
+    getWarehouse() {
+      
+   }
+
 }

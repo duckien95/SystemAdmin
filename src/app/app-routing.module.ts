@@ -58,6 +58,8 @@ import { VariationThemAttributeComponent } from './components/variation-theme/va
 import { FileUploaderPopupComponent } from './components/common/file-uploader-popup/file-uploader-popup.component';
 
 import { VtpServiceComponent } from './components/marketing-management/vtp-service/vtp-service.component';
+import { ValidateNumberDirective } from './directives/validate-number.directive';
+import { VtpChildServiceComponent } from './components/marketing-management/vtp-child-service/vtp-child-service.component';
 import { VtpServiceAddOrChangeComponent } from './components/marketing-management/vtp-service-add-or-change/vtp-service-add-or-change.component';
 import { PostComponent } from './components/marketing-management/post/post.component';
 import { PostAddOrChangeComponent } from './components/marketing-management/post-add-or-change/post-add-or-change.component'
@@ -274,7 +276,9 @@ const routesConfig: Routes = [
     ConsultComponent,
     ConsultUpdateComponent,
     VtpEmployeeComponent,
-    VtpEmployeeChangeComponent
+    VtpEmployeeChangeComponent,
+    VtpChildServiceComponent,
+    ValidateNumberDirective
   ],
   imports: [
     FormsModule,

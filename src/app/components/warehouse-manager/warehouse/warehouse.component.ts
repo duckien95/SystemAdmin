@@ -27,6 +27,11 @@ export class WarehouseComponent implements OnInit {
   statuses: KeyValueModel[];
   warehouses: WarehouseModel[];
 
+  pageSize: number;
+  pageIndex: number;
+  totalRow: number;
+  totalItems: number;
+
   constructor(
     private warehouseService: WarehouseService,
     private router: ActivatedRoute

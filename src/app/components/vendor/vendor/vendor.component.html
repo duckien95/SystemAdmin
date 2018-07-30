@@ -4,10 +4,10 @@
       <!-- Begin: Demo Datatable 1 -->
       <div class="portlet light portlet-fit portlet-datatable">
           <div class="portlet-title portlet-title-action ">
-              <div class="actions">                    
+              <div class="actions">
                   <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddOrChangeForm('')" >
                       <i class="fa fa-plus"></i> Add new </a>
-                  
+
                   <div class="btn-group">
                       <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                           <i class="fa fa-share"></i>
@@ -44,7 +44,7 @@
                               <th>
                                   Name
                               </th>
-                              
+
                               <th>
                                   Email
                               </th>
@@ -83,7 +83,7 @@
                                       'has-error': email.errors && email.dirty,
                                       'has-success': !email.errors && email.dirty && email.value!=''
                                   }">
-                                  <input type="text" class="form-control form-filter input-sm" name="email" [(ngModel)]="searchParams.email" 
+                                  <input type="text" class="form-control form-filter input-sm" name="email" [(ngModel)]="searchParams.email"
                                           pattern="[^ @]*@[^ @]*" minlength="3" maxlength="150" #email="ngModel"
                                    />
                                   <span class="help-block" *ngIf="email.errors && email.dirty">  Email invalid </span>
@@ -161,5 +161,5 @@
   </div>
 </div>
 <div class="popup">
-  <app-vendor-add-or-change #vendorAddOrChange (getVendors)="getVendors($event)"></app-vendor-add-or-change>
+  <app-vendor-add-or-change #vendorAddOrChange (getVendors)="getVendors()"></app-vendor-add-or-change>
 </div>

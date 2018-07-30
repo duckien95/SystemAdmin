@@ -292,6 +292,10 @@ export class WarehouseVendorInventoryComponent implements OnInit {
     }
 
   }
+
+  pageChanged(event){
+
+ }
   async onRegisterProductSelect2(): Promise<void> {
     const $this = this;
     try {

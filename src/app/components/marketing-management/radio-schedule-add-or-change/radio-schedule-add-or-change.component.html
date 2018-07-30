@@ -59,7 +59,7 @@
                         <span class="required"> * </span>
                      </label>
                      <div class="col-md-7" [ngClass]="{
-                        'has-error': radioStatus.errors && (radioStatus.dirty  || (submited && !radioStatus.dirty))|| (!formValid && radioStatus.errors),
+                        'has-error': radioStatus.errors && (radioStatus.dirty || radioStatus.touched)|| (!formValid && radioStatus.errors),
                         'has-success': !radioStatus.errors}">
                         <select class="form-control form-filter input-sm" [(ngModel)]="radioScheduleModel.status" name="radioStatus" #radioStatus="ngModel" required>
                            <option *ngFor="let stt of statuses" [ngValue]="stt.value">{{stt.text}}</option>
