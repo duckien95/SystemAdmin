@@ -307,7 +307,7 @@
                 </tr> -->
               </thead>
               <tbody>
-                <tr *ngFor="let employee of ListEmployee | paginate: { itemsPerPage: pageSize, currentPage: pageIndex };let i = index; let last = last">
+                <tr *ngFor="let employee of ListEmployee | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalItems };let i = index; let last = last">
                   <td>
                     {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                   </td>
@@ -358,7 +358,15 @@
               </tbody>
             </table>
             <div class="pull-right">
-               <pagination-controls (pageChange)="pageIndex = $event"></pagination-controls>
+               <pagination-controls
+                     (pageChange)="pageIndex = $event"
+                     previousLabel="Lùi"
+                     nextLabel="Tiếp"
+                     maxSize="20"
+                     directionLinks="true"
+                     autoHide="true"
+               >
+               </pagination-controls>
             </div>
           </form>
         </div>

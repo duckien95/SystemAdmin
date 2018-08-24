@@ -22,6 +22,7 @@ export class VtpEmployeeComponent implements OnInit {
    searchParams: EmployeeSearch;
    pageSize: number = 24;
    pageIndex: number = 0;
+   totalItems: number = 0;
    trackById: number;
    configSetting = ConfigSetting;
 
@@ -64,6 +65,7 @@ export class VtpEmployeeComponent implements OnInit {
       this.vtpEmployeeService.getListEmployee().subscribe( res => {
          if(!res.error && res.data.length) {
             this.ListEmployee = res.data;
+            this.totalItems = res.data.length;
          } else {
             this.ListEmployee = [];
          }

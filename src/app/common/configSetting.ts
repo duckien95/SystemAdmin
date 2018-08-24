@@ -29,8 +29,8 @@ export class ConfigSetting {
    //    })
    // }
   public static BASE_URL = 'http://localhost:62009/api/';
-  // public static BACKEND_URL = 'http://localhost:3344';
-  public static BACKEND_URL = 'http://125.212.238.119:3344';
+  public static BACKEND_URL = 'http://localhost:3344';
+  // public static BACKEND_URL = 'http://125.212.238.119:3344';
   public static BACKEND_API_URL = ConfigSetting.BACKEND_URL + '/api/';
   // public static BASE_URL = 'http://local.gico.cms/api/';
   public static Headers: Headers = new Headers();

@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.model = new LoginModel();
-    this.model.email = 'a1@gmail.com';
-    this.model.password = '123456';
+    this.model.email = '';
+    this.model.password = '';
   }
 
   async onInit(): Promise<void> {
