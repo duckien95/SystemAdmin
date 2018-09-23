@@ -107,7 +107,15 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('cms_app_id', res.appId);
                   localStorage.setItem('cms_expire_time', JSON.stringify(Date.now() + 86400000)) //one day
                   ConfigSetting.ShowSuccess('Login success');
-                  this.router.navigate(['/g/services']);
+
+                  if(res.appId == "daotaotruyenthong") {
+                      this.router.navigate(['/g/radios']);
+                  }
+                  if(res.appId == "facebook") {
+                      this.router.navigate(['/g/search-facebook-user']);
+                  }
+                  else this.router.navigate(['/g/services']);
+
                }
                else {
                   ConfigSetting.ShowError(res.message);

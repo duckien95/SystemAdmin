@@ -60,7 +60,7 @@ export class RadioComponent implements OnInit {
       this.radioService.deleteRadio({ "radioId" : radioId }).subscribe (res => {
          if(!res.error) {
             // delete radio success
-            ConfigSetting.ShowSuccess('Remove radio and schedule success');
+            ConfigSetting.ShowSuccess('Xóa radio thành công');
             this.loadListRadio();
          } else {
             ConfigSetting.ShowError(res.message);

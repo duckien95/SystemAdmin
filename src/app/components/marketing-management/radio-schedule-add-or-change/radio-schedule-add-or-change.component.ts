@@ -74,7 +74,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
             this.radioService.updateRadioSchedule(requestModel).subscribe( res => {
                console.log(res);
                if(!res.error) {
-                  ConfigSetting.ShowSuccess('Update radio schedule sucess.');
+                  ConfigSetting.ShowSuccess('Cập nhật lịch phát radio thành công.');
                   this.reloadAndReset();
                } else {
                   ConfigSetting.ShowError(res.message);
@@ -86,7 +86,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
             requestModel.radioId = this.radioModel._id;
             this.radioService.createRadioSchedule(requestModel).subscribe( res => {
                if(!res.error) {
-                  ConfigSetting.ShowSuccess('Create radio schedule sucess.');
+                  ConfigSetting.ShowSuccess('Thêm lịch phát radio thành công.');
                   this.reloadAndReset();
                   // console.log(this.radioScheduleForm)
 
@@ -97,7 +97,7 @@ export class RadioScheduleAddOrChangeComponent implements OnInit {
          }
 
       } else {
-         ConfigSetting.ShowError("Can not update or create radio schedule");
+         ConfigSetting.ShowError("Không thể thêm mới hoặc cập nhật lịch phát radio");
       }
    }
 

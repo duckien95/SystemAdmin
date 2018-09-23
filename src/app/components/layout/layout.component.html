@@ -13,8 +13,10 @@
       <!-- BEGIN MEGA MENU -->
       <!-- DOC: Remove "hor-menu-light" class to have a horizontal menu with theme background instead of white background -->
       <!-- DOC: This is desktop version of the horizontal menu. The mobile version is defined(duplicated) in the responsive menu below along with sidebar menu. So the horizontal menu has 2 seperate versions -->
-      <div class="hor-menu   hidden-sm hidden-xs">
+      <div class="hor-menu hidden-sm hidden-xs">
         <ul class="nav navbar-nav">
+        <ng-container *ngIf="list_account.indexOf(appId) == -1">
+
           <li class="classic-menu-dropdown" aria-haspopup="true" [routerLinkActive]="['active']">
             <a routerLink="/g/admin-menu"> Category
               <span class="selected"> </span>
@@ -35,10 +37,7 @@
              <span class="selected"> </span>
            </a>
           </li>
-          <li class="classic-menu-dropdown" aria-haspopup="true" [routerLinkActive]="['active']">
-           <a routerLink="/g/radios"> Radio
-             <span class="selected"> </span>
-           </a>
+
            <li class="classic-menu-dropdown" aria-haspopup="true" [routerLinkActive]="['active']">
            <a routerLink="/g/register-agency"> Register Agency
              <span class="selected"> </span>
@@ -59,6 +58,17 @@
           <span class="selected"> </span>
          </a>
        </li>
+       </ng-container>
+        <li *ngIf="appId == 'daotaotruyenthong'" class="classic-menu-dropdown" aria-haspopup="true" [routerLinkActive]="['active']">
+            <a routerLink="/g/radios"> Radio
+              <span class="selected"> </span>
+            </a>
+        </li>
+        <li *ngIf="appId == 'facebook'" class="classic-menu-dropdown" aria-haspopup="true" [routerLinkActive]="['active']">
+            <a routerLink="/g/search-facebook-user"> Facebook
+              <span class="selected"> </span>
+            </a>
+        </li>
         </ul>
       </div>
       <!-- END MEGA MENU -->

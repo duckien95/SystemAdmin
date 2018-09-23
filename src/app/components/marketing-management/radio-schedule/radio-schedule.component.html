@@ -5,11 +5,11 @@
             <div class="portlet-title portlet-title-action ">
                <div class="caption">
                  <i class="icon-settings font-green"></i>
-                 <span class="caption-subject font-green sbold uppercase"> List Radio Schedule of {{radioModel.title}} . </span>
+                 <span class="caption-subject font-green sbold uppercase"> Danh sách lịch phát của {{radioModel.title}} . </span>
                </div>
                 <div class="actions">
                     <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddRadioSchedule()">
-                        <i class="fa fa-plus"></i> Add new </a>
+                        <i class="fa fa-plus"></i> Thêm lịch phát </a>
                 </div>
             </div>
         </div>
@@ -23,20 +23,20 @@
                                 <th>
                                     STT
                                 </th>
-                                <th>
+                                <!-- <th>
                                    Radio Schedule Id
-                                </th>
+                                </th> -->
                                 <th>
-                                    Title
+                                    Tiêu đề
                                 </th>
                                 <th class="text-center">
-                                    Public Date
+                                    Ngày phát
                                 </th>
                                 <th class="text-center">
-                                    Status
+                                    Trạng thái
                                 </th>
                                 <th class="text-center">
-                                    Actions
+                                    Hành động
                                 </th>
                            </tr>
                            <tr role="row" class="filter">
@@ -44,9 +44,9 @@
                                 <td>
                                    <!-- STT -->
                                 </td>
-                                <td>
+                                <!-- <td> -->
                                    <!-- Radio Schedule Id -->
-                                </td>
+                                <!-- </td> -->
                                 <td>
                                    <!-- Title -->
                                 </td>
@@ -77,7 +77,7 @@
                                 <td class="text-center">
                                     <div class="margin-bottom-5">
                                         <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
-                                            <i class="fa fa-search"></i> Search</button>
+                                            <i class="fa fa-search"></i> Tìm kiếm</button>
                                     </div>
                                 </td>
                            </tr>
@@ -90,9 +90,9 @@
                                  <td>
                                     {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
                                  </td>
-                                 <td>
+                                 <!-- <td>
                                     {{ radio._id }}
-                                 </td>
+                                 </td> -->
                                 <td>
                                     {{radio.title}}
                                 </td>
@@ -100,15 +100,15 @@
                                     {{radio.publicDate | date: 'dd/MM/yyyy hh:mm aaa'}}
                                 </td>
                                 <td class="text-center">
-                                    {{radio.status}}
+                                    {{configSetting.ListStatusView[radio.status].value}}
                                 </td>
                                 <td class="text-center">
                                     <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowUpdateRadio(radio._id)">
-                                        <i class="fa fa-pencil"></i> Edit </a>
+                                        <i class="fa fa-pencil"></i> Sửa </a>
                                     <button type="button" class="btn btn-circle btn-outline red fa fa-remove radio_schedule_remove_bs_confirmation" data-toggle="confirmation"
                                         attr.tmpid="{{radio._id}}">
                                         <span *ngIf="last">{{onRegisterConfirmation()}}</span>
-                                        Remove
+                                        Xóa
                                     </button>
                                     <!-- <button type="button" (click)="deleteService(service._id)" class="btn btn-circle btn-outline red fa fa-remove banner_remove_bs_confirmation">
                                        Remove
@@ -119,7 +119,11 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                       <pagination-controls (pageChange)="pageIndex = $event"></pagination-controls>
+                       <pagination-controls
+                            (pageChange)="pageIndex = $event"
+                            previousLabel="Trước"
+                            nextLabel="Sau"
+                        ></pagination-controls>
                     </div>
                 </form>
            </div>

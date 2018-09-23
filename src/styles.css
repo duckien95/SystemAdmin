@@ -1,3 +1,6 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 .portlet-title-action {
     border: 0 !important;
     margin: 15px 25px 0 0 !important;

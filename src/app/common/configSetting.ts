@@ -29,8 +29,11 @@ export class ConfigSetting {
    //    })
    // }
   public static BASE_URL = 'http://localhost:62009/api/';
-  public static BACKEND_URL = 'http://localhost:3344';
+  // public static BACKEND_URL = 'http://localhost:3344';
+  // public static SERVER_URL  = 'http://localhost:3344';
   // public static BACKEND_URL = 'http://125.212.238.119:3344';
+  public static BACKEND_URL = 'http://125.212.238.130:8899';
+    public static SERVER_URL  = 'http://125.212.238.130';
   public static BACKEND_API_URL = ConfigSetting.BACKEND_URL + '/api/';
   // public static BASE_URL = 'http://local.gico.cms/api/';
   public static Headers: Headers = new Headers();
@@ -47,6 +50,9 @@ export class ConfigSetting {
   public static UrlPathShardingAddOrChange = 'ShardingConfig/AddOrChange';
   public static UrlPathShardingGet = 'ShardingConfig/Get';
   public static UrlPathShardingGets = 'ShardingConfig/Gets';
+
+  public static UrlPathSearchFacebookUser = 'user/search-by-uid';
+  public static UrlPathUploadTextFile = 'user/upload-txt-file';
 
   public static UrlPathCProductAttributeGets = 'AttrCategory/GetProductAttr';
   public static UrlPathCategoryGets = 'Category/Gets';
@@ -474,19 +480,27 @@ export class ConfigSetting {
    ];
 
    public static ListStatus = [
-      { 'value': 1, 'text': '1' },
-      { 'value': 2, 'text': '2' },
-      { 'value': 3, 'text': '3' },
-      { 'value': 4, 'text': '4' }
+      { 'value': 1, 'text': 'Tạo mới' },
+      { 'value': 2, 'text': 'Kích hoạt' },
+      { 'value': 3, 'text': 'Chưa kích hoạt' },
+      // { 'value': 4, 'text': '4' }
    ];
 
    public static ListStatusSearch = [
-      { 'value': 0, 'text': 'Status' },
-      { 'value': 1, 'text': '1' },
-      { 'value': 2, 'text': '2' },
-      { 'value': 3, 'text': '3' },
-      { 'value': 4, 'text': '4' }
+      { 'value': 0, 'text': 'Trạng thái' },
+      { 'value': 1, 'text': 'Tạo mới' },
+      { 'value': 2, 'text': 'Kích hoạt' },
+      { 'value': 3, 'text': 'Chưa kích hoạt' },
+      // { 'value': 4, 'text': '4' }
    ];
+
+   public static ListStatusView = [
+       { value: 'Trạng thái' },
+       { value: 'Tạo mới' },
+       { value: 'Kích hoạt' },
+       { value: 'Chưa kích hoạt' },
+       { value: ''}
+   ]
 
   //#endregion
 
@@ -564,6 +578,7 @@ export class ConfigSetting {
   }
    public static GetLoginStatus(): boolean {
       const token = localStorage.getItem("cms_token");
+      const app_id = localStorage.getItem("cms_app_id");
       if( token == null || token == undefined ) {
          return false;
       }
@@ -572,6 +587,7 @@ export class ConfigSetting {
       if (expire_time && (Date.now() > expire_time) ) {
          return false;
       }
+
       return true;
     // const tmp = localStorage.getItem(this.LoginStatus);
     // if (tmp == null) {

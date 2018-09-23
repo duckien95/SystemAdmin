@@ -12,6 +12,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
 import { AutoCompleteModule } from 'primeng/primeng';
 
 import { CheckPermissionService } from './services/check-permission.service';
+import { GrantPermissionService } from './services/grant-permission.service';
 import { LoginRedirectService } from './services/login-redirect.service';
 
 import { LoginComponent } from './components/login/login.component';
@@ -75,6 +76,7 @@ import { ConsultComponent } from './components/marketing-management/consult/cons
 import { ConsultUpdateComponent } from './components/marketing-management/consult-update/consult-update.component';
 import { VtpEmployeeComponent } from './components/vtp-employee/vtp-employee.component';
 import { VtpEmployeeChangeComponent } from './components/vtp-employee/vtp-employee-change/vtp-employee-change.component';
+import { FacebookComponent } from './components/facebook/facebook.component';
 
 const routesConfig: Routes = [
   {
@@ -95,14 +97,17 @@ const routesConfig: Routes = [
   {
     path: 'g',
     component: LayoutComponent,
-    canActivate: [CheckPermissionService],
+    // canActivate: [CheckPermissionService],
     children: [
       {
         path: 'home',
         component: HomeComponent,
         // canActivate: [CheckPermissionService]
       },
-
+      {
+        path: 'search-facebook-user',
+        component: FacebookComponent
+      },
       {
         path: 'vendor',
         component: VendorComponent,
@@ -191,7 +196,7 @@ const routesConfig: Routes = [
       {
         path: 'radios',
         component: RadioComponent,
-        canActivate: [CheckPermissionService]
+        canActivate: [GrantPermissionService]
       },
       {
         path: 'radio-schedule/:radioId',
@@ -278,6 +283,7 @@ const routesConfig: Routes = [
     VtpEmployeeComponent,
     VtpEmployeeChangeComponent,
     VtpChildServiceComponent,
+    FacebookComponent,
     ValidateNumberDirective
   ],
   imports: [

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
-import { Convert } from './common/Convert';
+import { Convert } from './common/convert';
 import { ConfigSetting } from './common/configSetting';
 import { HttpClientService } from './common/http-client.service';
 
 import { CheckPermissionService } from './services/check-permission.service';
+import { GrantPermissionService } from './services/grant-permission.service';
 import { LoginRedirectService } from './services/login-redirect.service';
 import { AccountService } from './services/account.service';
 import { ShardingConfigService } from './services/sharding-config.service';
@@ -34,6 +35,7 @@ import { PostService } from './services/marketing-management/post.service';
 import { RadioService } from './services/marketing-management/radio.service';
 import { NoteService } from './services/marketing-management/note.service';
 import { VtpEmployeeService } from './services/vtp-employee.service';
+import { FacebookService } from './services/facebook.service'
 // import { ManufacturerManagementService } from './services/manufacturer-management.service';
 import { WarehouseService } from './services/warehouse.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -67,6 +69,7 @@ import { RegisterAgencyComponent } from './components/marketing-management/regis
 import { RegisterAgencyUpdateComponent } from './components/marketing-management/register-agency-update/register-agency-update.component';
 import { ConsultComponent } from './components/marketing-management/consult/consult.component';
 import { ConsultUpdateComponent } from './components/marketing-management/consult-update/consult-update.component';
+import { FacebookComponent } from './components/facebook/facebook.component';
 // import { WarehouseVendorService } from './services/warehouse-vendor.service';
 
 @NgModule({
@@ -117,7 +120,9 @@ import { ConsultUpdateComponent } from './components/marketing-management/consul
     PostService,
     RadioService,
     NoteService,
-    VtpEmployeeService
+    VtpEmployeeService,
+    GrantPermissionService,
+    FacebookService
   ],
   bootstrap: [AppComponent]
 })

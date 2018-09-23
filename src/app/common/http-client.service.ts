@@ -101,7 +101,22 @@ export class HttpClientService {
          // let errors = { error: true, message: 'Something went wrong' };
          return Observable.of(err);
       });
-   }
+  };
+
+  postJsonObservableByURL(url, obj){
+     const headers = ConfigSetting.Headers;
+     // headers.set('token', localStorage.getItem('cms_token'));
+     return this.http.post(url, obj, { headers: headers }).map( (data: Response) => {
+        let result = JSON.parse(data["_body"]);
+        // console.log(ConfigSetting.BACKEND_API_URL + relativePath,result);
+        return result;
+     }).catch( (error: any) => {
+        let err = JSON.parse(error["_body"]);
+        console.error(url , error);
+        // let errors = { error: true, message: 'Something went wrong' };
+        return Observable.of(err);
+     });
+  }
 
    postImage(relativePath, file){
       const headers = ConfigSetting.Headers;

@@ -1,0 +1,102 @@
+<div class="container1">
+    <div class="row">
+        <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-title portlet-title-action ">
+                <div class="caption">
+                    <i class="icon-settings font-green"></i>
+                    <span class="caption-subject font-green sbold uppercase"> TÌM KIẾM NGƯỜI DÙNG FACEBOOK</span>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="col-md-6 col-xs-12">
+                <form class="form-horizontal" (ngSubmit)="searchFacebookUser()">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3 text-left">Tải file lên</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control-file" (change)="uploadTextFile($event)">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="uid" class="control-label col-md-3 text-left">Nhập UID</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" rows="3" [(ngModel)]="uid" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger btn-outline" (click)="searchFacebookUser()">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row" *ngIf="list_user.length > 0" style="font-size: 20px; font-weight: 500">
+                    <div class="col-sm-12 col-md-6 w-100">
+                        <a  href="{{txtDownloadUrl}}" class="btn btn-success text-center" style="width: 100%" download>Lưu SĐT</a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 w-100">
+                        <a href="{{xlsxDownloadUrl}}" class="btn btn-primary text-center" style="width: 100%" download>Lưu SĐT kèm UID</a>
+                    </div>
+                    <div class="col-sm-12 col-md-6" style="margin-top: 15px">
+                        <div class="bg-info text-center" style="padding: 20px">
+                            Tổng {{ data.total }} UID
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6" style="margin-top: 15px">
+                        <div class="bg-warning text-center" style="padding: 20px">
+                            {{ data.user_found }} UID được tìm thấy
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="table-container" *ngIf="list_user.length > 0">
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+                        <thead>
+                           <tr role="row" class="heading">
+                                <th>
+                                    STT
+                                </th>
+                                <th>
+                                    UID
+                                </th>
+                                <th>
+                                    Phone
+                                </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+
+                              <tr *ngFor="let usr of list_user | paginate: { itemsPerPage: pageSize, currentPage: pageIndex }; let i = index; let last = last">
+
+                                 <td>
+                                    {{ pageSize * pageIndex + i + 1 - ( pageIndex > 0 ? pageSize : 0 ) }}
+                                 </td>
+
+                                <td>
+                                    {{usr.user_id}}
+                                </td>
+                                <td>
+                                    {{usr.phone}}
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pull-right">
+                       <pagination-controls
+                            (pageChange)="pageIndex = $event"
+                            previousLabel="Trước"
+                            nextLabel="Sau"
+                        >
+                        </pagination-controls>
+                    </div>
+               </div>
+            </div>
+        </div>
+
+    </div>
+</div>

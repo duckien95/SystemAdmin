@@ -67,7 +67,7 @@ export class RadioAddOrChangeComponent implements OnInit {
                   ConfigSetting.ShowError(res.message)
                }
                else {
-                  ConfigSetting.ShowSuccess("Create radio success");
+                  ConfigSetting.ShowSuccess("Thêm mới radio thành công");
                   this.reloadAndReset();
                }
                // this.postModel = new PostModel();
@@ -80,7 +80,7 @@ export class RadioAddOrChangeComponent implements OnInit {
                   ConfigSetting.ShowError(res.message)
                }
                else {
-                  ConfigSetting.ShowSuccess("Update radio success");
+                  ConfigSetting.ShowSuccess("Cập nhật radio thành công");
                   this.reloadAndReset();
                }
             })
@@ -88,7 +88,7 @@ export class RadioAddOrChangeComponent implements OnInit {
 
       }
       else {
-         ConfigSetting.ShowError("Can not create or update radio");
+         ConfigSetting.ShowError("Không thể thêm mới hoặc cập nhật radio");
       }
 
       // postComponent.loadListPost();
@@ -106,7 +106,7 @@ export class RadioAddOrChangeComponent implements OnInit {
                ConfigSetting.ShowError(res.message)
             }
             else {
-               ConfigSetting.ShowSuccess("Upload audio success");
+               ConfigSetting.ShowSuccess("Tải file thành công");
                this.radioModel.mediaUrl = res.filename;
             }
          })

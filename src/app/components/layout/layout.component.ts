@@ -12,6 +12,7 @@ import { BaseComponent } from '../base/base.component';
 export class LayoutComponent extends BaseComponent implements OnInit {
    actionIds: string[] = ["Home/About", "Home/Index"];
    appId: string;
+   list_account: any = ['daotaotruyenthong', 'facebook'];
    constructor(
       private roleService: RoleService
    ) {
